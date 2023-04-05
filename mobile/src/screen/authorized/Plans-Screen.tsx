@@ -1,6 +1,6 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
-import { Add, Input, PlanItem } from "../../component";
+import { Add, PlanItem } from "../../component";
 import { planAction } from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addPlanService, getPlansService } from "../../service";
@@ -21,10 +21,11 @@ export function PlansScreen() {
 
             <Add onPress={ addPlanFn }/>
 
-            <Input onChange={ handleChange }
-                   value={ searchKey }
-                   isCenter={ false }
-                   placeholder={ 'Пошук' }/>
+            <TextInput onChangeText={ handleChange }
+                       value={ searchKey }
+                       placeholder={ 'Пошук' }
+                       style={[gStyle.regular_font, gStyle.input]}
+            />
 
          </View>
 
@@ -32,8 +33,7 @@ export function PlansScreen() {
             <FlatList style={ styles.planListWrapper }
                       data={ plans }
                       renderItem={ ({ item, index }) =>
-                         <PlanItem plan={ item }/>
-                      }/>
+                         <PlanItem key={ index + 1 } plan={ item }/> }/>
          </View>
 
       </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
    },
    body: {
-      paddingTop: "1%",
+      paddingTop: 20,
       height: "95%",
       width: "100%",
       alignItems: "center",

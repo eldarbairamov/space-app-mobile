@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
 import { NOTES_COLOR } from "../../constant";
 import { LoginForm } from "../../component";
-import { LoginProps, UnauthorizedStackEnum } from "../../type";
+import { LoginProps, UnauthorizedStackEnum } from "../../navigation/type";
 import { loginService } from "../../service";
 
 export function LoginScreen({ navigation }: LoginProps) {

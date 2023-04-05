@@ -12,7 +12,7 @@ export function BackIcon({ to }: IBackIcon) {
    return (
       <TouchableOpacity onPress={ () => navigate(to) }
                         activeOpacity={ 0.5 }>
-         <Image style={ { width: 28, height: 28, } } source={ BACK_ICON }/>
+         <Image style={ { width: 32, height: 32, } } source={ BACK_ICON }/>
       </TouchableOpacity>
    )
 }

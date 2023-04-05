@@ -1,5 +1,5 @@
 export const configuration = {
-   API_URL: "http://localhost:3010",
+   API_URL: "http://localhost:4000",
 }
 
 export const userRequests = {

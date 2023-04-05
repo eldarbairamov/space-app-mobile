@@ -6,7 +6,7 @@ import { gStyle } from "../../asset";
 import { changePasswordService } from "../../service";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import { DashboardStackEnum, PasswordSettingScreenNavigationProp } from "../../type";
+import { DashboardStackEnum, PasswordSettingScreenNavigationProp } from "../../navigation/type";
 
 export function ChangePasswordForm() {
    const {

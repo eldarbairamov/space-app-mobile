@@ -4,40 +4,54 @@ import { BRAIN_IMAGE, DELETE_ICON, ITEM_BG, PLANS_COLOR } from "../../constant";
 import { IPlan } from "../../interface";
 import dateHelper from "moment";
 import { deletePlanService } from "../../service";
+import { useNavigation } from "@react-navigation/native";
+import { PlanListScreenNavigationProp, PlansStackEnum } from "../../navigation/type";
+import { useAppDispatch, useAppSelector } from "../../hook";
+import { planAction } from "../../redux/slice";
+import { useEffect } from "react";
 
 export function PlanItem({ plan }: { plan: IPlan }) {
+   const dispatch = useAppDispatch()
+
+   useEffect(() => {
+      dispatch(planAction.setActivePlan(plan))
+   }, [])
+
+   const { activePlan } = useAppSelector(state => state.planReducer)
+
+   const { navigate } = useNavigation<PlanListScreenNavigationProp>()
+
    const { deletePlanFn } = deletePlanService()
 
    return (
       <>
-         { plan &&
+         { activePlan &&
             <TouchableOpacity style={ [ styles.noteItem ] }
                               activeOpacity={ 0.7 }
-            >
+                              onPress={ () => {
+                                 dispatch(planAction.setActivePlan(activePlan))
+                                 navigate(PlansStackEnum.TaskList)
+                              } }>
                <View style={ [ styles.left ] }>
                   <Text style={ [ gStyle.regular_font, styles.title ] }>
-                     { plan.title }
+                     { activePlan.title }
                   </Text>
 
                   <Text style={ [ gStyle.regular_font, styles.date ] }>
-                     { dateHelper(plan.lastModified).format("DD-MM-YYYY, HH:mm") }
+                     { dateHelper(activePlan.lastModified).format("DD-MM-YYYY, HH:mm") }
                   </Text>
                </View>
 
                <View style={ [ styles.mid ] }>
                   <Image source={ BRAIN_IMAGE }
-                         style={ [ { width: 70, height: 70 } ] }
-                  />
+                         style={ [ { width: 60, height: 60 } ] }/>
                </View>
 
                <TouchableOpacity activeOpacity={ 0.5 }
                                  style={ [ styles.right, gStyle.center ] }
-                                 onPress={ () => deletePlanFn(plan.id) }
-
-               >
+                                 onPress={ () => deletePlanFn(activePlan.id) }>
                   <Image source={ DELETE_ICON }
-                         style={ { width: 25, height: 25, alignSelf: "flex-end" } }
-                  />
+                         style={ { width: 28, height: 28, alignSelf: "flex-end" } }/>
 
                </TouchableOpacity>
 
@@ -49,7 +63,7 @@ export function PlanItem({ plan }: { plan: IPlan }) {
 
 const styles = StyleSheet.create({
    noteItem: {
-      height: 140,
+      height: 120,
       padding: 20,
       flexDirection: "row",
       borderRadius: 15,

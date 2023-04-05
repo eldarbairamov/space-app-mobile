@@ -1,13 +1,12 @@
+import { useState } from "react";
 import { FlatList, Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { Add, Input, MomentItem } from "../../component";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addMomentService, getMomentsService } from "../../service";
 import { Dropdown } from "react-native-element-dropdown";
-import { useState } from "react";
-import { SelectItem } from "../../component/UI/Select-Item";
 import { momentActions } from "../../redux/slice";
-import { CLEAR_ICON, DELETE_ICON } from "../../constant";
+import { CLEAR_ICON } from "../../constant";
+import { Add, MomentItem, SelectItem } from "../../component";
 
 export function MomentsScreen() {
    const { moments, tags, searchKey } = useAppSelector(state => state.momentReducer)
@@ -50,15 +49,15 @@ export function MomentsScreen() {
                renderRightIcon={ showClearIcon ? () =>
                      <TouchableOpacity activeOpacity={ 0.5 } onPress={ onClear }>
                         <Image source={ CLEAR_ICON }
-                               style={ { width: 15, height: 15, marginRight: 2 } }/>
+                               style={ { width: 15, height: 15, marginRight: 2 } }
+                        />
                      </TouchableOpacity> :
                   undefined }
                onChange={ (item: any) => {
                   dispatch(momentActions.setSearchKey(item))
                   setValue(item.value)
                   setShowClearIcon(true)
-               } }
-            />
+               } }/>
 
          </View>
 
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
    },
    body: {
-      paddingTop: "1%",
+      paddingTop: 20,
       height: "95%",
       width: "100%",
       alignItems: "center",

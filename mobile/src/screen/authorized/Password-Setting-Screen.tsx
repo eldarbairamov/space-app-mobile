@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
-import { DashboardStackEnum } from "../../type";
+import { DashboardStackEnum } from "../../navigation/type";
 import { BackIcon, ChangePasswordForm } from "../../component";
 
 export function PasswordSettingScreen() {

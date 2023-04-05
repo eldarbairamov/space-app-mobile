@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
 import { BackIcon, UpdateProfileForm } from "../../component";
-import { DashboardStackEnum, SettingsProps } from "../../type";
+import { DashboardStackEnum, SettingsProps } from "../../navigation/type";
 import { updateProfileService } from "../../service";
 
 export function SettingsScreen({ navigation }: SettingsProps) {

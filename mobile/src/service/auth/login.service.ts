@@ -5,7 +5,7 @@ import { storageService } from "../storage.service";
 import Toast from "react-native-toast-message";
 import { errorCatherFn, pleaseWait } from "../../helper";
 import { useNavigation } from "@react-navigation/native";
-import { LoginScreenNavigationProp, UnauthorizedStackEnum } from "../../type";
+import { LoginScreenNavigationProp, UnauthorizedStackEnum } from "../../navigation/type";
 import { useAppDispatch } from "../../hook";
 import { authActions } from "../../redux/slice";
 

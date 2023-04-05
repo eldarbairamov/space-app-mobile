@@ -21,8 +21,8 @@ export function getPlansService() {
                searchKey: searchKey ? debounced : null,
             },
          });
-         Toast.hide()
          dispatch(planAction.setPlans(data));
+         Toast.hide()
 
       } catch (e) {
          Toast.show({ type: 'error', text1: errorCatherFn(e) })

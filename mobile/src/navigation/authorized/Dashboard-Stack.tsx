@@ -1,6 +1,6 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { PasswordSettingScreen, DashboardScreen, SettingsScreen, EmailSettingScreen } from "../../screen";
-import { DashboardStackEnum } from "../../type";
+import { DashboardStackEnum } from "../type";
 import { ChangePasswordMessage } from "../../component";
 
 const Stack = createNativeStackNavigator()

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { ActivationScreen, ForgotPasswordSreen, LoginScreen, RegistrationSreen, ResetPasswordScreen } from "../../screen";
-import { UnauthorizedStackEnum } from "../../type";
+import { UnauthorizedStackEnum } from "../type";
 import { Title } from "../../component";
 
 const Stack = createNativeStackNavigator()

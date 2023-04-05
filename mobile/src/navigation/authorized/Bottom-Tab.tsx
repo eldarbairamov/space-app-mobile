@@ -1,12 +1,13 @@
 import { BottomTabNavigationOptions, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image, StyleSheet } from "react-native";
-import { MomentsScreen, PlansScreen } from "../../screen";
 import { TabBarLabel, Title } from "../../component";
-import { TabStackEnum } from "../../type";
+import { TabStackEnum } from "../type";
 import { HOME_ICON, MOMENT_ICON, MOMENTS_COLOR, NOTE_ICON, NOTES_COLOR, PLAN_ICON, PLANS_COLOR } from "../../constant";
 import { useAppSelector } from "../../hook";
 import { DashboardStack } from "./Dashboard-Stack";
-import { NotesStack } from "./Note-Stack";
+import { NotesStack } from "./Notes-Stack";
+import { PlansStack } from "./Plans-Stack";
+import { MomentsStack } from "./Moments-Stack";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export function BottomTab() {
             tabBarLabel: (props) => <TabBarLabel { ...props } />
          } }/>
 
-         <Tab.Screen name={ TabStackEnum.Plans } component={ PlansScreen } options={ {
+         <Tab.Screen name={ TabStackEnum.Plans } component={ PlansStack } options={ {
             tabBarIcon: () => <Image source={ PLAN_ICON } style={ styles.image }/>,
             tabBarBadge: plansCount,
             tabBarBadgeStyle: { backgroundColor: PLANS_COLOR, color: "whitesmoke" },
@@ -36,7 +37,7 @@ export function BottomTab() {
             tabBarLabel: (props) => <TabBarLabel { ...props } />
          } }/>
 
-         <Tab.Screen name={ TabStackEnum.Moments } component={ MomentsScreen } options={ {
+         <Tab.Screen name={ TabStackEnum.Moments } component={ MomentsStack } options={ {
             tabBarIcon: () => <Image source={ MOMENT_ICON } style={ styles.image }/>,
             tabBarBadge: momentsCount,
             tabBarBadgeStyle: { backgroundColor: MOMENTS_COLOR, color: "whitesmoke" },

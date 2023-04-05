@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { TabStackEnum } from "../../type";
+import { TabStackEnum } from "../../navigation/type";
 import { DASHBOARD_COLOR, MOMENTS_COLOR, NOTES_COLOR, PLANS_COLOR } from "../../constant";
 
 interface ITabBarLabel {

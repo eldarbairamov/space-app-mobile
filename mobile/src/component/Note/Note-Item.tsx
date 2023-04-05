@@ -4,7 +4,7 @@ import { DELETE_ICON, ITEM_BG, NOTES_COLOR, SECOND_FONT_COLOR } from "../../cons
 import { INote } from "../../interface";
 import { deleteNoteService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
-import { NoteListScreenNavigationProp, NotesStackEnum } from "../../type";
+import { NoteListScreenNavigationProp, NotesStackEnum } from "../../navigation/type";
 import dateHelper from "moment";
 import { useAppDispatch } from "../../hook";
 import { noteActions } from "../../redux/slice";
@@ -26,8 +26,7 @@ export function NoteItem({ note }: { note: INote }) {
          { note &&
             <TouchableOpacity style={ [ styles.noteItem ] }
                               activeOpacity={ 0.7 }
-                              onPress={ openNote }
-            >
+                              onPress={ openNote }>
 
                <View style={ [ styles.left ] }>
 
@@ -37,8 +36,7 @@ export function NoteItem({ note }: { note: INote }) {
 
                   <Text style={ [ gStyle.regular_font, styles.noteBody ] }
                         ellipsizeMode={ 'tail' }
-                        numberOfLines={ 1 }
-                  >
+                        numberOfLines={ 1 }>
                      { note.body }
                   </Text>
 
@@ -50,10 +48,9 @@ export function NoteItem({ note }: { note: INote }) {
 
                <TouchableOpacity activeOpacity={ 0.5 }
                                  style={ [ gStyle.center, styles.right ] }
-                                 onPress={ () => deleteNoteFn(note.id) }
-               >
+                                 onPress={ () => deleteNoteFn(note.id) }>
 
-                  <Image source={ DELETE_ICON } style={ { width: 25, height: 25 } }/>
+                  <Image source={ DELETE_ICON } style={ { width: 28, height: 28 } }/>
 
                </TouchableOpacity>
 
@@ -65,7 +62,7 @@ export function NoteItem({ note }: { note: INote }) {
 
 const styles = StyleSheet.create({
    noteItem: {
-      height: 140,
+      height: 120,
       padding: 20,
       flexDirection: "row",
       borderRadius: 15,

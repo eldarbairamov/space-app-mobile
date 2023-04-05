@@ -1,6 +1,6 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
-import { Add, Input, NoteItem } from "../../component";
+import { Add, NoteItem } from "../../component";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addNoteService, getNotesService } from "../../service";
 import { noteActions } from "../../redux/slice";
@@ -23,10 +23,11 @@ export function NotesScreen() {
 
             <Add onPress={ addNoteFn }/>
 
-            <Input onChange={ handleChange }
-                   value={ searchKey }
-                   isCenter={ false }
-                   placeholder={ 'Пошук' }/>
+            <TextInput onChangeText={ handleChange }
+                       value={ searchKey }
+                       placeholder={ 'Пошук' }
+                       style={ [ gStyle.regular_font, gStyle.input ] }
+            />
 
          </View>
 
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
    },
    body: {
-      paddingTop: "1%",
+      paddingTop: 20,
       height: "95%",
       width: "100%",
       alignItems: "center",

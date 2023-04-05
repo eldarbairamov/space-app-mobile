@@ -7,7 +7,7 @@ import { notePrevStateService, updateNoteService } from "../../service";
 import { INote } from "../../interface";
 import { noteActions } from "../../redux/slice";
 import { BackIcon } from "../../component";
-import { NotesStackEnum } from "../../type";
+import { NotesStackEnum } from "../../navigation/type";
 
 export function NoteEditScreen() {
    const { activeNote } = useAppSelector(state => state.noteReducer)
@@ -34,16 +34,14 @@ export function NoteEditScreen() {
       <View style={ [ gStyle.screen, gStyle.center ] }>
          <View style={ [ styles.header ] }>
 
-            <View style={ { flexDirection: 'row', gap: 15 } }>
+            <View style={ [{ flexDirection: 'row', gap: 15, alignItems: 'center' }] }>
                <BackIcon to={ NotesStackEnum.NoteList }/>
 
-               <TouchableOpacity style={ { flexDirection: 'row', gap: 10 } }
+               <TouchableOpacity style={ [{ flexDirection: 'row', gap: 10 }] }
                                  activeOpacity={ 0.5 }
-                                 onPress={ () => updateNoteFn(activeNote) }
-               >
+                                 onPress={ () => updateNoteFn(activeNote) }>
                   <Image source={ prevState === activeNote ? SAVE_DISABLE : SAVE_ENABLE }
-                         style={ [ { width: 23, height: 23 } ] }
-                  />
+                         style={ [ { width: 27, height: 27 } ] }/>
 
                </TouchableOpacity>
             </View>
@@ -56,19 +54,18 @@ export function NoteEditScreen() {
 
          <View style={ [ styles.body ] }>
             <TextInput style={ [ gStyle.regular_font, styles.title ] }
+                       maxLength={30}
                        autoFocus={ false }
                        value={ activeNote.title }
                        placeholder={ 'Заголовок' }
-                       onChangeText={ value => handleInputs('title', value) }
-            />
+                       onChangeText={ value => handleInputs('title', value) }/>
 
             <TextInput placeholder={ 'Розкажи мені щось цікаве...' }
-                       style={ [ gStyle.regular_font, { width: "90%", minHeight: "100%" } ] }
+                       style={ [ gStyle.regular_font, { width: "90%", minHeight: "100%", marginTop: 10 } ] }
                        autoFocus={ false }
                        value={ activeNote.body }
                        onChangeText={ (value) => handleInputs('body', value) }
-                       multiline={ true }
-            />
+                       multiline={ true }/>
          </View>
 
       </View>
@@ -85,7 +82,7 @@ const styles = StyleSheet.create({
       justifyContent: "space-between",
    },
    body: {
-      paddingTop: "1%",
+      paddingTop: 20,
       gap: 15,
       height: "95%",
       width: "100%",

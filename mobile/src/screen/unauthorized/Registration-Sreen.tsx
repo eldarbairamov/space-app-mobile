@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
 import { RegistrationForm } from "../../component";
-import { RegistrationProps, UnauthorizedStackEnum } from "../../type";
+import { RegistrationProps, UnauthorizedStackEnum } from "../../navigation/type";
 import { NOTES_COLOR } from "../../constant";
 import { registrationService } from "../../service";
 

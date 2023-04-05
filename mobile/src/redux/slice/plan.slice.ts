@@ -4,15 +4,15 @@ import { IPlan } from "../../interface";
 interface IPlanInitialState {
    searchKey: string;
    plans: IPlan[];
-   activePlan: IPlan;
    limit: number;
+   activePlan: IPlan
 }
 
 const initialState: IPlanInitialState = {
    plans: [],
    searchKey: "",
-   activePlan: {} as IPlan,
    limit: 30,
+   activePlan: {} as IPlan
 };
 
 const planSlice = createSlice({
@@ -37,13 +37,13 @@ const planSlice = createSlice({
          state.searchKey = payload;
       },
 
-      setActivePlan: (state, { payload }: PayloadAction<IPlan>) => {
-         state.activePlan = payload;
+      updateTitle: (state, { payload }: PayloadAction<string>) => {
+         state.activePlan.title = payload
       },
 
-      updateTitle: (state, { payload }: PayloadAction<string>) => {
-         state.activePlan.title = payload;
-      },
+      setActivePlan: (state, { payload }: PayloadAction<IPlan>) => {
+         state.activePlan = payload
+      }
 
    },
 

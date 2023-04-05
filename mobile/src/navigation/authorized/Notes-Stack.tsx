@@ -1,6 +1,6 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { NoteEditScreen, NotesScreen } from "../../screen";
-import { NotesStackEnum } from "../../type";
+import { NotesStackEnum } from "../type";
 
 const Stack = createNativeStackNavigator()
 

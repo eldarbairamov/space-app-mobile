@@ -7,4 +7,3 @@ export const ERROR_COLOR = "#df8281"
 export const MAIN_FONT_COLOR = "#4e4e51"
 export const SECOND_FONT_COLOR = "#7d7d7d"
 export const ITEM_BG = "#dfdfdf"
-

@@ -3,14 +3,14 @@ import { IMoment, IMoments } from "../../interface";
 
 interface IMomentInitialState {
    moments: IMoment[];
-   activeMoment: IMoment | null;
+   activeMoment: IMoment;
    searchKey: string;
    tags: (string | undefined)[];
 }
 
 const initialState: IMomentInitialState = {
    moments: [],
-   activeMoment: null,
+   activeMoment: {} as IMoment,
    searchKey: "",
    tags: [],
 };
@@ -21,7 +21,7 @@ const momentSlice = createSlice({
    reducers: {
 
       setMoments: (state, { payload }: PayloadAction<IMoments>) => {
-         state.activeMoment = null;
+         state.activeMoment = {} as IMoment;
          state.moments = payload.data;
          state.tags = payload.tagsForFilter;
       },
@@ -37,7 +37,7 @@ const momentSlice = createSlice({
          state.moments = state.moments.filter(moment => moment.id !== payload.momentId);
       },
 
-      setActiveMoment: (state, { payload }: PayloadAction<IMoment | null>) => {
+      setActiveMoment: (state, { payload }: PayloadAction<IMoment>) => {
          state.activeMoment = payload;
       },
 
@@ -54,7 +54,7 @@ const momentSlice = createSlice({
       },
 
       setPhoto: (state, { payload }: PayloadAction<{ photo: string }>) => {
-         state.activeMoment!.photo = payload.photo;
+         state.activeMoment.photo = payload.photo;
       },
 
    },

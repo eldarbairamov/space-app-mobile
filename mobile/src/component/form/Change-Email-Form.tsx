@@ -35,9 +35,13 @@ export function ChangeEmailForm() {
          </View>
 
          { isEmailSent && <View style={ gStyle.form_control_wrapper }>
-            <FormControl label={ '6-значний код' }
-                         control={ control }
+            <Text style={ [ gStyle.regular_font, styles.description ] }>
+               6-значний код
+            </Text>
+
+            <FormControl control={ control }
                          name={ 'code' }
+                         isCenter={ true }
                          errorMessage={ errors.code?.message }
                          isRequired={ true }/>
 

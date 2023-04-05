@@ -9,11 +9,9 @@ export function Logout() {
    return (
       <TouchableOpacity style={ [ gStyle.center ] }
                         activeOpacity={ 0.5 }
-                        onPress={ logoutFn }
-      >
+                        onPress={ logoutFn }>
          <Image source={ LOGOUT_ICON }
-                style={ { width: 30, height: 30 } }
-         />
+                style={ { width: 28, height: 28 } }/>
 
       </TouchableOpacity>
    )

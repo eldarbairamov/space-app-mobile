@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { ActivationForm } from "../../component";
-import { ActivationProps, UnauthorizedStackEnum } from "../../type";
+import { ActivationProps, UnauthorizedStackEnum } from "../../navigation/type";
 import { gStyle } from "../../asset";
 import { activationService } from "../../service";
 

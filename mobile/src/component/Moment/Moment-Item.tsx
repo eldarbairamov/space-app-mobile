@@ -1,24 +1,65 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { ITEM_BG, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
+import { ITEM_BG, MOMENTS_COLOR, NO_PHOTO_IMAGE, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
 import { IMoment } from "../../interface";
 import { configuration } from "../../config";
+import dateHelper from "moment";
+import { useNavigation } from "@react-navigation/native";
+import { MomentListScreenNavigationProp, MomentsStackEnum } from "../../navigation/type";
+import { useAppDispatch } from "../../hook";
+import { momentActions } from "../../redux/slice";
 
 export function MomentItem({ moment }: { moment: IMoment }) {
+   const { navigate } = useNavigation<MomentListScreenNavigationProp>()
+   const dispatch = useAppDispatch()
 
    return (
       <>
          { moment &&
             <TouchableOpacity style={ [ styles.noteItem ] }
-                              activeOpacity={ 0.7 }
-            >
-               <Image style={ styles.photo } source={ { uri: `${ configuration.API_URL }/${ moment.photo }` } }/>
-               <View style={ [ styles.background, gStyle.absolute ] }></View>
+                              onPress={ () => {
+                                 dispatch(momentActions.setActiveMoment(moment))
+                                 navigate(MomentsStackEnum.MomentEdit)
+                              } }
+                              activeOpacity={ 0.7 }>
 
-               <View style={ styles.left }>
-                  <View style={ styles.title_wrapper }>
+               { moment.photo
+                  ?
+                  <Image style={ styles.photo }
+                         source={ { uri: `${ configuration.API_URL }/${ moment.photo }` } }/>
+                  :
+                  <View style={ [ gStyle.absolute_center, gStyle.center ] }>
+                     <Image source={ NO_PHOTO_IMAGE }
+                            style={ [ { width: 50, height: 50 } ] }/>
+                  </View>
+               }
+
+               <View
+                  style={ [ moment.photo ? styles.background : null, gStyle.absolute ] }>
+               </View>
+
+               <View style={ [ styles.title_position, styles.wrapper ] }>
+                  <Text style={ [ gStyle.regular_font, styles.title ] }>
+                     { moment.title }
+                  </Text>
+               </View>
+
+               <View style={ [ styles.tag_position, styles.wrapper, { backgroundColor: MOMENTS_COLOR } ] }>
+                  <Text style={ [ gStyle.regular_font, styles.title ] }>
+                     { moment.tag }
+                  </Text>
+               </View>
+
+               <View style={ [ styles.date_and_location_position ] }>
+                  <View style={ [ styles.wrapper ] }>
                      <Text style={ [ gStyle.regular_font, styles.title ] }>
-                        { moment.title }
+                        { moment.location }
+                     </Text>
+                  </View>
+
+                  <View style={ [ styles.wrapper ] }>
+                     <Text style={ [ gStyle.regular_font, styles.title ] }>
+                        { dateHelper(moment.date).format("DD-MM-YYYY") }
                      </Text>
                   </View>
                </View>
@@ -31,7 +72,7 @@ export function MomentItem({ moment }: { moment: IMoment }) {
 
 const styles = StyleSheet.create({
    noteItem: {
-      height: 200,
+      height: 300,
       padding: 20,
       flexDirection: "row",
       borderRadius: 15,
@@ -50,20 +91,28 @@ const styles = StyleSheet.create({
       backgroundColor: 'black',
       opacity: 0.2
    },
-   left: {
-      width: "95%",
-      justifyContent: "space-between",
-      gap: 10
-   },
-   right: {
-      width: "5%",
-   },
-   title_wrapper: {
+   wrapper: {
       backgroundColor: '#24292e',
-      alignSelf: "baseline",
       padding: 5,
       paddingHorizontal: 10,
       borderRadius: 4
+   },
+   title_position: {
+      position: "absolute",
+      left: 20,
+      top: 20,
+   },
+   date_and_location_position: {
+      position: "absolute",
+      flexDirection: "row",
+      bottom: 20,
+      right: 20,
+      gap: 10
+   },
+   tag_position: {
+      position: "absolute",
+      left: 20,
+      bottom: 20,
    },
    title: {
       fontWeight: '500',

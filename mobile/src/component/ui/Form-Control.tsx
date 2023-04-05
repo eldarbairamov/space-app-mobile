@@ -61,11 +61,13 @@ export function FormControl({
                                  { (isRequired && label) && <Text style={ styles.required }>*</Text> }
                               </View>
 
-                              { !!isPassword && <TouchableOpacity activeOpacity={ 0.5 } onPress={ showHiddenPassword }>
-                                 <Text style={ [ gStyle.regular_font, styles.label ] }>
-                                    { passwordValueCondition }
-                                 </Text>
-                              </TouchableOpacity> }
+                              { !!isPassword
+                                 && <TouchableOpacity activeOpacity={ 0.5 } onPress={ showHiddenPassword }>
+                                    <Text style={ [ gStyle.second_font, styles.label ] }>
+                                       { passwordValueCondition }
+                                    </Text>
+                                 </TouchableOpacity>
+                              }
 
                            </View>
                            <TextInput

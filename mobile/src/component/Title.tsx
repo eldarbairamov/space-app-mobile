@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { gStyle } from "../asset";
-import { TabStackEnum } from "../type";
+import { TabStackEnum } from "../navigation/type";
 
 export function Title({ children }: { children: string }) {
    const changeLogoBg = () => {
@@ -25,7 +25,7 @@ export function Title({ children }: { children: string }) {
       },
       title: {
          fontWeight: "bold",
-         fontSize: 23,
+         fontSize: 20,
          color: changeLogoBg(),
       }
    });

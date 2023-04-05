@@ -34,12 +34,30 @@ export const gStyle = StyleSheet.create({
          height: 5
       }
    },
+   bottom_border: {
+      borderBottomColor: "#e3e3e3",
+      borderBottomWidth: 1,
+      width: 200
+   },
+   input: {
+      minWidth: 0,
+      maxWidth: 200,
+      padding: 1
+   },
    absolute: {
       position: "absolute",
       top: 0,
       left: 0,
       bottom: 0,
       right: 0
+   },
+   absolute_center: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      margin: "auto",
    },
    border: {
       borderColor: "black",

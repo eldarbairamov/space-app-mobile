@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { HOME_ICON } from "../../constant/image.constant";
+import { HOME_ICON } from "../../constant";
 import { gStyle } from "../../asset";
 
 export function MyTabBar({ state, descriptors, navigation }: any) {

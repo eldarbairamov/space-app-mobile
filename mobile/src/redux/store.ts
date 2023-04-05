@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer, momentReducer, noteReducer, planReducer, userReducer } from "./slice";
+import { authReducer, momentReducer, noteReducer, planReducer, taskReducer, userReducer } from "./slice";
 
 
 export const store = configureStore({
@@ -8,7 +8,8 @@ export const store = configureStore({
       userReducer,
       noteReducer,
       planReducer,
-      momentReducer
+      momentReducer,
+      taskReducer
    }
 })
 

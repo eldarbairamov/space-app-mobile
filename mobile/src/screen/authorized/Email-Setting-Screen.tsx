@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
-import { DashboardStackEnum } from "../../type";
+import { DashboardStackEnum } from "../../navigation/type";
 import { BackIcon, ChangeEmailForm } from "../../component";
 
 export function EmailSettingScreen() {
@@ -11,7 +11,6 @@ export function EmailSettingScreen() {
             <View style={ [ styles.header ] }>
                <BackIcon to={ DashboardStackEnum.Settings }/>
             </View>
-
 
             <View style={ [ gStyle.center, styles.form, { flex: 1 } ] }>
                <ChangeEmailForm/>

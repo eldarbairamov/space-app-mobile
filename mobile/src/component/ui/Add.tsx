@@ -1,20 +1,19 @@
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { gStyle } from "../../asset";
-import { ADD_ICON } from "../../constant";
+import { ADD_DISABLE_ICON, ADD_ICON } from "../../constant";
 
 interface IAddProps {
-   onPress: () => void
+   onPress: () => void,
+   condition?: boolean
 }
 
-export function Add({ onPress }: IAddProps) {
+export function Add({ onPress, condition }: IAddProps) {
    return (
       <TouchableOpacity activeOpacity={ 0.5 }
                         style={ [ styles.add, gStyle.center ] }
-                        onPress={ onPress }
-      >
-         <Image source={ ADD_ICON }
-                style={ { width: 28, height: 28 } }
-         />
+                        onPress={ onPress }>
+         <Image source={ condition ? ADD_DISABLE_ICON : ADD_ICON }
+                style={ { width: 32, height: 32 } }/>
 
       </TouchableOpacity>
    )

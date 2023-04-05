@@ -6,6 +6,7 @@ export * from './authorized/Note-Edit-Screen'
 export * from './authorized/Plans-Screen'
 export * from './authorized/Settings-Screen'
 export * from './authorized/Email-Setting-Screen'
+export * from './authorized/Moment-Edit-Screen'
 
 export * from './unauthorized/Registration-Sreen'
 export * from "./unauthorized/Login-Screen"

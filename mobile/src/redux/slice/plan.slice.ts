@@ -37,8 +37,14 @@ const planSlice = createSlice({
          state.searchKey = payload;
       },
 
-      updateTitle: (state, { payload }: PayloadAction<string>) => {
-         state.activePlan.title = payload
+      updateTitle: (state, { payload }: PayloadAction<{ planId: string, title: string }>) => {
+         state.activePlan.title = payload.title
+         state.plans = state.plans.map(item => {
+            if (item.id === payload.planId) {
+               item.title = payload.title
+            }
+            return item
+         })
       },
 
       setActivePlan: (state, { payload }: PayloadAction<IPlan>) => {

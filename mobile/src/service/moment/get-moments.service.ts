@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { IMoments } from "../../interface/moment.interface";
+import { IMoments } from "../../interface";
 import { axiosInstance } from "../axios.service";
 import { useDispatch } from "react-redux";
 import { momentsRequests } from "../../config";
 import { momentActions } from "../../redux/slice";
+import Toast from "react-native-toast-message";
+import { errorCatherFn } from "../../helper";
 
 export function getMomentsService(searchKey: string) {
    const dispatch = useDispatch();
@@ -18,6 +20,7 @@ export function getMomentsService(searchKey: string) {
          dispatch(momentActions.setMoments(data));
 
       } catch (e) {
+         Toast.show({ type: 'error', text1: errorCatherFn(e) })
       }
    };
 

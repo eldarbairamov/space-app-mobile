@@ -1,11 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Put, Query, UseGuards } from "@nestjs/common";
 import { PlanService } from "./plan.service";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { CreatePlanDto } from "./dto";
 import { IPlanResponse } from "./interface/plan-response.interface";
-import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
-import { DefaultError, DeleteItemBody, ObjectIdError, ObjNotExistError, PlanResponse, SuccessResponse, UnauthorizedError } from "@src/common/swagger";
-import { DeleteItemDto } from "@src/common/dto";
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
+import { DefaultError, ObjectIdError, ObjNotExistError, PlanResponse, SuccessResponse, UnauthorizedError } from "@src/common/swagger";
 import { AccessGuard } from "@src/auth/guard";
 import { User } from "@src/common/decorator";
 
@@ -78,10 +77,9 @@ export class PlanController {
       return this.planService.updatePlan(noteId, dto);
    }
 
-   // Send prev request params and delete plan
-   @ApiOperation({ summary: "send prev request params and delete plan by id" })
+   // Delete plan
+   @ApiOperation({ summary: "delete plan by id" })
    @ApiParam({ name: "planId", description: "plan id", example: "63dfe16eda233c96fc6e2604" })
-   @ApiBody({ type: DeleteItemBody, required: false })
    @ApiOkResponse({ description: "Success", type: SuccessResponse })
    @ApiBadRequestResponse({ description: "Invalid ObjectID", type: ObjectIdError })
    @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
@@ -89,10 +87,9 @@ export class PlanController {
    @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
-   @Post(":planId")
+   @Delete(":planId")
    async deletePlan(
       @User("userId") userId: string,
-      @Body() dto: DeleteItemDto,
       @Param("planId") noteId: string): Promise<{ message: string }> {
 
       await this.planService.deletePlan(noteId, userId)

@@ -5,9 +5,10 @@ interface IButtonProps {
    title: string,
    onPress?: any,
    isValid?: boolean
+   btnWidth?: number
 }
 
-export function Button({ title, onPress, isValid }: IButtonProps) {
+export function Button({ title, onPress, isValid, btnWidth = 250 }: IButtonProps) {
    const styles = StyleSheet.create({
       container: {
          width: 250,
@@ -25,7 +26,7 @@ export function Button({ title, onPress, isValid }: IButtonProps) {
    return (
       <TouchableOpacity onPress={ onPress }
                         disabled={ !isValid }
-                        style={ [ gStyle.border, gStyle.center, styles.container ] }
+                        style={ [ gStyle.border, gStyle.center, styles.container, { width: btnWidth } ] }
                         activeOpacity={ 0.5 }>
          <Text style={ [ gStyle.regular_font, styles.title ] }> { title } </Text>
       </TouchableOpacity>

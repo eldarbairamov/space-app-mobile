@@ -13,7 +13,7 @@ export function deletePlanService() {
    const deletePlanFn = async (targetId: IPlan["id"]) => {
       try {
          Toast.show({ type: 'info', text1: 'Лоудінг..' })
-         const { data } = await axiosInstance.post<IPlan[]>(plansRequests.deletePlan + targetId);
+         await axiosInstance.delete(plansRequests.deletePlan + targetId);
          dispatch(planAction.deletePlan(targetId));
          dispatch(userActions.setPlansCount(plansCount - 1))
          Toast.hide()

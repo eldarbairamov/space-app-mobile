@@ -3,8 +3,6 @@ import { databaseException } from "@src/common/exception/database.exception";
 import { FilterQuery, Model, UpdateQuery } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { Moment, MomentDocument } from "../model/moment.model";
-import { UserDocument } from "@src/user/model/user.model";
-import { QueryDto } from "@src/common/dto";
 
 @Injectable()
 export class MomentRepository {
@@ -42,21 +40,10 @@ export class MomentRepository {
       }
    }
 
-   async find(filter: FilterQuery<MomentDocument>, queryDto = {} as QueryDto): Promise<MomentDocument[]> {
-      const { searchKey, limit } = queryDto;
-      const filterObj = searchKey ? { ...filter, tags: { $regex: searchKey } } : { ...filter };
+   async find(filter: FilterQuery<MomentDocument>, searchKey: string = ''): Promise<MomentDocument[]> {
+      const filterObj = searchKey ? { ...filter, tag: { $regex: searchKey } } : { ...filter };
       try {
-         return await this.momentModel.find(filterObj).sort({ createdAt: "desc" }).limit(limit);
-      } catch (e) {
-         const error = e as Error;
-         console.log(error.message);
-         databaseException();
-      }
-   }
-
-   async findAllByUserId(userId: UserDocument["id"]) {
-      try {
-         return await this.momentModel.find({ ownerId: userId });
+         return await this.momentModel.find(filterObj).sort({ createdAt: "desc" });
       } catch (e) {
          const error = e as Error;
          console.log(error.message);

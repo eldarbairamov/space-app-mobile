@@ -7,7 +7,6 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { ApiBadRequestResponse, ApiBody, ApiConsumes, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiPayloadTooLargeResponse, ApiTags, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
 import { DefaultError, FileSizeError, FileTypeError, MomentResponse, MomentsResponse, ObjectIdError, ObjNotExistError, SuccessResponse, UnauthorizedError, UpdateMomentBody, UploadImageResponse } from "@src/common/swagger";
-import { QueryDto } from "@src/common/dto";
 import { SharpPipe } from "@src/common/pipe/sharp.pipe";
 import { FileValidatorFilter } from "@src/common/exception/file-validator.filter";
 import { ApiFile, User } from "@src/common/decorator";
@@ -27,10 +26,10 @@ export class MomentController {
    @UseGuards(AccessGuard)
    @Get()
    async getMoments(
-      @Query() queryDto: QueryDto,
+      @Query('searchKey') searchKey: string,
       @User("userId") userId: string): Promise<IMomentsResponse> {
 
-      return this.momentService.getMoments(userId, queryDto);
+      return this.momentService.getMoments(userId, searchKey);
    }
 
    // Add moment

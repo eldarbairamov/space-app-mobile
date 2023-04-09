@@ -48,7 +48,8 @@ export function DashboardScreen() {
             <View style={ [ styles.greetings_wrapper, gStyle.center ] }>
                <View style={ [ gStyle.center, styles.greetings, { width: '100%' } ] }>
                   <Text style={ [ gStyle.handwrite, styles.hello ] }> Привіт, </Text>
-                  <Text style={ [ gStyle.regular_font, styles.username ] }> { username ? username : 'завантажую' } </Text>
+                  <Text
+                     style={ [ gStyle.regular_font, styles.username ] }> { username ? username : 'завантажую' } </Text>
                   <Text style={ [ gStyle.handwrite, styles.how_are_you ] }> Ну, як ти? </Text>
                </View>
             </View>

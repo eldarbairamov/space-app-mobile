@@ -23,6 +23,7 @@ export function MomentsScreen() {
    const onClear = () => {
       setShowClearIcon(false)
       setValue('')
+      dispatch(momentActions.setSearchKey(''))
    }
 
    return (
@@ -54,7 +55,7 @@ export function MomentsScreen() {
                      </TouchableOpacity> :
                   undefined }
                onChange={ (item: any) => {
-                  dispatch(momentActions.setSearchKey(item))
+                  dispatch(momentActions.setSearchKey(item.value))
                   setValue(item.value)
                   setShowClearIcon(true)
                } }/>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
    },
    body: {
-      paddingTop: 20,
       height: "95%",
       width: "100%",
       alignItems: "center",

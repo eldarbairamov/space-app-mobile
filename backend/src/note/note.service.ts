@@ -36,7 +36,7 @@ export class NoteService {
    }
 
    async getNotes(userId: UserDocument["id"], searchKey: string): Promise<INoteResponse[]> {
-      // Find and count notes
+      // Find notes
       const notes = await this.noteRepository.find({ ownerId: userId }, searchKey)
 
       // Return presented data to client

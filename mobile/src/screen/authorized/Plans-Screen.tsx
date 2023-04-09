@@ -24,8 +24,7 @@ export function PlansScreen() {
             <TextInput onChangeText={ handleChange }
                        value={ searchKey }
                        placeholder={ 'Пошук' }
-                       style={[gStyle.regular_font, gStyle.input]}
-            />
+                       style={ [ gStyle.regular_font, gStyle.input ] }/>
 
          </View>
 
@@ -50,7 +49,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
    },
    body: {
-      paddingTop: 20,
       height: "95%",
       width: "100%",
       alignItems: "center",

@@ -15,7 +15,7 @@ export class AuthController {
    constructor(private authService: AuthService) {
    }
 
-   // RegistrationSreen
+   // Registration
    @ApiOperation({ summary: "registration" })
    @ApiCreatedResponse({ description: "User account was created", type: SuccessResponse })
    @ApiConflictResponse({ description: "Conflict", type: EmailInUse })
@@ -29,7 +29,7 @@ export class AuthController {
       return { message: "Success" };
    }
 
-   // LoginScreen
+   // Login
    @ApiOperation({ summary: "login" })
    @ApiBody({ type: LoginBody, required: true })
    @ApiCreatedResponse({ description: "Access tokens was created", type: LoginResponse })

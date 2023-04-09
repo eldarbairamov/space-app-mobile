@@ -6,7 +6,7 @@ import dateHelper from "moment";
 import { deletePlanService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import { PlanListScreenNavigationProp, PlansStackEnum } from "../../navigation/type";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch } from "../../hook";
 import { planAction } from "../../redux/slice";
 import { useEffect } from "react";
 
@@ -17,28 +17,26 @@ export function PlanItem({ plan }: { plan: IPlan }) {
       dispatch(planAction.setActivePlan(plan))
    }, [])
 
-   const { activePlan } = useAppSelector(state => state.planReducer)
-
    const { navigate } = useNavigation<PlanListScreenNavigationProp>()
 
    const { deletePlanFn } = deletePlanService()
 
    return (
       <>
-         { activePlan &&
+         { plan &&
             <TouchableOpacity style={ [ styles.noteItem ] }
                               activeOpacity={ 0.7 }
                               onPress={ () => {
-                                 dispatch(planAction.setActivePlan(activePlan))
+                                 dispatch(planAction.setActivePlan(plan))
                                  navigate(PlansStackEnum.TaskList)
                               } }>
                <View style={ [ styles.left ] }>
                   <Text style={ [ gStyle.regular_font, styles.title ] }>
-                     { activePlan.title }
+                     { plan.title }
                   </Text>
 
                   <Text style={ [ gStyle.regular_font, styles.date ] }>
-                     { dateHelper(activePlan.lastModified).format("DD-MM-YYYY, HH:mm") }
+                     { dateHelper(plan.lastModified).format("DD-MM-YYYY, HH:mm") }
                   </Text>
                </View>
 
@@ -49,7 +47,7 @@ export function PlanItem({ plan }: { plan: IPlan }) {
 
                <TouchableOpacity activeOpacity={ 0.5 }
                                  style={ [ styles.right, gStyle.center ] }
-                                 onPress={ () => deletePlanFn(activePlan.id) }>
+                                 onPress={ () => deletePlanFn(plan.id) }>
                   <Image source={ DELETE_ICON }
                          style={ { width: 28, height: 28, alignSelf: "flex-end" } }/>
 

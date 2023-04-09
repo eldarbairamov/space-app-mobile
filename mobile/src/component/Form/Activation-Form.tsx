@@ -1,6 +1,6 @@
 import { Text, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
-import { Button } from "../ui/Button";
+import { Button } from "../UI/Button";
 import { useState } from "react";
 
 interface IActivationFormProps {
@@ -19,9 +19,10 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
             Будь ласка, введіть код активації
          </Text>
 
-         <TextInput onChangeText={ handleChange } value={ value }
-                    style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: 'center' } ] }/>
-         <Button title={ 'Надіслати' } isValid={ !!value } onPress={ () => activationFn(value) }/>
+         <TextInput onChangeText={ handleChange }
+                    value={ value }
+                    style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: 'center', minWidth: 300} ] }/>
+         <Button title={ 'Надіслати' } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={300}/>
 
       </View>
    )

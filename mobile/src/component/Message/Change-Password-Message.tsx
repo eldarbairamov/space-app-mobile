@@ -1,6 +1,6 @@
 import { SUCCESS_IMAGE } from "../../constant";
 import { logoutService } from "../../service";
-import { Message } from "../ui/Message";
+import { Message } from "../UI/Message";
 
 export function ChangePasswordMessage() {
    const { logoutFn } = logoutService()

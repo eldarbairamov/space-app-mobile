@@ -30,6 +30,8 @@ export * from './moment/get-moments.service'
 export * from './moment/add-moment.service'
 export * from './moment/delete-moment.service'
 export * from './moment/upload-moment-photo.service'
+export * from './moment/update-moment.service'
+export * from './moment/moment-prev-state.service'
 
 export * from './axios.service'
 export * from './storage.service'

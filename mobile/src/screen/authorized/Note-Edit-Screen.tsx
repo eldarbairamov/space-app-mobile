@@ -41,7 +41,7 @@ export function NoteEditScreen() {
                                  activeOpacity={ 0.5 }
                                  onPress={ () => updateNoteFn(activeNote) }>
                   <Image source={ prevState === activeNote ? SAVE_DISABLE : SAVE_ENABLE }
-                         style={ [ { width: 27, height: 27 } ] }/>
+                         style={ [ { width: 26, height: 26 } ] }/>
 
                </TouchableOpacity>
             </View>

@@ -7,7 +7,6 @@ import { UpdateMomentDto } from "./dto";
 import path from "path";
 import { UserRepository } from "@src/user/repository/user.repository";
 import { UserDocument } from "@src/user/model/user.model";
-import { QueryDto } from "@src/common/dto";
 import { staticPath } from "@src/common/constants";
 import { exists, unlinker } from "@src/common/helper";
 
@@ -17,21 +16,17 @@ export class MomentService {
    constructor(private momentRepository: MomentRepository, private userRepository: UserRepository, private momentPresenter: MomentPresenter) {
    }
 
-   async getMoments(userId: UserDocument["id"], queryDto: QueryDto): Promise<IMomentsResponse> {
-      // Find all moments / by search key
-      const [ moments, count, allMoments ] = await Promise.all([
-         this.momentRepository.find({ ownerId: userId }, queryDto),
-         this.momentRepository.count({ ownerId: userId }, queryDto.searchKey),
-         this.momentRepository.findAllByUserId(userId),
-      ]);
+   async getMoments(userId: UserDocument["id"], searchKey: string): Promise<IMomentsResponse> {
+      // Find all moments by search key
+      const moments = await this.momentRepository.find({ ownerId: userId }, searchKey)
 
       // Defined unique tags
-      const tags = allMoments.map(moment => moment.tag);
+      const tags = moments.map(moment => moment.tag);
       const uniqueTags = Array.from(new Set(tags.flat()));
 
       // Return presented data to client
       const presentedMoments = this.momentPresenter.array(moments);
-      return { data: presentedMoments, count, tagsForFilter: uniqueTags };
+      return { data: presentedMoments, tagsForFilter: uniqueTags };
    }
 
    async addMoment(userId: UserDocument["id"]): Promise<IMomentResponse> {

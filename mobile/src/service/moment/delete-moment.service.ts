@@ -1,18 +1,24 @@
 import { useAppDispatch } from "../../hook";
-import { IMoment } from "../../interface/moment.interface";
+import { IMoment } from "../../interface";
 import { axiosInstance } from "../axios.service";
 import { momentsRequests } from "../../config";
 import { momentActions } from "../../redux/slice";
+import Toast from "react-native-toast-message";
+import { errorCatherFn } from "../../helper";
 
-export function deleteMomentService() {
+export function deleteMomentService(next: () => void) {
    const dispatch = useAppDispatch();
 
    const deleteMomentFn = async (momentId: IMoment["id"]) => {
       try {
+         Toast.show({ type: 'info', text1: 'Лоудінг..' })
          await axiosInstance.delete(momentsRequests.deleteMoment + momentId);
          dispatch(momentActions.deleteMoment({ momentId: momentId! }));
+         Toast.hide()
+         next()
 
       } catch (e) {
+         Toast.show({ type: 'error', text1: errorCatherFn(e) })
       }
    };
 

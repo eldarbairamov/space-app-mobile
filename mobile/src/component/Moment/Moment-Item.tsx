@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
       bottom: 20,
    },
    title: {
-      fontWeight: '500',
       color: "whitesmoke",
    },
    noteBody: {
@@ -126,6 +125,5 @@ const styles = StyleSheet.create({
    date: {
       color: NOTES_COLOR,
       fontSize: 12,
-      fontWeight: "bold"
    }
 })

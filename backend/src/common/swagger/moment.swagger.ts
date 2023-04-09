@@ -30,9 +30,6 @@ export class MomentsResponse implements IMomentsResponse {
 
    @ApiProperty({ example: [ "tags" ], type: [ String ] })
    readonly tagsForFilter: (string | undefined)[];
-
-   @ApiProperty({ example: 30, type: Number })
-   readonly count: number;
 }
 
 export class UpdateMomentBody {

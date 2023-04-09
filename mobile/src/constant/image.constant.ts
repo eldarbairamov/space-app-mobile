@@ -8,6 +8,7 @@ export const LOGOUT_ICON = require("../asset/image/logout-dark.png")
 export const ADD_ICON = require('../asset/image/add-dark.png')
 export const ADD_DISABLE_ICON = require("../asset/image/add-disable.png")
 export const DELETE_ICON = require('../asset/image/delete-dark.png')
+export const DELETE_ICON_COLOR = require('../asset/image/delete-color.png')
 export const CLEAR_ICON = require('../asset/image/clear-dark.png')
 
 export const SAVE_ENABLE = require("../asset/image/check-mark-enable.png")

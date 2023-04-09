@@ -38,7 +38,7 @@ export class PlanService {
    }
 
    async getPlans(userId: UserDocument["id"], searchKey: string): Promise<IPlanResponse[]> {
-      // Find and count plans
+      // Find plans
       const plans = await this.planRepository.find({ ownerId: userId }, searchKey)
 
       // Return presented data to client

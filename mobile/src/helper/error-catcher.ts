@@ -56,7 +56,7 @@ export const errorCatherFn = (e: unknown) => {
          break;
    }
 
-   // console.log(response ? response : axiosError.message);
+   console.log(response ? response : axiosError.message);
 
    return message;
 };

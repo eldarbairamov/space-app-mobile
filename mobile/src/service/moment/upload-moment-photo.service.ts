@@ -36,7 +36,6 @@ export function uploadMomentPhotoService(momentId: IMoment["id"]) {
          } catch (e) {
             Toast.show({ type: 'error', text1: errorCatherFn(e) })
          }
-
       }
    }
 

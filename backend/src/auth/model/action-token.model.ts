@@ -13,6 +13,9 @@ export class ActionToken {
    @Prop()
    tokenType: string;
 
+   @Prop({ isRequired: false })
+   email: string
+
    @Prop({ type: Types.ObjectId, ref: "User" })
    ownerId: User;
 

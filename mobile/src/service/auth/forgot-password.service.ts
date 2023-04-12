@@ -4,6 +4,7 @@ import { axiosInstance } from "../axios.service";
 import { authRequests } from "../../config";
 
 export function forgotPasswordService(next: () => any) {
+
    const forgotPasswordFn = async (email: string) => {
       try {
          Toast.show({ type: 'info', text1: 'Лоудінг..' })

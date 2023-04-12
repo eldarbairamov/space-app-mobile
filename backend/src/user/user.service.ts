@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { UserRepository } from "./repository/user.repository";
 import { ChangePasswordDto, ProfileUpdateDto } from "./dto";
 import { UserDocument } from "./model/user.model";
-import { ConfigService } from "@nestjs/config";
 import { IUpdateProfileResponse } from "./interface/update-profile-response.interface";
 import { IUserInfoResponse } from "./interface/user-info-response.interface";
 import path from "node:path";
@@ -10,12 +9,12 @@ import { passComparer, passHasher } from "@src/auth/helper";
 import { ActionTokenRepository } from "@src/auth/repository";
 import { NoteRepository } from "@src/note/repository/note.repository";
 import { PlanRepository } from "@src/plan/repository/plan.repository";
-import { CHANGE_EMAIL, EMAIL_CONFIRMATION_TOKEN_TYPE, staticPath } from "@src/common/constants";
-import { IEnvironmentVariables } from "@src/config/env-variables.interface";
+import { CHANGE_EMAIL, EMAIL_CONFIRMATION_TOKEN_TYPE, STATIC_PATH } from "@src/common/constants";
 import { exists, unlinker } from "@src/common/helper";
 import { EmailService } from "@src/common/email.service";
 import { MomentRepository } from "@src/moment/repository/moment.repository";
 import { TokenService } from "@src/common/token.service";
+import crypto from "crypto";
 
 @Injectable()
 export class UserService {
@@ -28,7 +27,6 @@ export class UserService {
       private noteRepository: NoteRepository,
       private planRepository: PlanRepository,
       private momentRepository: MomentRepository,
-      private configService: ConfigService<IEnvironmentVariables>,
    ) {
    }
 
@@ -57,44 +55,34 @@ export class UserService {
 
    async changeEmailRequest(email: string, userId: UserDocument["id"]): Promise<void> {
       // Check is new email unique
-      const [ isEmailUnique, user ] = await Promise.all([
+      const [ isEmailDoesNotUnique, user ] = await Promise.all([
          this.userRepository.findOne({ email }),
          this.userRepository.findById(userId)
       ])
-      if (isEmailUnique) throw new HttpException('This email is already in use', HttpStatus.CONFLICT)
+      if (isEmailDoesNotUnique) throw new HttpException('This email is already in use', HttpStatus.CONFLICT)
 
       // Generate link
-      const confirmationToken = this.tokenService.generate({
-         userId,
-         email
-      }, this.configService.get("SECRET_CHANGE_EMAIL_KEY"));
-      const confirmationLink = `${ this.configService.get('CLIENT_URL') }/email_confirmation/new?token=${ confirmationToken }`;
+      const changeEmailCode = crypto.randomBytes(3).toString('hex').toUpperCase()
 
       // Save action token to DB
       await this.actionTokenRepository.create({
-         token: confirmationToken,
+         token: changeEmailCode,
          tokenType: EMAIL_CONFIRMATION_TOKEN_TYPE,
          ownerId: userId,
+         email
       })
 
       // Send email
-      await this.emailService.send(email, CHANGE_EMAIL, { confirmationLink, username: user.username });
+      await this.emailService.send(email, CHANGE_EMAIL, { changeEmailCode, username: user.username });
    }
 
-   async changeEmail(token: string): Promise<void> {
-      // Decoding token
-      const {
-         userId,
-         email,
-      } = this.tokenService.tokenVerify(token, this.configService.get("SECRET_CHANGE_EMAIL_KEY")) as { userId: string, email: string };
-      if (!userId && !email) throw new HttpException("Invalid or expired token", HttpStatus.UNAUTHORIZED);
-
+   async changeEmail(code: string): Promise<void> {
       // Delete action token
-      const actionToken = await this.actionTokenRepository.findOneAndDelete({ token });
-      if (!actionToken) throw new HttpException("Invalid or expired token", HttpStatus.UNAUTHORIZED);
+      const actionTokenInfo = await this.actionTokenRepository.findOneAndDelete({ token: code });
+      if (!actionTokenInfo) throw new HttpException("Invalid code", HttpStatus.UNAUTHORIZED);
 
       // Update email
-      await this.userRepository.findByIdAndUpdate(userId, { email: email });
+      await this.userRepository.findByIdAndUpdate(actionTokenInfo.ownerId, { email: actionTokenInfo.email });
    }
 
    async changePassword(userId: UserDocument["id"], dto: ChangePasswordDto): Promise<void> {
@@ -117,9 +105,13 @@ export class UserService {
    }
 
    async profileUpdate(userId: UserDocument["id"], dto: ProfileUpdateDto): Promise<IUpdateProfileResponse> {
-      // Check if there is nothing to change
-      const userFromDb = await this.userRepository.findOne({ id: userId });
+      // Define variables
+      const [ userFromDb, username ] = await Promise.all([
+         this.userRepository.findOne({ id: userId }),
+         this.userRepository.findOne({ username: dto.username })
+      ])
 
+      // Check if there is nothing to change
       const objToCompare = {
          username: userFromDb!.username,
          name: userFromDb!.name,
@@ -127,6 +119,9 @@ export class UserService {
       };
 
       if (JSON.stringify(dto) === JSON.stringify(objToCompare)) throw new HttpException("There is nothing to change", HttpStatus.BAD_REQUEST);
+
+      // Check is username is unique
+      if (username && username.username !== dto.username) throw new HttpException("This username is already in use", HttpStatus.CONFLICT)
 
       // Update user
       await userFromDb.updateOne(dto);
@@ -141,7 +136,7 @@ export class UserService {
    async uploadAvatar(fileName: string, userId: string): Promise<void> {
       // Delete prev image from hard drive if exists
       const { avatar } = await this.userRepository.findById(userId);
-      const imagePath = path.join(staticPath, (avatar ? avatar : "nothing"));
+      const imagePath = path.join(STATIC_PATH, (avatar ? avatar : "nothing"));
       const isImageExists = await exists(imagePath);
 
       if (isImageExists) await unlinker(imagePath);
@@ -155,7 +150,7 @@ export class UserService {
       await this.userRepository.findByIdAndUpdate(userId, { avatar: "" });
 
       // Delete image from hard drive
-      const filePath = path.resolve(staticPath, fileName);
+      const filePath = path.resolve(STATIC_PATH, fileName);
       await unlinker(filePath);
    }
 

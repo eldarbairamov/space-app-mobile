@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
 import { Button } from "../UI/Button";
 import { useState } from "react";
@@ -13,18 +13,32 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
    const handleChange = (value: string) => setValue(value);
 
    return (
-      <View style={ gStyle.form_control_wrapper }>
+      <View>
+         <View style={styles.message}>
+            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: '500' } ] }>
+               Ви успішно зареєструвались.
+            </Text>
+            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: '500' } ] }>
+               Введіть код активації, який щойно прилетів на вашу електронну пошту:
+            </Text>
+         </View>
 
-         <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: '500' } ] }>
-            Будь ласка, введіть код активації
-         </Text>
+         <View style={ gStyle.form_control_wrapper }>
+            <TextInput onChangeText={ handleChange }
+                       value={ value }
+                       style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: 'center', minWidth: 300 } ] }/>
+            <Button title={ 'Активувати' } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={ 300 }/>
 
-         <TextInput onChangeText={ handleChange }
-                    value={ value }
-                    style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: 'center', minWidth: 300} ] }/>
-         <Button title={ 'Надіслати' } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={300}/>
-
+         </View>
       </View>
    )
 }
+
+const styles = StyleSheet.create({
+   message: {
+      alignItems: 'center',
+      width: 300,
+      marginBottom: 40
+   }
+})
 

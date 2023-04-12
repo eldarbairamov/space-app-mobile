@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SettingsIcon, Logout } from "../../component";
+import { SettingsIcon, LogoutIcon } from "../../component";
 import { gStyle } from "../../asset";
 import { NO_AVATAR_IMAGE } from "../../constant";
 import { deletePhotoService, getUserService, uploadPhotoService } from "../../service";
@@ -20,7 +20,7 @@ export function DashboardScreen() {
 
             <View style={ [ styles.header ] }>
                <SettingsIcon/>
-               <Logout/>
+               <LogoutIcon/>
             </View>
 
             <View style={ [ gStyle.center, styles.avatar_wrapper ] }>

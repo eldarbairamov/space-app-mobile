@@ -11,12 +11,7 @@ interface IUpdateProfileFormProps {
 }
 
 export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) {
-   const {
-      control,
-      handleSubmit,
-      formState: { errors, isValid },
-      setValue
-   } = useForm<IUpdateProfileForm>({ mode: "onTouched" });
+   const { control, handleSubmit, formState: { errors, isValid }, setValue } = useForm<IUpdateProfileForm>({ mode: "onTouched" });
    const { username, name, surname } = useAppSelector(state => state.userReducer)
 
    const onSubmit = (data: any) => updateProfileFn(data)
@@ -35,7 +30,6 @@ export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) 
                       name={ 'username' }
                       isRequired={ true }
                       isTextLimit={ true }
-                      isOnlyLetters={ true }
                       errorMessage={ errors.username?.message }/>
 
          <FormControl label={ 'Імʼя' }

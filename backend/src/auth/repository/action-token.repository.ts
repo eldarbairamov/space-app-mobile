@@ -20,6 +20,16 @@ export class ActionTokenRepository {
       }
    }
 
+   async deleteMany(filter: FilterQuery<ActionToken>) {
+      try {
+         return await this.actionTokenModel.deleteMany(filter)
+      } catch (e) {
+         const error = e as Error;
+         console.log(error.message);
+         databaseException();
+      }
+   }
+
    async findByIdAndUpdate(id: string, update: UpdateQuery<ActionToken>): Promise<ActionTokenDocument> {
       try {
          return await this.actionTokenModel.findByIdAndUpdate(id, update, { new: true });

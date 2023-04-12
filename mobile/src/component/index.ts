@@ -1,7 +1,7 @@
 export * from './UI/Button'
 export * from './UI/Form-Control'
 export * from './UI/Tab-Bar-Label'
-export * from './UI/Logout'
+export * from './UI/Logout-Icon'
 export * from './UI/Message'
 export * from './UI/Select-Item'
 

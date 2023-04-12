@@ -9,7 +9,8 @@ export function SettingsIcon() {
    return (
       <TouchableOpacity onPress={ () => navigate('Settings') }
                         activeOpacity={ 0.5 }>
-         <Image style={ { width: 27, height: 27, } } source={ SETTINGS_ICON }/>
+         <Image style={ { width: 27, height: 27, } }
+                source={ SETTINGS_ICON }/>
       </TouchableOpacity>
    )
 }

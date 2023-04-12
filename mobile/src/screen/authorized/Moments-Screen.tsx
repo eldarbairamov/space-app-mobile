@@ -7,6 +7,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import { momentActions } from "../../redux/slice";
 import { CLEAR_ICON } from "../../constant";
 import { Add, MomentItem, SelectItem } from "../../component";
+import { EmptyIcon } from "../../component/UI/Empty-Icon";
 
 export function MomentsScreen() {
    const { moments, tags, searchKey } = useAppSelector(state => state.momentReducer)
@@ -63,11 +64,14 @@ export function MomentsScreen() {
          </View>
 
          <View style={ [ styles.body ] }>
-            <FlatList style={ styles.momentListWrapper }
-                      data={ moments }
-                      renderItem={ ({ item, index }) =>
-                         <MomentItem key={ index + 1 } moment={ item }/>
-                      }/>
+            { Boolean(moments.length)
+               ?
+               <FlatList style={ styles.momentListWrapper }
+                         data={ moments }
+                         renderItem={ ({ item, index }) =>
+                            <MomentItem key={ index + 1 } moment={ item }/> }/>
+               : <EmptyIcon/>
+            }
          </View>
 
       </View>

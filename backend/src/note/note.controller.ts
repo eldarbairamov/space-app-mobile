@@ -3,8 +3,8 @@ import { NoteService } from "./note.service";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { UpdateNoteDto } from "./dto";
 import { INoteResponse } from "./interface/note-response.interface";
-import { ApiBadRequestResponse, ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
-import { DefaultError, DeleteItemBody, NoteResponse, ObjectIdError, ObjNotExistError, SuccessResponse, UnauthorizedError } from "@src/common/swagger";
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
+import { DefaultError, NoteResponse, ObjectIdError, ObjNotExistError, SuccessResponse, UnauthorizedError } from "@src/common/swagger";
 import { AccessGuard } from "@src/auth/guard";
 import { User } from "@src/common/decorator";
 

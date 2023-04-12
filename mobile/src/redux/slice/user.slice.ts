@@ -56,6 +56,10 @@ const userSlice = createSlice({
 
       setPlansCount: (state, { payload }: PayloadAction<number>) => {
          state.plansCount = payload
+      },
+
+      setMomentCount: (state, { payload }: PayloadAction<number>) => {
+         state.momentsCount = payload
       }
 
    },

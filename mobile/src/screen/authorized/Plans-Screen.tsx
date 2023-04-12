@@ -4,6 +4,7 @@ import { Add, PlanItem } from "../../component";
 import { planAction } from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addPlanService, getPlansService } from "../../service";
+import { EmptyIcon } from "../../component/UI/Empty-Icon";
 
 export function PlansScreen() {
    const { plans, searchKey } = useAppSelector(state => state.planReducer)
@@ -29,10 +30,14 @@ export function PlansScreen() {
          </View>
 
          <View style={ [ styles.body ] }>
-            <FlatList style={ styles.planListWrapper }
-                      data={ plans }
-                      renderItem={ ({ item, index }) =>
-                         <PlanItem key={ index + 1 } plan={ item }/> }/>
+            { Boolean(plans.length)
+               ?
+               <FlatList style={ styles.planListWrapper }
+                         data={ plans }
+                         renderItem={ ({ item, index }) =>
+                            <PlanItem key={ index + 1 } plan={ item }/> }/>
+               : <EmptyIcon/>
+            }
          </View>
 
       </View>

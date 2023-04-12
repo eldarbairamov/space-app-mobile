@@ -19,10 +19,8 @@ interface IFormControlProps {
    isChangeValueOff?: boolean
 }
 
-export function FormControl({
-                               label, name, control, errorMessage, isRequired, isEmail,
-                               isPassword, isTextLimit, isOnlyLetters, isCenter, isChangeValueOff
-                            }: IFormControlProps) {
+export function FormControl({ label, name, control, errorMessage, isRequired, isEmail,
+                               isPassword, isTextLimit, isOnlyLetters, isCenter, isChangeValueOff }: IFormControlProps) {
 
    const [ isPasswordHidden, setIsPasswordHidden ] = useState<boolean>(!!isPassword);
 

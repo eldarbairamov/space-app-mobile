@@ -3,7 +3,7 @@ import { gStyle } from "../../asset";
 import { LOGOUT_ICON } from "../../constant";
 import { logoutService } from "../../service";
 
-export function Logout() {
+export function LogoutIcon() {
    const { logoutFn } = logoutService()
 
    return (

@@ -20,7 +20,6 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
                       control={ control }
                       name={ 'username' }
                       isTextLimit={ true }
-                      isOnlyLetters={ true }
                       isRequired={ true }
                       errorMessage={ errors.username?.message }/>
 

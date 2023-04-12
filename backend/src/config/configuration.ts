@@ -6,7 +6,7 @@ export default () => ({
    EMAIL_SERVICE_USER: "your.space.application@gmail.com",
    EMAIL_SERVICE_PASS: "doyfhkvwcyctpdzb",
 
-   MONGO_URI: process.env.MONGO_URI || "mongodb://localhost:27017/space-app-nestjs",
+   MONGO_URI: process.env.MONGO_URI || "mongodb://localhost:27017/space-app-mobile",
 
    SECRET_ACCESS_TOKEN_KEY: process.env.SECRET_ACCESS_TOKEN_KEY || "secret access token key",
    SECRET_REFRESH_TOKEN_KEY: process.env.SECRET_REFRESH_TOKEN_KEY || "secret access refresh key",

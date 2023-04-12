@@ -70,9 +70,9 @@ export class UserController {
    @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @Patch("email_new")
    async changeEmail(
-      @Body("confirmationToken") confirmationToken: string): Promise<{ message: string }> {
+      @Body("code") code: string): Promise<{ message: string }> {
 
-      await this.userService.changeEmail(confirmationToken);
+      await this.userService.changeEmail(code);
       return { message: "Success" };
    }
 

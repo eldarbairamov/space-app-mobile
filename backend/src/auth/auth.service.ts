@@ -6,7 +6,6 @@ import { RegistrationDto, ResetPasswordDto } from "./dto";
 import { ActionTokenRepository, OAuthRepository } from "./repository";
 import { ILoginResponse } from "./interface";
 import { Cron, CronExpression } from "@nestjs/schedule";
-import { ConfigService } from "@nestjs/config";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { UserRepository } from "@src/user/repository/user.repository";
@@ -14,7 +13,7 @@ import { UserDocument } from "@src/user/model/user.model";
 import { ACTIVATION_TOKEN_TYPE, FORGOT_PASSWORD, REGISTRATION, RESET_PASSWORD_TOKEN_TYPE } from "@src/common/constants";
 import { EmailService } from "@src/common/email.service";
 import { TokenService } from "@src/common/token.service";
-import { IEnvironmentVariables } from "@src/config/env-variables.interface";
+import crypto from "crypto"
 
 dayjs.extend(utc);
 
@@ -28,7 +27,6 @@ export class AuthService {
       private actionTokenRepository: ActionTokenRepository,
       private oAuthRepository: OAuthRepository,
       private userRepository: UserRepository,
-      private configService: ConfigService<IEnvironmentVariables>,
    ) {
 
    }
@@ -94,26 +92,34 @@ export class AuthService {
       const user = await this.userRepository.findOne({ email });
       if (!user) throw new HttpException("User is not found", HttpStatus.UNAUTHORIZED);
 
-      // Generate link
-      const resetPasswordToken = this.tokenService.generate({ userId: user.id }, this.configService.get("SECRET_FORGOT_PASS_KEY"))
-      const resetPasswordLink = `${ this.configService.get('CLIENT_URL') }/password_reset/new?token=${ resetPasswordToken }`;
+      // Generate code
+      const resetPasswordCode = crypto.randomBytes(3).toString('hex').toUpperCase()
+
+      // Delete previous codes
+      await Promise.all([
+         this.actionTokenRepository.deleteMany({ tokenType: RESET_PASSWORD_TOKEN_TYPE }),
+         this.actionTokenRepository.create({
+            token: resetPasswordCode,
+            tokenType: RESET_PASSWORD_TOKEN_TYPE,
+            ownerId: user.id,
+         }),
+      ])
 
       // Save action token to DB
       await this.actionTokenRepository.create({
-         token: resetPasswordToken,
+         token: resetPasswordCode,
          tokenType: RESET_PASSWORD_TOKEN_TYPE,
          ownerId: user.id,
       });
 
       // Send email
-      await this.emailService.send(email, FORGOT_PASSWORD, { resetPasswordLink, username: user.username });
+      await this.emailService.send(email, FORGOT_PASSWORD, { resetPasswordCode, username: user.username });
    }
 
    async resetPassword(dto: ResetPasswordDto) {
       // Delete action token
-      const actionTokenInfo = await this.actionTokenRepository.findOneAndDelete({ token: dto.resetPasswordToken });
-
-      if (!actionTokenInfo) throw new HttpException("Invalid or expired token", HttpStatus.UNAUTHORIZED);
+      const actionTokenInfo = await this.actionTokenRepository.findOneAndDelete({ token: dto.code });
+      if (!actionTokenInfo) throw new HttpException("Invalid code", HttpStatus.UNAUTHORIZED);
 
       // Define token owner ID
       const tokenOwnerId = actionTokenInfo.ownerId;

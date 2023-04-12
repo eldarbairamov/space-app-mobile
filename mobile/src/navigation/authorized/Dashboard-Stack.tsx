@@ -2,6 +2,7 @@ import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react
 import { PasswordSettingScreen, DashboardScreen, SettingsScreen, EmailSettingScreen } from "../../screen";
 import { DashboardStackEnum } from "../type";
 import { ChangePasswordMessage } from "../../component";
+import { ChangeEmailMessage } from "../../component/Message/Change-Email-Message";
 
 const Stack = createNativeStackNavigator()
 
@@ -13,6 +14,7 @@ export function DashboardStack() {
          <Stack.Screen name={ DashboardStackEnum.EmailSetting } component={ EmailSettingScreen }/>
          <Stack.Screen name={ DashboardStackEnum.PasswordSetting } component={ PasswordSettingScreen }/>
          <Stack.Screen name={ DashboardStackEnum.ChangePasswordMessage } component={ ChangePasswordMessage }/>
+         <Stack.Screen name={ DashboardStackEnum.ChangeEmailMessage } component={ ChangeEmailMessage }/>
       </Stack.Navigator>
    )
 }

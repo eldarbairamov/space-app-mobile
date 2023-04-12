@@ -6,7 +6,8 @@ export enum DashboardStackEnum {
    Settings = "Settings",
    EmailSetting = "EmailSetting",
    PasswordSetting = "PasswordSetting",
-   ChangePasswordMessage = "ChangePasswordMessage"
+   ChangePasswordMessage = "ChangePasswordMessage",
+   ChangeEmailMessage = 'ChangeEmailMessage'
 }
 
 type DashboardStackParam = {
@@ -15,6 +16,7 @@ type DashboardStackParam = {
    PasswordSetting: any,
    EmailSetting: any,
    ChangePasswordMessage: any,
+   ChangeEmailMessage: any
 }
 
 type MainScreenRouteProp = RouteProp<DashboardStackParam, "Main">
@@ -55,4 +57,12 @@ export type ChangePasswordMessageScreenNavigationProp = NativeStackNavigationPro
 export type ChangePasswordMessageProps = {
    route: ChangePasswordMessageRouteProp,
    navigation: ChangePasswordMessageScreenNavigationProp
+}
+
+type ChangeEmailMessageScreenRouteProp = RouteProp<DashboardStackParam, "ChangeEmailMessage">
+export type ChangeEmailMessageScreenNavigationProp = NativeStackNavigationProp<DashboardStackParam, "ChangeEmailMessage">
+
+export type ChangeEmailMessageProps = {
+   route: ChangeEmailMessageScreenRouteProp,
+   navigation: ChangeEmailMessageScreenNavigationProp
 }

@@ -4,6 +4,7 @@ import { Add, NoteItem } from "../../component";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addNoteService, getNotesService } from "../../service";
 import { noteActions } from "../../redux/slice";
+import { EmptyIcon } from "../../component/UI/Empty-Icon";
 
 export function NotesScreen() {
    const { notes, searchKey } = useAppSelector(state => state.noteReducer)
@@ -26,19 +27,21 @@ export function NotesScreen() {
             <TextInput onChangeText={ handleChange }
                        value={ searchKey }
                        placeholder={ 'Пошук' }
-                       style={ [ gStyle.regular_font, gStyle.input ] }
-            />
+                       style={ [ gStyle.regular_font, gStyle.input ] }/>
 
          </View>
 
          <View style={ [ styles.body ] }>
-            <FlatList style={ styles.noteListWrapper }
-                      data={ notes }
-                      renderItem={ ({ item, index }) =>
-                         <NoteItem key={ index + 1 } note={ item }/>
-                      }/>
+            { Boolean(notes.length)
+               ?
+               <FlatList style={ styles.noteListWrapper }
+                         data={ notes }
+                         renderItem={ ({ item, index }) =>
+                            <NoteItem key={ index + 1 } note={ item }/> }/>
+               :
+               <EmptyIcon/>
+            }
          </View>
-
 
       </View>
    );

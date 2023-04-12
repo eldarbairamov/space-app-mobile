@@ -6,7 +6,7 @@ export enum UnauthorizedStackEnum {
    Login = "Login",
    Activation = "Activation",
    ForgotPassword = 'ForgotPassword',
-   ResetPassword = 'ResetPassword'
+   ResetPassword = 'ResetPassword',
 }
 
 type UnauthorizedStackParam = {
@@ -14,7 +14,7 @@ type UnauthorizedStackParam = {
    Login: any,
    Activation: any,
    ForgotPassword: any,
-   ResetPassword: any
+   ResetPassword: any,
 }
 
 type LoginScreenRouteProp = RouteProp<UnauthorizedStackParam, "Login">

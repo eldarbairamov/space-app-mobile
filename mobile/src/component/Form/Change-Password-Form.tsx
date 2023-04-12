@@ -19,33 +19,33 @@ export function ChangePasswordForm() {
       if (newPassword === repeatPassword) {
          await updatePasswordFn(newPassword, currentPassword);
       } else {
-         Toast.show({ type: 'error', text1: 'Паролі не співпадають' })
+         Toast.show({ type: "error", text1: "Паролі не співпадають" })
       }
    }
 
    return (
       <View style={ gStyle.form_control_wrapper }>
-         <FormControl label={ 'Поточний пароль' }
+         <FormControl label={ "Поточний пароль" }
                       control={ control }
-                      name={ 'currentPassword' }
+                      name={ "currentPassword" }
                       isPassword={ true }
                       errorMessage={ errors.currentPassword?.message }
                       isRequired={ true }/>
 
-         <FormControl label={ 'Новий пароль' }
+         <FormControl label={ "Новий пароль" }
                       control={ control }
-                      name={ 'newPassword' }
+                      name={ "newPassword" }
                       isPassword={ true }
                       errorMessage={ errors.newPassword?.message }
                       isRequired={ true }/>
 
-         <FormControl label={ 'Повторіть пароль' }
+         <FormControl label={ "Повторіть пароль" }
                       control={ control }
-                      name={ 'repeatPassword' }
+                      name={ "repeatPassword" }
                       isPassword={ true }
                       errorMessage={ errors.repeatPassword?.message }
                       isRequired={ true }/>
 
-         <Button title={ 'Змінити' } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
       </View>)
 }

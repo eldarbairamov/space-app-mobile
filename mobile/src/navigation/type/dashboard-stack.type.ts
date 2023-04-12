@@ -7,7 +7,7 @@ export enum DashboardStackEnum {
    EmailSetting = "EmailSetting",
    PasswordSetting = "PasswordSetting",
    ChangePasswordMessage = "ChangePasswordMessage",
-   ChangeEmailMessage = 'ChangeEmailMessage'
+   ChangeEmailMessage = "ChangeEmailMessage"
 }
 
 type DashboardStackParam = {

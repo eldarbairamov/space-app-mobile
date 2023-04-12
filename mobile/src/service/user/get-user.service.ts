@@ -16,7 +16,7 @@ export function getUserService() {
          dispatch(userActions.setInfo(data));
 
       } catch (e) {
-         Toast.show({ type: 'error', text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) })
       }
    };
 

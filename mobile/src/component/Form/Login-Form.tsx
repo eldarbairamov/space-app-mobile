@@ -16,21 +16,21 @@ export function LoginForm({ loginFn }: ILoginFormProps) {
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
 
-         <FormControl label={ 'Електронна пошта' }
+         <FormControl label={ "Електронна пошта" }
                       control={ control }
-                      name={ 'email' }
+                      name={ "email" }
                       isEmail={ true }
                       isRequired={ true }
                       errorMessage={ errors.email?.message }/>
 
-         <FormControl label={ 'Пароль' }
+         <FormControl label={ "Пароль" }
                       control={ control }
-                      name={ 'password' }
+                      name={ "password" }
                       isPassword={ true }
                       isRequired={ true }
                       errorMessage={ errors.password?.message }/>
 
-         <Button title={ 'Увійти' } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Увійти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    )

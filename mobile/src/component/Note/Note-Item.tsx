@@ -35,7 +35,7 @@ export function NoteItem({ note }: { note: INote }) {
                   </Text>
 
                   <Text style={ [ gStyle.regular_font, styles.noteBody ] }
-                        ellipsizeMode={ 'tail' }
+                        ellipsizeMode={ "tail" }
                         numberOfLines={ 1 }>
                      { note.body }
                   </Text>
@@ -76,10 +76,10 @@ const styles = StyleSheet.create({
    },
    right: {
       width: "10%",
-      alignItems: 'flex-end'
+      alignItems: "flex-end"
    },
    title: {
-      fontWeight: '500'
+      fontWeight: "500"
    },
    noteBody: {
       color: SECOND_FONT_COLOR,

@@ -20,13 +20,13 @@ export function ForgotPasswordForm({ forgotPasswordFn }: IActivationFormProps) {
          </Text>
 
          <FormControl control={ control }
-                      name={ 'email' }
+                      name={ "email" }
                       isEmail={ true }
                       isRequired={ true }
                       isCenter={ true }
                       errorMessage={ errors.email?.message }/>
 
-         <Button title={ 'Надіслати' } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Надіслати" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    )
@@ -35,9 +35,9 @@ export function ForgotPasswordForm({ forgotPasswordFn }: IActivationFormProps) {
 const styles = StyleSheet.create({
    description: {
       fontSize: 16,
-      fontWeight: '500',
+      fontWeight: "500",
       width: 300,
-      textAlign: 'center'
+      textAlign: "center"
    }
 })
 

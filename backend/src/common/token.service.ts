@@ -10,7 +10,8 @@ export class TokenService {
    constructor(
       private jwtService: JwtService,
       private configService: ConfigService<IEnvironmentVariables>
-   ) {}
+   ) {
+   }
 
    generatePair(payload: any): IAccessTokenPair {
       try {

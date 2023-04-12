@@ -8,9 +8,9 @@ export function ChangeEmailMessage() {
    return (
       <Message nextFn={ logoutFn }
                image={ SUCCESS_IMAGE }
-               buttonTitle={ 'Увійти' }
-               title={ 'Ви успішно оновили адресу електронної пошти' }
-               message={ 'Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані' }/>
+               buttonTitle={ "Увійти" }
+               title={ "Ви успішно оновили адресу електронної пошти" }
+               message={ "Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані" }/>
 
    )
 }

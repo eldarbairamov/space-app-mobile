@@ -21,7 +21,7 @@ export function Add({ onPress, condition }: IAddProps) {
 
 const styles = StyleSheet.create({
    add: {
-      flexDirection: 'row',
+      flexDirection: "row",
       gap: 5
    },
 })

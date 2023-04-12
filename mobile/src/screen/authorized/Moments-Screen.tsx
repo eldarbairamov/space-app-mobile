@@ -18,13 +18,13 @@ export function MomentsScreen() {
 
    getMomentsService(searchKey)
 
-   const [ value, setValue ] = useState('');
+   const [ value, setValue ] = useState("");
    const [ showClearIcon, setShowClearIcon ] = useState<boolean>(false)
 
    const onClear = () => {
       setShowClearIcon(false)
-      setValue('')
-      dispatch(momentActions.setSearchKey(''))
+      setValue("")
+      dispatch(momentActions.setSearchKey(""))
    }
 
    return (
@@ -34,32 +34,31 @@ export function MomentsScreen() {
 
             <Add onPress={ addMomentFn }/>
 
-            <Dropdown
-               style={ [ styles.dropdown ] }
-               placeholderStyle={ gStyle.second_font }
-               selectedTextStyle={ gStyle.regular_font }
-               activeColor={ '#e3e3e3' }
-               renderItem={ (item) => <SelectItem> { item.label } </SelectItem> }
-               containerStyle={ { borderRadius: 5 } }
-               iconStyle={ { tintColor: '#4e4e51' } }
-               fontFamily={ 'Roboto' }
-               data={ tags.map(tag => ({ value: tag, label: tag })) }
-               labelField="label"
-               valueField="value"
-               placeholder={ 'Фільтр' }
-               value={ value }
-               renderRightIcon={ showClearIcon ? () =>
-                     <TouchableOpacity activeOpacity={ 0.5 } onPress={ onClear }>
-                        <Image source={ CLEAR_ICON }
-                               style={ { width: 15, height: 15, marginRight: 2 } }
-                        />
-                     </TouchableOpacity> :
-                  undefined }
-               onChange={ (item: any) => {
-                  dispatch(momentActions.setSearchKey(item.value))
-                  setValue(item.value)
-                  setShowClearIcon(true)
-               } }/>
+            <Dropdown style={ [ styles.dropdown ] }
+                      placeholderStyle={ gStyle.second_font }
+                      selectedTextStyle={ gStyle.regular_font }
+                      activeColor={ "#e3e3e3" }
+                      renderItem={ (item) => <SelectItem> { item.label } </SelectItem> }
+                      containerStyle={ { borderRadius: 5 } }
+                      iconStyle={ { tintColor: "#4e4e51" } }
+                      fontFamily={ "Roboto" }
+                      data={ tags.map(tag => ({ value: tag, label: tag })) }
+                      labelField={ "label" }
+                      valueField={ "value" }
+                      placeholder={ "Фільтр" }
+                      value={ value }
+                      renderRightIcon={ showClearIcon ? () =>
+                            <TouchableOpacity activeOpacity={ 0.5 } onPress={ onClear }>
+                               <Image source={ CLEAR_ICON }
+                                      style={ { width: 15, height: 15, marginRight: 2 } }
+                               />
+                            </TouchableOpacity> :
+                         undefined }
+                      onChange={ (item: any) => {
+                         dispatch(momentActions.setSearchKey(item.value))
+                         setValue(item.value)
+                         setShowClearIcon(true)
+                      } }/>
 
          </View>
 
@@ -82,11 +81,11 @@ const styles = StyleSheet.create({
    header: {
       height: "5%",
       width: "100%",
-      alignItems: 'center',
+      alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 20,
       gap: 10,
-      flexDirection: 'row'
+      flexDirection: "row"
    },
    body: {
       height: "95%",
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
    dropdown: {
       height: 26,
       width: 100,
-      borderColor: '#4e4e51',
+      borderColor: "#4e4e51",
    },
    iconStyle: {
       width: 20,

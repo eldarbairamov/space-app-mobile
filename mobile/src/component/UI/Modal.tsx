@@ -10,7 +10,7 @@ interface IModal {
 
 export function MyModal({ isOpen, children }: IModal) {
    return (
-      <Modal visible={ isOpen } animationType={ 'fade' }>
+      <Modal visible={ isOpen } animationType={ "fade" }>
          <View style={ [ gStyle.screen, gStyle.center ] }>
             { children }
          </View>

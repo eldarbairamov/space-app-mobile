@@ -46,7 +46,7 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
             <View style={ [ gStyle.screen, gStyle.center ] }>
 
                <View style={ [ styles.header ] }>
-                  <View style={ [ { flexDirection: 'row', gap: 15 }, gStyle.center ] }>
+                  <View style={ [ { flexDirection: "row", gap: 15 }, gStyle.center ] }>
                      <BackIcon to={ MomentsStackEnum.MomentList }/>
 
                      <TouchableOpacity activeOpacity={ 0.5 } onPress={ () => updateMomentFn(activeMoment) }>
@@ -75,23 +75,23 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
                   </View>
 
                   <View style={ [ gStyle.center, styles.top_line, ] }>
-                     <TextInput placeholder={ 'Назва моменту' }
+                     <TextInput placeholder={ "Назва моменту" }
                                 value={ activeMoment.title }
                                 maxLength={ 20 }
-                                onChangeText={ value => handleInputs('title', value) }
-                                style={ [ gStyle.regular_font, styles.input, { position: 'absolute', top: 20, left: 20 } ] }/>
+                                onChangeText={ value => handleInputs("title", value) }
+                                style={ [ gStyle.regular_font, styles.input, { position: "absolute", top: 20, left: 20 } ] }/>
                   </View>
 
                   <View style={ [ gStyle.center, styles.bottom_line ] }>
-                     <TextInput placeholder={ 'Тег' }
+                     <TextInput placeholder={ "Тег" }
                                 value={ activeMoment.tag }
                                 onChangeText={ handleTag }
                                 style={ [ styles.input, { minWidth: 50, position: "absolute", left: 20, bottom: 20, backgroundColor: MOMENTS_COLOR } ] }/>
 
                      <View style={ [ { gap: 10 }, { position: "absolute", right: 20, bottom: 20 } ] }>
-                        <TextInput placeholder={ 'Локація' }
+                        <TextInput placeholder={ "Локація" }
                                    value={ activeMoment.location }
-                                   onChangeText={ value => handleInputs('location', value) }
+                                   onChangeText={ value => handleInputs("location", value) }
                                    maxLength={ 20 }
                                    style={ [ gStyle.regular_font, styles.input ] }/>
 
@@ -122,7 +122,7 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
                <DatePicker modal
                            open={ isDatePickerOpen }
                            date={ new Date(activeMoment.date) }
-                           mode={ 'date' }
+                           mode={ "date" }
                            onConfirm={ (date) => {
                               setIsDatePickerOpen(false)
                               dispatch(momentActions.setDate(new Date(date).getTime()))
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
       top: 0,
       height: "5%",
       gap: 15,
-      flexDirection: 'row',
+      flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 20,
@@ -157,15 +157,15 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
       minWidth: 100,
       borderRadius: 4,
-      textAlign: 'center'
+      textAlign: "center"
    },
    body: {
       height: "85%",
-      width: '100%',
+      width: "100%",
    },
    top_line: {
       position: "absolute",
-      flexDirection: 'row',
+      flexDirection: "row",
       width: "100%",
       top: 0,
       left: 0,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
       left: 0,
    },
    wrapper: {
-      backgroundColor: '#24292e',
+      backgroundColor: "#24292e",
       padding: 5,
       paddingHorizontal: 10,
    },
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
       height: "100%",
    },
    background_fx: {
-      backgroundColor: 'black',
+      backgroundColor: "black",
       opacity: 0.3,
       zIndex: 1
    },

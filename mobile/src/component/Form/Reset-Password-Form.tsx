@@ -16,33 +16,33 @@ export function ResetPasswordForm() {
 
    const onSubmit = async ({ code, newPassword, repeatPassword }: IResetPassword) => {
       if (newPassword === repeatPassword) await resetPasswordFn(newPassword, code);
-      else Toast.show({ type: 'error', text1: 'Паролі не співпадають' })
+      else Toast.show({ type: "error", text1: "Паролі не співпадають" })
    }
 
    return (
       <View style={ [ gStyle.form_control_wrapper ] }>
 
-         <FormControl label={ '6-значний код' }
+         <FormControl label={ "6-значний код" }
                       control={ control }
-                      name={ 'code' }
+                      name={ "code" }
                       errorMessage={ errors.code?.message }
                       isRequired={ true }/>
 
-         <FormControl label={ 'Новий пароль' }
+         <FormControl label={ "Новий пароль" }
                       control={ control }
-                      name={ 'newPassword' }
+                      name={ "newPassword" }
                       isPassword={ true }
                       errorMessage={ errors.newPassword?.message }
                       isRequired={ true }/>
 
-         <FormControl label={ 'Повторіть пароль' }
+         <FormControl label={ "Повторіть пароль" }
                       control={ control }
-                      name={ 'repeatPassword' }
+                      name={ "repeatPassword" }
                       isPassword={ true }
                       errorMessage={ errors.repeatPassword?.message }
                       isRequired={ true }/>
 
-         <Button title={ 'Змінити' } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>)
 }

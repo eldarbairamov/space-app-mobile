@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { HOME_ICON } from "../../constant";
 import { gStyle } from "../../asset";
 
@@ -18,7 +18,7 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
 
             const onPress = () => {
                const event = navigation.emit({
-                  type: 'tabPress',
+                  type: "tabPress",
                   target: route.key,
                   canPreventDefault: true,
                });
@@ -30,7 +30,7 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
 
             const onLongPress = () => {
                navigation.emit({
-                  type: 'tabLongPress',
+                  type: "tabLongPress",
                   target: route.key,
                });
             };
@@ -46,7 +46,7 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
                   onLongPress={ onLongPress }
                   style={ { flex: 1 } }
                >
-                  <Text style={ { color: isFocused ? '#673ab7' : '#222' } }>
+                  <Text style={ { color: isFocused ? "#673ab7" : "#222" } }>
                      { label }
                   </Text>
                   <Image source={ HOME_ICON } style={ styles.image }/>

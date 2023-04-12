@@ -93,7 +93,7 @@ export class AuthService {
       if (!user) throw new HttpException("User is not found", HttpStatus.UNAUTHORIZED);
 
       // Generate code
-      const resetPasswordCode = crypto.randomBytes(3).toString('hex').toUpperCase()
+      const resetPasswordCode = crypto.randomBytes(3).toString("hex").toUpperCase()
 
       // Delete previous codes
       await Promise.all([

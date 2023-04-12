@@ -20,7 +20,7 @@ const theme: Theme = {
    ...DefaultTheme,
    colors: {
       ...DefaultTheme.colors,
-      primary: '#4e4e51',
-      background: 'whitesmoke'
+      primary: "#4e4e51",
+      background: "whitesmoke"
    }
 }

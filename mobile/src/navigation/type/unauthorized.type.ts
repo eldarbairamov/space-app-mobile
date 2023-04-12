@@ -5,8 +5,8 @@ export enum UnauthorizedStackEnum {
    Registration = "Registration",
    Login = "Login",
    Activation = "Activation",
-   ForgotPassword = 'ForgotPassword',
-   ResetPassword = 'ResetPassword',
+   ForgotPassword = "ForgotPassword",
+   ResetPassword = "ResetPassword",
 }
 
 type UnauthorizedStackParam = {

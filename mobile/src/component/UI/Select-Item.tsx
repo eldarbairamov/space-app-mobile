@@ -14,7 +14,7 @@ export function SelectItem({ children }: { children: ReactNode }) {
 const styles = StyleSheet.create({
    container: {
       height: 30,
-      justifyContent: 'center',
+      justifyContent: "center",
       paddingHorizontal: 5
    }
 })

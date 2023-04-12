@@ -1,4 +1,4 @@
-import {  CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Types } from "mongoose";
 import { NoteRepository } from "@src/note/repository/note.repository";
 

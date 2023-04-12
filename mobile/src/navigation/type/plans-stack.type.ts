@@ -2,8 +2,8 @@ import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum PlansStackEnum {
-   PlanList = 'PlanList',
-   TaskList = 'TaskList'
+   PlanList = "PlanList",
+   TaskList = "TaskList"
 }
 
 type PlansStackParam = {

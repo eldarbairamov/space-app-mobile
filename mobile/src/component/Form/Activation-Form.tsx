@@ -14,11 +14,11 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
 
    return (
       <View>
-         <View style={styles.message}>
-            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: '500' } ] }>
+         <View style={ styles.message }>
+            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" } ] }>
                Ви успішно зареєструвались.
             </Text>
-            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: '500' } ] }>
+            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" } ] }>
                Введіть код активації, який щойно прилетів на вашу електронну пошту:
             </Text>
          </View>
@@ -26,8 +26,8 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
          <View style={ gStyle.form_control_wrapper }>
             <TextInput onChangeText={ handleChange }
                        value={ value }
-                       style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: 'center', minWidth: 300 } ] }/>
-            <Button title={ 'Активувати' } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={ 300 }/>
+                       style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: "center", minWidth: 300 } ] }/>
+            <Button title={ "Активувати" } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={ 300 }/>
 
          </View>
       </View>
@@ -36,7 +36,7 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
 
 const styles = StyleSheet.create({
    message: {
-      alignItems: 'center',
+      alignItems: "center",
       width: 300,
       marginBottom: 40
    }

@@ -11,37 +11,37 @@ export function uploadPhotoService() {
    const dispatch = useAppDispatch();
 
    const pickImageHandler = () => {
-      Alert.alert('Змініти фото', undefined, [
-            { text: 'Галерея', onPress: () => pickImageFromGallery() },
-            { text: 'Камера', onPress: () => pickImageFromCamera() },
-            { text: 'Закрити', style: "destructive" }
+      Alert.alert("Змініти фото", undefined, [
+            { text: "Галерея", onPress: () => pickImageFromGallery() },
+            { text: "Камера", onPress: () => pickImageFromCamera() },
+            { text: "Закрити", style: "destructive" }
          ],
          { cancelable: true })
    }
 
    const pickImageFromGallery = async () => {
-      const result: ImagePickerResponse = await launchImageLibrary({ mediaType: 'photo' })
+      const result: ImagePickerResponse = await launchImageLibrary({ mediaType: "photo" })
       if (result.assets) {
          const file = result.assets[0]
          const formData = new FormData()
-         formData.append('avatar', { uri: file.uri, type: file.type, name: file.fileName })
+         formData.append("avatar", { uri: file.uri, type: file.type, name: file.fileName })
 
          try {
-            Toast.show({ type: 'info', text1: 'Лоудінг..' })
+            Toast.show({ type: "info", text1: "Лоудінг.." })
             const { data } = await axiosInstance.patch<{ image: string }>(userRequests.uploadAvatar, formData)
             dispatch(userActions.setAvatar(data.image));
-            Toast.show({ type: 'success', text1: "Готово!" })
+            Toast.show({ type: "success", text1: "Готово!" })
 
          } catch (e) {
-            Toast.show({ type: 'error', text1: errorCatherFn(e) })
+            Toast.show({ type: "error", text1: errorCatherFn(e) })
          }
 
       }
    }
 
    const pickImageFromCamera = async () => {
-      const result: ImagePickerResponse = await launchCamera({ mediaType: 'photo', saveToPhotos: false })
-      if (result.errorMessage) console.log('error')
+      const result: ImagePickerResponse = await launchCamera({ mediaType: "photo", saveToPhotos: false })
+      if (result.errorMessage) console.log("error")
    }
 
    return { pickImageHandler }

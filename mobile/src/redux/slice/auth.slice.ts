@@ -9,7 +9,7 @@ const initialState: IInitialState = {
 }
 
 const authSlice = createSlice({
-   name: 'auth',
+   name: "auth",
    initialState,
    reducers: {
       setIsLogin: (state, { payload }: PayloadAction<boolean>) => {

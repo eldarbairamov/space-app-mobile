@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
       height: 500,
    },
    background: {
-      backgroundColor: 'black',
+      backgroundColor: "black",
       opacity: 0.2
    },
    wrapper: {
-      backgroundColor: '#24292e',
+      backgroundColor: "#24292e",
       padding: 5,
       paddingHorizontal: 10,
       borderRadius: 4

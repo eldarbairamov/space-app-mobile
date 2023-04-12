@@ -32,10 +32,10 @@ export function ChangeEmailForm() {
                          errorMessage={ errors.email?.message }
                          isEmail={ true }
                          isChangeValueOff={ isEmailSent }
-                         name={ 'email' }/>
+                         name={ "email" }/>
 
             { !isEmailSent &&
-               <Button title={ 'Надіслати' } isValid={ isValid } onPress={ handleSubmit(handleNewEmailRequest) }/> }
+               <Button title={ "Надіслати" } isValid={ isValid } onPress={ handleSubmit(handleNewEmailRequest) }/> }
          </View>
 
          { isEmailSent && <View style={ gStyle.form_control_wrapper }>
@@ -44,12 +44,12 @@ export function ChangeEmailForm() {
             </Text>
 
             <FormControl control={ control }
-                         name={ 'code' }
+                         name={ "code" }
                          isCenter={ true }
                          errorMessage={ errors.code?.message }
                          isRequired={ true }/>
 
-            <Button title={ 'Змінити' } isValid={ isValid } onPress={ handleSubmit(handleNewEmailConfirmation) }/>
+            <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(handleNewEmailConfirmation) }/>
          </View> }
 
       </View>
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: "500",
       width: 300,
-      textAlign: 'center',
+      textAlign: "center",
    }
 })

@@ -59,10 +59,10 @@ export class UserService {
          this.userRepository.findOne({ email }),
          this.userRepository.findById(userId)
       ])
-      if (isEmailDoesNotUnique) throw new HttpException('This email is already in use', HttpStatus.CONFLICT)
+      if (isEmailDoesNotUnique) throw new HttpException("This email is already in use", HttpStatus.CONFLICT)
 
       // Generate link
-      const changeEmailCode = crypto.randomBytes(3).toString('hex').toUpperCase()
+      const changeEmailCode = crypto.randomBytes(3).toString("hex").toUpperCase()
 
       // Save action token to DB
       await this.actionTokenRepository.create({

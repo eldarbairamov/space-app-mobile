@@ -12,13 +12,13 @@ export function getTasksService(planId: IPlan["id"]) {
 
    const getTasksFn = async () => {
       try {
-         Toast.show({ type: 'info', text1: 'Лоудінг..' })
+         Toast.show({ type: "info", text1: "Лоудінг.." })
          const { data } = await axiosInstance.post<ITask[]>(tasksRequests.getAllTasks, { planId });
          dispatch(taskAction.setTasks(data));
          Toast.hide()
 
       } catch (e) {
-         Toast.show({ type: 'error', text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) })
       }
    };
 

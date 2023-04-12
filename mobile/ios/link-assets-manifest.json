@@ -1,17 +1,17 @@
 {
-  "migIndex": 1,
-  "data": [
-    {
-      "path": "src/asset/font/Caveat.ttf",
-      "sha1": "622989e46c6e18a42f96e92622e5cdb5ebde0f47"
-    },
-    {
-      "path": "src/asset/font/Roboto-Bold.ttf",
-      "sha1": "62442a18a9fe9457c1afeabf683d263a691b7798"
-    },
-    {
-      "path": "src/asset/font/Roboto.ttf",
-      "sha1": "56c5c0d38bde4c1f1549dda43db37b09c608aad3"
-    }
-  ]
+   "migIndex": 1,
+   "data": [
+      {
+         "path": "src/asset/font/Caveat.ttf",
+         "sha1": "622989e46c6e18a42f96e92622e5cdb5ebde0f47"
+      },
+      {
+         "path": "src/asset/font/Roboto-Bold.ttf",
+         "sha1": "62442a18a9fe9457c1afeabf683d263a691b7798"
+      },
+      {
+         "path": "src/asset/font/Roboto.ttf",
+         "sha1": "56c5c0d38bde4c1f1549dda43db37b09c608aad3"
+      }
+   ]
 }

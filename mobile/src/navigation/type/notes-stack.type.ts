@@ -2,8 +2,8 @@ import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum NotesStackEnum {
-   NoteList = 'NoteList',
-   NoteEdit = 'NoteEdit'
+   NoteList = "NoteList",
+   NoteEdit = "NoteEdit"
 }
 
 export type NotesStackParam = {

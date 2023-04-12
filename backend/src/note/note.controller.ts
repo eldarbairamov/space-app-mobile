@@ -24,7 +24,7 @@ export class NoteController {
    @UseGuards(AccessGuard)
    @Get()
    async getNotes(
-      @Query('searchKey') searchKey: string,
+      @Query("searchKey") searchKey: string,
       @User("userId") userId: string): Promise<INoteResponse[]> {
 
       return this.noteService.getNotes(userId, searchKey);
@@ -78,7 +78,7 @@ export class NoteController {
       @Param("noteId") noteId: string): Promise<{ message: string }> {
 
       await this.noteService.deleteNote(noteId, userId)
-      return { message: 'Success' };
+      return { message: "Success" };
    }
 
 }

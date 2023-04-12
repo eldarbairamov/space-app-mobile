@@ -26,7 +26,7 @@ export class MomentController {
    @UseGuards(AccessGuard)
    @Get()
    async getMoments(
-      @Query('searchKey') searchKey: string,
+      @Query("searchKey") searchKey: string,
       @User("userId") userId: string): Promise<IMomentsResponse> {
 
       return this.momentService.getMoments(userId, searchKey);

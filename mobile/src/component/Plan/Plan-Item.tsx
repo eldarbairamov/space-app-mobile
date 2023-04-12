@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
       width: "34%",
    },
    title: {
-      fontWeight: '500'
+      fontWeight: "500"
    },
    date: {
       color: PLANS_COLOR,

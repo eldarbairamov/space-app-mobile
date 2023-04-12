@@ -23,7 +23,7 @@ export class PlanController {
    @UseGuards(AccessGuard)
    @Get()
    async getPlans(
-      @Query('searchKey') searchKey: string,
+      @Query("searchKey") searchKey: string,
       @User("userId") userId: string): Promise<IPlanResponse[]> {
 
       return this.planService.getPlans(userId, searchKey);
@@ -93,7 +93,7 @@ export class PlanController {
       @Param("planId") noteId: string): Promise<{ message: string }> {
 
       await this.planService.deletePlan(noteId, userId)
-      return { message: 'Success' }
+      return { message: "Success" }
    }
 
 }

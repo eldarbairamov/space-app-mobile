@@ -11,14 +11,14 @@ export function logoutService() {
 
    const logoutFn = async () => {
       try {
-         Toast.show({ type: 'info', text1: 'Лоудінг..' })
+         Toast.show({ type: "info", text1: "Лоудінг.." })
          await axiosInstance.get(authRequests.logout);
          await storageService.deleteTokens();
          Toast.hide()
          dispatch(authActions.setIsLogin(false))
 
       } catch (e) {
-         Toast.show({ type: 'error', text1: errorCatherFn(e) });
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

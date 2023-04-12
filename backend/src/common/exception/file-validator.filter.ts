@@ -19,7 +19,7 @@ export class FileValidatorFilter implements ExceptionFilter {
          message: "Invalid file type"
       });
 
-      response.status(statusCode).json({statusCode, message })
+      response.status(statusCode).json({ statusCode, message })
 
    }
 }

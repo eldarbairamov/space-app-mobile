@@ -46,10 +46,10 @@ export function DashboardScreen() {
             </View>
 
             <View style={ [ styles.greetings_wrapper, gStyle.center ] }>
-               <View style={ [ gStyle.center, styles.greetings, { width: '100%' } ] }>
+               <View style={ [ gStyle.center, styles.greetings, { width: "100%" } ] }>
                   <Text style={ [ gStyle.handwrite, styles.hello ] }> Привіт, </Text>
                   <Text
-                     style={ [ gStyle.regular_font, styles.username ] }> { username ? username : 'завантажую' } </Text>
+                     style={ [ gStyle.regular_font, styles.username ] }> { username ? username : "завантажую" } </Text>
                   <Text style={ [ gStyle.handwrite, styles.how_are_you ] }> Ну, як ти? </Text>
                </View>
             </View>
@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
       zIndex: 1,
       height: "5%",
       width: "100%",
-      alignItems: 'center',
+      alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 20,
-      flexDirection: 'row'
+      flexDirection: "row"
    },
    avatar_wrapper: {
       marginTop: 30,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
    },
    edit_wrapper: {
       marginTop: 30,
-      flexDirection: 'row',
+      flexDirection: "row",
       gap: 5
    },
    greetings_wrapper: {

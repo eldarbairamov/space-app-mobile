@@ -15,16 +15,16 @@ export function loginService() {
 
    const loginFn = async (body: ILoginForm) => {
       try {
-         Toast.show({ type: 'info', text1: 'Лоудінг..' })
+         Toast.show({ type: "info", text1: "Лоудінг.." })
          const { data } = await axiosInstance.post<IOAuth>(authRequests.login, body);
          await storageService.setTokens(data.accessToken, data.refreshToken)
-         Toast.show({ type: 'success', text1: `Привіт, ${ data.username }` })
+         Toast.show({ type: "success", text1: `Привіт, ${ data.username }` })
          await pleaseWait(2000)
          Toast.hide()
          dispatch(authActions.setIsLogin(true))
 
       } catch (e) {
-         Toast.show({ type: 'error', text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) })
 
          const responseMessage = (e as AxiosApiError).response?.data.message;
          if (responseMessage === "Account is not activated") {

@@ -25,26 +25,26 @@ export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) 
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
 
-         <FormControl label={ 'Імʼя користувача' }
+         <FormControl label={ "Імʼя користувача" }
                       control={ control }
-                      name={ 'username' }
+                      name={ "username" }
                       isRequired={ true }
                       isTextLimit={ true }
                       errorMessage={ errors.username?.message }/>
 
-         <FormControl label={ 'Імʼя' }
+         <FormControl label={ "Імʼя" }
                       control={ control }
-                      name={ 'name' }
+                      name={ "name" }
                       isOnlyLetters={ true }
                       errorMessage={ errors.name?.message }/>
 
-         <FormControl label={ 'Фамілія' }
+         <FormControl label={ "Фамілія" }
                       control={ control }
-                      name={ 'surname' }
+                      name={ "surname" }
                       isOnlyLetters={ true }
                       errorMessage={ errors.surname?.message }/>
 
-         <Button title={ 'Зберегти' } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Зберегти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    )

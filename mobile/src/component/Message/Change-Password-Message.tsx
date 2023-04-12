@@ -8,8 +8,8 @@ export function ChangePasswordMessage() {
    return (
       <Message nextFn={ logoutFn }
                image={ SUCCESS_IMAGE }
-               buttonTitle={ 'Увійти' }
-               title={ 'Ви успішно оновили свій пароль' }
-               message={ 'Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані' }/>
+               buttonTitle={ "Увійти" }
+               title={ "Ви успішно оновили свій пароль" }
+               message={ "Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані" }/>
    )
 }

@@ -30,7 +30,7 @@ export class NoteRepository {
       }
    }
 
-   async find(filter: FilterQuery<Note>, searchKey = ''): Promise<NoteDocument[]> {
+   async find(filter: FilterQuery<Note>, searchKey = ""): Promise<NoteDocument[]> {
       const filterObj = searchKey ? { ...filter, title: { $regex: searchKey, $options: "i" } } : { ...filter };
       try {
          return await this.noteModel.find(filterObj).sort({ updatedAt: "desc" });

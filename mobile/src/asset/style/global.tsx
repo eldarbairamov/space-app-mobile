@@ -19,6 +19,12 @@ export const gStyle = StyleSheet.create({
       letterSpacing: -0.5,
       color: MAIN_FONT_COLOR,
    },
+   handwriteForNote: {
+      fontFamily: "Caveat",
+      fontSize: 25,
+      letterSpacing: -0.5,
+      color: MAIN_FONT_COLOR,
+   },
    center: {
       justifyContent: "center",
       alignItems: "center",
@@ -77,7 +83,7 @@ export const gStyle = StyleSheet.create({
       gap: 40,
    },
    shadow: {
-      shadowColor: '#171717',
+      shadowColor: "#171717",
       shadowOffset: {
          width: -2,
          height: 4

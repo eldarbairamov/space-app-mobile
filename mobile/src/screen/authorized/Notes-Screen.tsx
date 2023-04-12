@@ -26,7 +26,7 @@ export function NotesScreen() {
 
             <TextInput onChangeText={ handleChange }
                        value={ searchKey }
-                       placeholder={ 'Пошук' }
+                       placeholder={ "Пошук" }
                        style={ [ gStyle.regular_font, gStyle.input ] }/>
 
          </View>
@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
    header: {
       height: "5%",
       width: "100%",
-      alignItems: 'center',
+      alignItems: "center",
       paddingLeft: 20,
       gap: 10,
-      flexDirection: 'row'
+      flexDirection: "row"
    },
    body: {
       height: "95%",

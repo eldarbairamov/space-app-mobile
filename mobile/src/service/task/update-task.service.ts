@@ -11,13 +11,13 @@ export function updateTaskService() {
 
    const updateTaskFn = async (taskId: ITask["id"], status: boolean) => {
       try {
-         Toast.show({ type: 'info', text1: 'Лоудінг..' })
+         Toast.show({ type: "info", text1: "Лоудінг.." })
          await axiosInstance.patch(tasksRequests.updateTask + taskId, { isCompleted: status });
          Toast.hide()
          dispatch(taskAction.updateTask(taskId));
 
       } catch (e) {
-         Toast.show({ type: 'error', text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) })
       }
    };
 

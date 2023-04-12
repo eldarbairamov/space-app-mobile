@@ -14,14 +14,14 @@ export function addTaskService(planId: string, title: string, next: () => void) 
          const newTask = { planId, title };
 
          try {
-            Toast.show({ type: 'info', text1: 'Лоудінг..' })
+            Toast.show({ type: "info", text1: "Лоудінг.." })
             const { data } = await axiosInstance.post<ITask>(tasksRequests.addTask, newTask);
             dispatch(taskAction.addTask(data));
             next()
             Toast.hide()
 
          } catch (e) {
-            Toast.show({ type: 'error', text1: errorCatherFn(e) })
+            Toast.show({ type: "error", text1: errorCatherFn(e) })
          }
       }
 

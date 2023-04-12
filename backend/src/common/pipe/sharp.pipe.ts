@@ -1,4 +1,4 @@
-import {  Injectable, PipeTransform } from "@nestjs/common";
+import { Injectable, PipeTransform } from "@nestjs/common";
 import path from "path";
 import sharp from "sharp";
 import { mkdir } from "fs/promises";

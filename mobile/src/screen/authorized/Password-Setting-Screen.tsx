@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
       position: "absolute",
       height: "5%",
       width: "100%",
-      alignItems: 'center',
+      alignItems: "center",
       paddingHorizontal: 20,
-      flexDirection: 'row'
+      flexDirection: "row"
    },
    forms: {
       justifyContent: "center",

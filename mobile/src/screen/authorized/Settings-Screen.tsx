@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
       zIndex: 1,
       height: "5%",
       width: "100%",
-      alignItems: 'center',
+      alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 20,
-      flexDirection: 'row'
+      flexDirection: "row"
    },
    edit: {
       color: "#7d7d7d",

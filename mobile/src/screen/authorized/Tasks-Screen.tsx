@@ -13,25 +13,25 @@ export function TasksScreen() {
    const { activePlan } = useAppSelector(state => state.planReducer)
    const dispatch = useAppDispatch()
 
-   const [ taskTitle, setTaskTitle ] = useState<string>('')
+   const [ taskTitle, setTaskTitle ] = useState<string>("")
    const [ isPrevPlanTitleSame, setIsPrevPlanTitleSame ] = useState<boolean>(true)
    const [ isTyping, setIsTyping ] = useState<boolean | string>(false)
 
-   const iconDisableCondition = !isTyping || taskTitle === ''
+   const iconDisableCondition = !isTyping || taskTitle === ""
 
    getTasksService(activePlan.id)
-   const { addTaskFn } = addTaskService(activePlan.id, taskTitle, () => setTaskTitle(''))
+   const { addTaskFn } = addTaskService(activePlan.id, taskTitle, () => setTaskTitle(""))
    const { updatePlanFn } = updatePlanService(() => setIsPrevPlanTitleSame(true))
 
    return (
       <View style={ [ gStyle.screen, gStyle.center ] }>
          <View style={ [ styles.header ] }>
 
-            <View style={ [ { flexDirection: 'row', gap: 12, alignItems: 'center' } ] }>
+            <View style={ [ { flexDirection: "row", gap: 12, alignItems: "center" } ] }>
                <BackIcon to={ PlansStackEnum.PlanList }/>
 
 
-               <TouchableOpacity style={ [ { flexDirection: 'row', gap: 10 } ] }
+               <TouchableOpacity style={ [ { flexDirection: "row", gap: 10 } ] }
                                  activeOpacity={ 0.5 }
                                  onPress={ () => updatePlanFn(activePlan.id, activePlan.title) }>
 
@@ -39,7 +39,7 @@ export function TasksScreen() {
                          style={ [ { width: 26, height: 26 } ] }/>
                </TouchableOpacity>
 
-               <TextInput style={ [ gStyle.regular_font, styles.title, { textAlign: 'left' } ] }
+               <TextInput style={ [ gStyle.regular_font, styles.title, { textAlign: "left" } ] }
                           autoFocus={ false }
                           maxLength={ 30 }
                           onChangeText={ value => {
@@ -47,7 +47,7 @@ export function TasksScreen() {
                              dispatch(planAction.updateTitle({ planId: activePlan.id, title: value }))
                           } }
                           value={ activePlan.title }
-                          placeholder={ 'Назва плану' }/>
+                          placeholder={ "Назва плану" }/>
 
 
             </View>
@@ -55,7 +55,7 @@ export function TasksScreen() {
          </View>
 
          <View style={ [ styles.body ] }>
-            <View style={ [ { flexDirection: 'row', gap: 10 } ] }>
+            <View style={ [ { flexDirection: "row", gap: 10 } ] }>
                <Add onPress={ addTaskFn } condition={ iconDisableCondition }/>
                <TextInput value={ taskTitle }
                           style={ [ gStyle.regular_font, { width: 200 } ] }
@@ -64,7 +64,7 @@ export function TasksScreen() {
                              setIsTyping(true)
                              setTaskTitle(value)
                           } }
-                          placeholder={ 'Що плануєш зробити?' }/>
+                          placeholder={ "Що плануєш зробити?" }/>
             </View>
 
 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
    header: {
       height: "5%",
       width: "100%",
-      flexDirection: 'row',
+      flexDirection: "row",
       alignItems: "center",
       paddingHorizontal: 20,
       justifyContent: "space-between",

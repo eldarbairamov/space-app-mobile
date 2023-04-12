@@ -40,7 +40,7 @@ export class MomentRepository {
       }
    }
 
-   async find(filter: FilterQuery<MomentDocument>, searchKey: string = ''): Promise<MomentDocument[]> {
+   async find(filter: FilterQuery<MomentDocument>, searchKey: string = ""): Promise<MomentDocument[]> {
       const filterObj = searchKey ? { ...filter, tag: { $regex: searchKey } } : { ...filter };
       try {
          return await this.momentModel.find(filterObj).sort({ createdAt: "desc" });

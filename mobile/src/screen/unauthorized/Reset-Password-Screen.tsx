@@ -7,5 +7,5 @@ export function ResetPasswordScreen() {
       <View style={ [ gStyle.screen, gStyle.center, { gap: 100 } ] }>
          <ResetPasswordForm/>
       </View>
-   )
+   );
 }

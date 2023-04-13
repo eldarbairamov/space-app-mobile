@@ -6,7 +6,7 @@ import { LoginProps, UnauthorizedStackEnum } from "../../navigation/type";
 import { loginService } from "../../service";
 
 export function LoginScreen({ navigation }: LoginProps) {
-   const { loginFn } = loginService()
+   const { loginFn } = loginService();
 
    return (
       <View style={ [ gStyle.unauthorized_screen, gStyle.center ] }>
@@ -30,7 +30,7 @@ export function LoginScreen({ navigation }: LoginProps) {
          </View>
 
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
       gap: 20,
       marginTop: 40
    }
-})
+});

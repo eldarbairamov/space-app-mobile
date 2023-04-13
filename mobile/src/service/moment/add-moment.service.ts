@@ -8,18 +8,18 @@ import { errorCatherFn } from "../../helper";
 
 export function addMomentService() {
    const dispatch = useAppDispatch();
-   const { momentsCount } = useAppSelector(state => state.userReducer)
+   const { momentsCount } = useAppSelector(state => state.userReducer);
 
    const addMomentFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<IMoment>(momentsRequests.addMoment);
          dispatch(momentActions.addMoment(data));
-         dispatch(userActions.setMomentCount(momentsCount + 1))
-         Toast.hide()
+         dispatch(userActions.setMomentCount(momentsCount + 1));
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

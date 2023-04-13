@@ -1,2 +1,2 @@
-export * from "./toast"
-export * from "./configuration"
+export * from "./toast";
+export * from "./configuration";

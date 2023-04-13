@@ -3,7 +3,7 @@ import { ActivationScreen, ForgotPasswordSreen, LoginScreen, RegistrationSreen, 
 import { UnauthorizedStackEnum } from "../type";
 import { Title } from "../../component";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export function WelcomeStack() {
    return (
@@ -14,7 +14,7 @@ export function WelcomeStack() {
          <Stack.Screen name={ UnauthorizedStackEnum.Activation } component={ ActivationScreen }/>
          <Stack.Screen name={ UnauthorizedStackEnum.ResetPassword } component={ ResetPasswordScreen }/>
       </Stack.Navigator>
-   )
+   );
 }
 
 const screenOptions: NativeStackNavigationOptions = {
@@ -26,4 +26,4 @@ const screenOptions: NativeStackNavigationOptions = {
    },
    animation: "fade",
    animationDuration: 100
-}
+};

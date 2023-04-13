@@ -9,15 +9,15 @@ import { useNavigation } from "@react-navigation/native";
 import { ForgotPasswordScreenNavigationProp, UnauthorizedStackEnum } from "../../navigation/type";
 
 export function ResetPasswordForm() {
-   const { navigate } = useNavigation<ForgotPasswordScreenNavigationProp>()
+   const { navigate } = useNavigation<ForgotPasswordScreenNavigationProp>();
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<IResetPasswordForm>({ mode: "onTouched" });
 
-   const { resetPasswordFn } = resetPasswordService(() => navigate(UnauthorizedStackEnum.Login))
+   const { resetPasswordFn } = resetPasswordService(() => navigate(UnauthorizedStackEnum.Login));
 
    const onSubmit = async ({ code, newPassword, repeatPassword }: IResetPassword) => {
       if (newPassword === repeatPassword) await resetPasswordFn(newPassword, code);
-      else Toast.show({ type: "error", text1: "Паролі не співпадають" })
-   }
+      else Toast.show({ type: "error", text1: "Паролі не співпадають" });
+   };
 
    return (
       <View style={ [ gStyle.form_control_wrapper ] }>
@@ -44,5 +44,5 @@ export function ResetPasswordForm() {
 
          <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
-      </View>)
+      </View>);
 }

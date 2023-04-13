@@ -6,7 +6,7 @@ import { NOTES_COLOR } from "../../constant";
 import { registrationService } from "../../service";
 
 export function RegistrationSreen({ navigation }: RegistrationProps) {
-   const { registrationFn } = registrationService(() => navigation.navigate(UnauthorizedStackEnum.Activation))
+   const { registrationFn } = registrationService(() => navigation.navigate(UnauthorizedStackEnum.Activation));
 
    return (
       <View style={ [ gStyle.screen, gStyle.center ] }>
@@ -20,7 +20,7 @@ export function RegistrationSreen({ navigation }: RegistrationProps) {
             </TouchableOpacity>
          </View>
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       marginTop: 40
    }
-})
+});

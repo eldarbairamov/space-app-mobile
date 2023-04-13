@@ -11,17 +11,17 @@ import { DashboardStackEnum, PasswordSettingScreenNavigationProp } from "../../n
 export function ChangePasswordForm() {
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<IChangePasswordForm>({ mode: "onTouched" });
 
-   const { navigate } = useNavigation<PasswordSettingScreenNavigationProp>()
+   const { navigate } = useNavigation<PasswordSettingScreenNavigationProp>();
 
-   const { updatePasswordFn } = changePasswordService(() => navigate(DashboardStackEnum.ChangePasswordMessage))
+   const { updatePasswordFn } = changePasswordService(() => navigate(DashboardStackEnum.ChangePasswordMessage));
 
    const onSubmit = async ({ newPassword, currentPassword, repeatPassword }: IChangePasswordForm) => {
       if (newPassword === repeatPassword) {
          await updatePasswordFn(newPassword, currentPassword);
       } else {
-         Toast.show({ type: "error", text1: "Паролі не співпадають" })
+         Toast.show({ type: "error", text1: "Паролі не співпадають" });
       }
-   }
+   };
 
    return (
       <View style={ gStyle.form_control_wrapper }>
@@ -47,5 +47,5 @@ export function ChangePasswordForm() {
                       isRequired={ true }/>
 
          <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
-      </View>)
+      </View>);
 }

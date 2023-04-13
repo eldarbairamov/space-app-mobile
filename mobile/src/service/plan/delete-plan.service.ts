@@ -8,18 +8,18 @@ import { errorCatherFn } from "../../helper";
 
 export function deletePlanService() {
    const dispatch = useAppDispatch();
-   const { plansCount } = useAppSelector(state => state.userReducer)
+   const { plansCount } = useAppSelector(state => state.userReducer);
 
    const deletePlanFn = async (targetId: IPlan["id"]) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          await axiosInstance.delete(plansRequests.deletePlan + targetId);
          dispatch(planAction.deletePlan(targetId));
-         dispatch(userActions.setPlansCount(plansCount - 1))
-         Toast.hide()
+         dispatch(userActions.setPlansCount(plansCount - 1));
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

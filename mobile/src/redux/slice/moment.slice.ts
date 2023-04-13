@@ -29,8 +29,8 @@ const momentSlice = createSlice({
       addMoment: (state, { payload }: PayloadAction<IMoment>) => {
          state.moments.push(payload);
          state.moments = state.moments.sort((a, b) => b.createdAt - a.createdAt);
-         state.tags.push(payload.tag)
-         state.tags = Array.from(new Set(state.tags.flat()))
+         state.tags.push(payload.tag);
+         state.tags = Array.from(new Set(state.tags.flat()));
       },
 
       deleteMoment: (state, { payload }: PayloadAction<{ momentId: string }>) => {
@@ -52,26 +52,26 @@ const momentSlice = createSlice({
       },
 
       editTag: (state, { payload }: PayloadAction<string>) => {
-         state.activeMoment!.tag = payload
+         state.activeMoment!.tag = payload;
       },
 
       setPhoto: (state, { payload }: PayloadAction<{ photo: string }>) => {
          state.activeMoment.photo = payload.photo;
          state.moments = state.moments.map(item => {
             if (item.id === state.activeMoment.id) {
-               item.photo = payload.photo
-               return item
+               item.photo = payload.photo;
+               return item;
             }
-            return item
+            return item;
          });
       },
 
       updateMoment: (state, { payload }: PayloadAction<IMoment>) => {
          state.moments = state.moments.map(item => {
             if (item.id === payload.id) {
-               item = payload
+               item = payload;
             }
-            return item
+            return item;
          });
 
          state.tags = state.moments.map(moment => moment.tag);

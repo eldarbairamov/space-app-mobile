@@ -5,20 +5,23 @@ import { useAppDispatch, useAppSelector } from "../../hook";
 import { addNoteService, getNotesService } from "../../service";
 import { noteActions } from "../../redux/slice";
 import { EmptyIcon } from "../../component/UI/Empty-Icon";
+import { BG_DARK, MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 
 export function NotesScreen() {
-   const { notes, searchKey } = useAppSelector(state => state.noteReducer)
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const dispatch = useAppDispatch()
+   const { notes, searchKey } = useAppSelector(state => state.noteReducer);
+
+   const dispatch = useAppDispatch();
 
    const handleChange = (value: string) => dispatch(noteActions.setSearchKey(value));
 
-   const { addNoteFn } = addNoteService()
+   const { addNoteFn } = addNoteService();
 
-   getNotesService()
+   getNotesService();
 
    return (
-      <View style={ [ gStyle.screen, gStyle.center ] }>
+      <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
          <View style={ [ styles.header ] }>
 
@@ -27,7 +30,8 @@ export function NotesScreen() {
             <TextInput onChangeText={ handleChange }
                        value={ searchKey }
                        placeholder={ "Пошук" }
-                       style={ [ gStyle.regular_font, gStyle.input ] }/>
+                       placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
+                       style={ [ gStyle.regular_font, gStyle.input, isDark && { color: MAIN_FONT_DARK } ] }/>
 
          </View>
 
@@ -64,4 +68,4 @@ const styles = StyleSheet.create({
    noteListWrapper: {
       width: "93%",
    },
-})
+});

@@ -3,7 +3,7 @@ import { logoutService } from "../../service";
 import { Message } from "../UI/Message";
 
 export function ChangePasswordMessage() {
-   const { logoutFn } = logoutService()
+   const { logoutFn } = logoutService();
 
    return (
       <Message nextFn={ logoutFn }
@@ -11,5 +11,5 @@ export function ChangePasswordMessage() {
                buttonTitle={ "Увійти" }
                title={ "Ви успішно оновили свій пароль" }
                message={ "Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані" }/>
-   )
+   );
 }

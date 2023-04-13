@@ -15,17 +15,17 @@ export function getPlansService() {
 
    const getPlansFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<IPlan[]>(plansRequests.getAllPlans, {
             params: {
                searchKey: searchKey ? debounced : null,
             },
          });
          dispatch(planAction.setPlans(data));
-         Toast.hide()
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View }
 import { gStyle } from "../../asset";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { configuration } from "../../config";
-import { DELETE_ICON_COLOR, MOMENTS_COLOR, NO_PHOTO_IMAGE, SAVE_DISABLE, SAVE_ENABLE } from "../../constant";
+import { BG_DARK, DELETE_ICON_COLOR, ITEM_BG_DARK, MOMENTS_COLOR, NO_PHOTO, NO_PHOTO_DARK, SAVE_DARK, SAVE_DISABLE_DARK, SAVE_DISABLED_ICON, SAVE_ICON } from "../../constant";
 import { deleteMomentService, momentPrevStateService, updateMomentService, uploadMomentPhotoService } from "../../service";
 import { BackIcon } from "../../component";
 import { MomentEditProps, MomentsStackEnum } from "../../navigation/type";
@@ -13,15 +13,17 @@ import DatePicker from "react-native-date-picker";
 import { useState } from "react";
 
 export function MomentEditScreen({ navigation }: MomentEditProps) {
-   const { activeMoment } = useAppSelector(state => state.momentReducer)
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const { pickImageHandler } = uploadMomentPhotoService(activeMoment.id)
+   const { activeMoment } = useAppSelector(state => state.momentReducer);
 
-   const { prevState, setPrevState } = momentPrevStateService(activeMoment)
+   const { pickImageHandler } = uploadMomentPhotoService(activeMoment.id);
 
-   const { deleteMomentFn } = deleteMomentService(navigation.goBack)
+   const { prevState, setPrevState } = momentPrevStateService(activeMoment);
 
-   const dispatch = useAppDispatch()
+   const { deleteMomentFn } = deleteMomentService(navigation.goBack);
+
+   const dispatch = useAppDispatch();
 
    const handleInputs = (field: string, value: string) => {
       if (value.length <= 20) {
@@ -34,24 +36,27 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
       }
    };
 
-   const { updateMomentFn } = updateMomentService(setPrevState)
+   const { updateMomentFn } = updateMomentService(setPrevState);
 
-   const handleTag = (value: string) => dispatch(momentActions.editTag(value))
+   const handleTag = (value: string) => dispatch(momentActions.editTag(value));
 
-   const [ isDatePickerOpen, setIsDatePickerOpen ] = useState(false)
+   const [ isDatePickerOpen, setIsDatePickerOpen ] = useState(false);
+
+   const lightModeSaveDisable = prevState === activeMoment ? SAVE_ICON : SAVE_DISABLED_ICON;
+   const darkModeSaveDisable = prevState === activeMoment ? SAVE_DARK : SAVE_DISABLE_DARK;
 
    return (
       <>
          { activeMoment &&
-            <View style={ [ gStyle.screen, gStyle.center ] }>
+            <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
                <View style={ [ styles.header ] }>
                   <View style={ [ { flexDirection: "row", gap: 15 }, gStyle.center ] }>
                      <BackIcon to={ MomentsStackEnum.MomentList }/>
 
                      <TouchableOpacity activeOpacity={ 0.5 } onPress={ () => updateMomentFn(activeMoment) }>
-                        <Image source={ prevState === activeMoment ? SAVE_DISABLE : SAVE_ENABLE }
-                               style={ [ { width: 26, height: 26 } ] }/>
+                        <Image source={ isDark ? darkModeSaveDisable : lightModeSaveDisable }
+                               style={ [ { width: 32, height: 32 } ] }/>
                      </TouchableOpacity>
                   </View>
 
@@ -61,7 +66,7 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
 
                </View>
 
-               <View style={ [ styles.body, gStyle.center ] }>
+               <View style={ [ styles.body, gStyle.center, isDark && { backgroundColor: ITEM_BG_DARK } ] }>
                   <View style={ [ styles.absolute ] }>
                      <View
                         style={ [ activeMoment.photo ? styles.background_fx : null, gStyle.absolute ] }>
@@ -111,7 +116,7 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
                                source={ { uri: `${ configuration.API_URL }/${ activeMoment.photo }` } }/>
                         :
                         <View style={ [ gStyle.absolute_center, gStyle.center ] }>
-                           <Image source={ NO_PHOTO_IMAGE }
+                           <Image source={ isDark ? NO_PHOTO_DARK : NO_PHOTO }
                                   style={ [ { width: 50, height: 50 } ] }/>
                         </View>
                      }
@@ -124,18 +129,18 @@ export function MomentEditScreen({ navigation }: MomentEditProps) {
                            date={ new Date(activeMoment.date) }
                            mode={ "date" }
                            onConfirm={ (date) => {
-                              setIsDatePickerOpen(false)
-                              dispatch(momentActions.setDate(new Date(date).getTime()))
+                              setIsDatePickerOpen(false);
+                              dispatch(momentActions.setDate(new Date(date).getTime()));
                            } }
                            onCancel={ () => {
-                              setIsDatePickerOpen(false)
+                              setIsDatePickerOpen(false);
                            } }
                />
 
             </View>
          }
       </>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -204,4 +209,4 @@ const styles = StyleSheet.create({
       opacity: 0.3,
       zIndex: 1
    },
-})
+});

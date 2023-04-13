@@ -4,13 +4,13 @@ import { Button, FormControl } from "../../component";
 import { useForm } from "react-hook-form";
 
 interface IActivationFormProps {
-   forgotPasswordFn: (email: string) => Promise<void>
+   forgotPasswordFn: (email: string) => Promise<void>;
 }
 
 export function ForgotPasswordForm({ forgotPasswordFn }: IActivationFormProps) {
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string }>({ mode: "onTouched" });
 
-   const onSubmit = async (data: { email: string }) => await forgotPasswordFn(data.email)
+   const onSubmit = async (data: { email: string }) => await forgotPasswordFn(data.email);
 
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
@@ -29,7 +29,7 @@ export function ForgotPasswordForm({ forgotPasswordFn }: IActivationFormProps) {
          <Button title={ "Надіслати" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
       width: 300,
       textAlign: "center"
    }
-})
+});
 
 
 

@@ -8,19 +8,19 @@ export type AxiosApiError = AxiosError<{ message: string, status: number }>
 export const axiosInstance = axios.create({ baseURL: configuration.API_URL });
 
 axiosInstance.interceptors.request.use(async (config: any) => {
-   const accessToken = await storageService.getAccessToken()
+   const accessToken = await storageService.getAccessToken();
 
    if (accessToken) {
       config.headers = {
          "Authorization": `Bearer ${ accessToken }`
-      }
+      };
    }
 
-   return config
-})
+   return config;
+});
 
 axiosInstance.interceptors.response.use((config: any) => {
-      return config
+      return config;
    },
    async (e) => {
       const axiosError = e as AxiosApiError;
@@ -42,4 +42,4 @@ axiosInstance.interceptors.response.use((config: any) => {
       }
 
       return Promise.reject(e);
-   })
+   });

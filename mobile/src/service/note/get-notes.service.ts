@@ -16,13 +16,13 @@ export function getNotesService() {
 
    const getNotesFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<INote[]>(notesRequests.getNotes, { params: { searchKey: searchKey ? debounced : null, } });
          dispatch(noteActions.setNotes(data));
-         Toast.hide()
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

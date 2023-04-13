@@ -28,7 +28,7 @@ export const errorCatherFn = (e: unknown) => {
          break;
 
       case "Invalid code":
-         message = "Невірно вказаний код"
+         message = "Невірно вказаний код";
          break;
 
       case "Wrong email or password":

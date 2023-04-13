@@ -5,7 +5,7 @@ interface IPlanInitialState {
    searchKey: string;
    plans: IPlan[];
    limit: number;
-   activePlan: IPlan
+   activePlan: IPlan;
 }
 
 const initialState: IPlanInitialState = {
@@ -38,17 +38,17 @@ const planSlice = createSlice({
       },
 
       updateTitle: (state, { payload }: PayloadAction<{ planId: string, title: string }>) => {
-         state.activePlan.title = payload.title
+         state.activePlan.title = payload.title;
          state.plans = state.plans.map(item => {
             if (item.id === payload.planId) {
-               item.title = payload.title
+               item.title = payload.title;
             }
-            return item
-         })
+            return item;
+         });
       },
 
       setActivePlan: (state, { payload }: PayloadAction<IPlan>) => {
-         state.activePlan = payload
+         state.activePlan = payload;
       }
 
    },

@@ -12,17 +12,17 @@ export const toastConfig: ToastConfig = {
    error: (props) => (
       <BaseToast { ...props } style={ error }/>
    )
-}
+};
 
 const info: StyleProp<ViewStyle> = {
    borderLeftColor: NOTES_COLOR,
-}
+};
 
 const success: StyleProp<ViewStyle> = {
    borderLeftColor: SUCCESS_COLOR
-}
+};
 
 const error: StyleProp<ViewStyle> = {
    borderLeftColor: ERROR_COLOR,
 
-}
+};

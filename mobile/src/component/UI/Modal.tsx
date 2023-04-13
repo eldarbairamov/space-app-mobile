@@ -3,9 +3,9 @@ import { gStyle } from "../../asset";
 import { ReactNode } from "react";
 
 interface IModal {
-   isOpen: boolean
-   next: () => void
-   children: ReactNode
+   isOpen: boolean;
+   next: () => void;
+   children: ReactNode;
 }
 
 export function MyModal({ isOpen, children }: IModal) {
@@ -15,5 +15,5 @@ export function MyModal({ isOpen, children }: IModal) {
             { children }
          </View>
       </Modal>
-   )
+   );
 }

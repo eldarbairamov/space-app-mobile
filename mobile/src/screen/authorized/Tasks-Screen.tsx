@@ -4,50 +4,56 @@ import { Add, BackIcon, TaskItem } from "../../component";
 import { PlansStackEnum } from "../../navigation/type";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { useState } from "react";
-import { SAVE_DISABLE, SAVE_ENABLE, SECOND_FONT_COLOR } from "../../constant";
+import { BG_DARK, MAIN_FONT_DARK, SAVE_DARK, SAVE_DISABLE_DARK, SAVE_DISABLED_ICON, SAVE_ICON, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 import { addTaskService, getTasksService, updatePlanService } from "../../service";
 import { planAction } from "../../redux/slice";
 
 export function TasksScreen() {
-   const { tasks } = useAppSelector(state => state.taskReducer)
-   const { activePlan } = useAppSelector(state => state.planReducer)
-   const dispatch = useAppDispatch()
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const [ taskTitle, setTaskTitle ] = useState<string>("")
-   const [ isPrevPlanTitleSame, setIsPrevPlanTitleSame ] = useState<boolean>(true)
-   const [ isTyping, setIsTyping ] = useState<boolean | string>(false)
+   const { tasks } = useAppSelector(state => state.taskReducer);
+   const { activePlan } = useAppSelector(state => state.planReducer);
 
-   const iconDisableCondition = !isTyping || taskTitle === ""
+   const dispatch = useAppDispatch();
 
-   getTasksService(activePlan.id)
-   const { addTaskFn } = addTaskService(activePlan.id, taskTitle, () => setTaskTitle(""))
-   const { updatePlanFn } = updatePlanService(() => setIsPrevPlanTitleSame(true))
+   const [ taskTitle, setTaskTitle ] = useState<string>("");
+   const [ isPrevPlanTitleSame, setIsPrevPlanTitleSame ] = useState<boolean>(true);
+   const [ isTyping, setIsTyping ] = useState<boolean | string>(false);
+
+   const iconDisableCondition = !isTyping || taskTitle === "";
+
+   const lightModeSaveDisable = isPrevPlanTitleSame ? SAVE_ICON : SAVE_DISABLED_ICON;
+   const darkModeSaveDisable = isPrevPlanTitleSame ? SAVE_DARK : SAVE_DISABLE_DARK;
+
+   getTasksService(activePlan.id);
+   const { addTaskFn } = addTaskService(activePlan.id, taskTitle, () => setTaskTitle(""));
+   const { updatePlanFn } = updatePlanService(() => setIsPrevPlanTitleSame(true));
 
    return (
-      <View style={ [ gStyle.screen, gStyle.center ] }>
+      <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
          <View style={ [ styles.header ] }>
 
             <View style={ [ { flexDirection: "row", gap: 12, alignItems: "center" } ] }>
                <BackIcon to={ PlansStackEnum.PlanList }/>
 
-
                <TouchableOpacity style={ [ { flexDirection: "row", gap: 10 } ] }
                                  activeOpacity={ 0.5 }
                                  onPress={ () => updatePlanFn(activePlan.id, activePlan.title) }>
 
-                  <Image source={ isPrevPlanTitleSame ? SAVE_DISABLE : SAVE_ENABLE }
-                         style={ [ { width: 26, height: 26 } ] }/>
+                  <Image source={ isDark ? darkModeSaveDisable : lightModeSaveDisable }
+                         style={ [ { width: 32, height: 32 } ] }/>
                </TouchableOpacity>
 
-               <TextInput style={ [ gStyle.regular_font, styles.title, { textAlign: "left" } ] }
-                          autoFocus={ false }
-                          maxLength={ 30 }
-                          onChangeText={ value => {
-                             setIsPrevPlanTitleSame(false)
-                             dispatch(planAction.updateTitle({ planId: activePlan.id, title: value }))
-                          } }
-                          value={ activePlan.title }
-                          placeholder={ "Назва плану" }/>
+               <TextInput
+                  style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK }, { textAlign: "left" } ] }
+                  autoFocus={ false }
+                  maxLength={ 25 }
+                  onChangeText={ value => {
+                     setIsPrevPlanTitleSame(false);
+                     dispatch(planAction.updateTitle({ planId: activePlan.id, title: value }));
+                  } }
+                  value={ activePlan.title }
+                  placeholder={ "Назва плану" }/>
 
 
             </View>
@@ -58,11 +64,11 @@ export function TasksScreen() {
             <View style={ [ { flexDirection: "row", gap: 10 } ] }>
                <Add onPress={ addTaskFn } condition={ iconDisableCondition }/>
                <TextInput value={ taskTitle }
-                          style={ [ gStyle.regular_font, { width: 200 } ] }
-                          placeholderTextColor={ SECOND_FONT_COLOR }
+                          style={ [ gStyle.regular_font, isDark && { color: MAIN_FONT_DARK }, { width: 200 } ] }
+                          placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
                           onChangeText={ (value) => {
-                             setIsTyping(true)
-                             setTaskTitle(value)
+                             setIsTyping(true);
+                             setTaskTitle(value);
                           } }
                           placeholder={ "Що плануєш зробити?" }/>
             </View>
@@ -77,7 +83,7 @@ export function TasksScreen() {
 
 
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -111,4 +117,4 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10
    },
 
-})
+});

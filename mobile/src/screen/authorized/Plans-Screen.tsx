@@ -5,27 +5,31 @@ import { planAction } from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addPlanService, getPlansService } from "../../service";
 import { EmptyIcon } from "../../component/UI/Empty-Icon";
+import { BG_DARK, MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 
 export function PlansScreen() {
-   const { plans, searchKey } = useAppSelector(state => state.planReducer)
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const dispatch = useAppDispatch()
+   const { plans, searchKey } = useAppSelector(state => state.planReducer);
+
+   const dispatch = useAppDispatch();
 
    const handleChange = (value: string) => dispatch(planAction.setSearchKey(value));
 
-   const { addPlanFn } = addPlanService()
-   getPlansService()
+   const { addPlanFn } = addPlanService();
+   getPlansService();
 
    return (
-      <View style={ [ gStyle.screen, gStyle.center ] }>
+      <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
          <View style={ [ styles.header ] }>
 
             <Add onPress={ addPlanFn }/>
 
             <TextInput onChangeText={ handleChange }
+                       placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
                        value={ searchKey }
                        placeholder={ "Пошук" }
-                       style={ [ gStyle.regular_font, gStyle.input ] }/>
+                       style={ [ gStyle.regular_font, gStyle.input, isDark && { color: MAIN_FONT_DARK } ] }/>
 
          </View>
 
@@ -61,5 +65,5 @@ const styles = StyleSheet.create({
    planListWrapper: {
       width: "93%",
    },
-})
+});
 

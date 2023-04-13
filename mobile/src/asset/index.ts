@@ -1,1 +1,1 @@
-export * from "./style/global"
+export * from "./style/global";

@@ -20,7 +20,7 @@ export function getMomentsService(searchKey: string) {
          dispatch(momentActions.setMoments(data));
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

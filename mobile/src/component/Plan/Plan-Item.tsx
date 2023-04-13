@@ -1,37 +1,39 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { BRAIN_IMAGE, DELETE_ICON, ITEM_BG, PLANS_COLOR } from "../../constant";
+import { BRAIN_IMAGE, DELETE_ICON, DELETE_ICON_DARK, ITEM_BG, ITEM_BG_DARK, MAIN_FONT_DARK, PLANS_COLOR } from "../../constant";
 import { IPlan } from "../../interface";
 import dateHelper from "moment";
 import { deletePlanService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import { PlanListScreenNavigationProp, PlansStackEnum } from "../../navigation/type";
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { planAction } from "../../redux/slice";
 import { useEffect } from "react";
 
 export function PlanItem({ plan }: { plan: IPlan }) {
-   const dispatch = useAppDispatch()
+   const { isDark } = useAppSelector(state => state.appReducer);
+
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
-      dispatch(planAction.setActivePlan(plan))
-   }, [])
+      dispatch(planAction.setActivePlan(plan));
+   }, []);
 
-   const { navigate } = useNavigation<PlanListScreenNavigationProp>()
+   const { navigate } = useNavigation<PlanListScreenNavigationProp>();
 
-   const { deletePlanFn } = deletePlanService()
+   const { deletePlanFn } = deletePlanService();
 
    return (
       <>
          { plan &&
-            <TouchableOpacity style={ [ styles.noteItem ] }
+            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
                               activeOpacity={ 0.7 }
                               onPress={ () => {
-                                 dispatch(planAction.setActivePlan(plan))
-                                 navigate(PlansStackEnum.TaskList)
+                                 dispatch(planAction.setActivePlan(plan));
+                                 navigate(PlansStackEnum.TaskList);
                               } }>
                <View style={ [ styles.left ] }>
-                  <Text style={ [ gStyle.regular_font, styles.title ] }>
+                  <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }>
                      { plan.title }
                   </Text>
 
@@ -48,7 +50,7 @@ export function PlanItem({ plan }: { plan: IPlan }) {
                <TouchableOpacity activeOpacity={ 0.5 }
                                  style={ [ styles.right, gStyle.center ] }
                                  onPress={ () => deletePlanFn(plan.id) }>
-                  <Image source={ DELETE_ICON }
+                  <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON }
                          style={ { width: 28, height: 28, alignSelf: "flex-end" } }/>
 
                </TouchableOpacity>
@@ -56,7 +58,7 @@ export function PlanItem({ plan }: { plan: IPlan }) {
             </TouchableOpacity>
          }
       </>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -88,4 +90,4 @@ const styles = StyleSheet.create({
       fontSize: 12,
       fontWeight: "500"
    }
-})
+});

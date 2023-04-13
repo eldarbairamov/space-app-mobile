@@ -11,15 +11,15 @@ export function updatePlanService(next: () => void) {
 
    const updatePlanFn = async (planId: IPlan["id"], title: IPlan["title"]): Promise<void> => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          await axiosInstance.put(plansRequests.updatePlan + planId, { title });
-         dispatch(planAction.updateTitle({ planId, title }))
-         Toast.show({ type: "success", text1: "Збережено" })
-         Toast.hide()
-         next()
+         dispatch(planAction.updateTitle({ planId, title }));
+         Toast.show({ type: "success", text1: "Збережено" });
+         Toast.hide();
+         next();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

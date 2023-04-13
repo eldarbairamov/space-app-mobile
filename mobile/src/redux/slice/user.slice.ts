@@ -51,15 +51,15 @@ const userSlice = createSlice({
       },
 
       setNotesCount: (state, { payload }: PayloadAction<number>) => {
-         state.notesCount = payload
+         state.notesCount = payload;
       },
 
       setPlansCount: (state, { payload }: PayloadAction<number>) => {
-         state.plansCount = payload
+         state.plansCount = payload;
       },
 
       setMomentCount: (state, { payload }: PayloadAction<number>) => {
-         state.momentsCount = payload
+         state.momentsCount = payload;
       }
 
    },

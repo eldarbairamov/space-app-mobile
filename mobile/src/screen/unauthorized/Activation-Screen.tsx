@@ -5,11 +5,11 @@ import { gStyle } from "../../asset";
 import { activationService } from "../../service";
 
 export function ActivationScreen({ navigation }: ActivationProps) {
-   const { activationFn } = activationService(() => navigation.navigate(UnauthorizedStackEnum.Login))
+   const { activationFn } = activationService(() => navigation.navigate(UnauthorizedStackEnum.Login));
 
    return (
       <View style={ [ gStyle.screen, gStyle.center ] }>
          <ActivationForm activationFn={ activationFn }/>
       </View>
-   )
+   );
 }

@@ -6,23 +6,26 @@ import { changeEmailService } from "../../service/user/change-email.service";
 import { emailConfirmationService } from "../../service/user/email-confirmation.service";
 import { useNavigation } from "@react-navigation/native";
 import { DashboardStackEnum, EmailSettingScreenNavigationProp } from "../../navigation/type";
+import { SECOND_FONT_DARK } from "../../constant";
 
 export function ChangeEmailForm() {
+   const isDark = true;
+
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string, code: string }>({ mode: "onTouched" });
 
-   const { navigate } = useNavigation<EmailSettingScreenNavigationProp>()
+   const { navigate } = useNavigation<EmailSettingScreenNavigationProp>();
 
-   const { changeEmailFn, isEmailSent } = changeEmailService()
-   const { confirmEmailFn } = emailConfirmationService(() => navigate(DashboardStackEnum.ChangeEmailMessage))
+   const { changeEmailFn, isEmailSent } = changeEmailService();
+   const { confirmEmailFn } = emailConfirmationService(() => navigate(DashboardStackEnum.ChangeEmailMessage));
 
-   const handleNewEmailRequest = async ({ email }: { email: string }) => changeEmailFn(email)
-   const handleNewEmailConfirmation = async ({ code }: { code: string }) => confirmEmailFn(code)
+   const handleNewEmailRequest = async ({ email }: { email: string }) => changeEmailFn(email);
+   const handleNewEmailConfirmation = async ({ code }: { code: string }) => confirmEmailFn(code);
 
    return (
       <View style={ { gap: !isEmailSent ? 80 : 50 } }>
 
          <View style={ gStyle.form_control_wrapper }>
-            <Text style={ [ gStyle.regular_font, styles.description ] }>
+            <Text style={ [ gStyle.regular_font, styles.description, isDark && { color: SECOND_FONT_DARK } ] }>
                Введіть нову адресу електронної пошти і ми пришлемо вам лист із подальшою інструкцією
             </Text>
 
@@ -53,7 +56,7 @@ export function ChangeEmailForm() {
          </View> }
 
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -63,4 +66,4 @@ const styles = StyleSheet.create({
       width: 300,
       textAlign: "center",
    }
-})
+});

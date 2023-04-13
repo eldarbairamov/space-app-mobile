@@ -3,12 +3,16 @@ import { gStyle } from "../../asset";
 import { BackIcon, UpdateProfileForm } from "../../component";
 import { DashboardStackEnum, SettingsProps } from "../../navigation/type";
 import { updateProfileService } from "../../service";
+import { BG_DARK, SECOND_FONT_DARK } from "../../constant";
+import { useAppSelector } from "../../hook";
 
 export function SettingsScreen({ navigation }: SettingsProps) {
-   const { updateProfileFn } = updateProfileService()
+   const { isDark } = useAppSelector(state => state.appReducer);
+
+   const { updateProfileFn } = updateProfileService();
 
    return (
-      <View style={ gStyle.screen }>
+      <View style={ [ gStyle.screen, isDark && { backgroundColor: BG_DARK } ] }>
          <View style={ [ gStyle.container ] }>
 
             <View style={ [ styles.header ] }>
@@ -22,21 +26,26 @@ export function SettingsScreen({ navigation }: SettingsProps) {
                   <TouchableOpacity style={ [ gStyle.center ] }
                                     activeOpacity={ 0.5 }
                                     onPress={ () => navigation.navigate(DashboardStackEnum.PasswordSetting) }>
-                     <Text style={ [ gStyle.second_font ] }> Змінити пароль </Text>
+                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
+                        Змінити пароль
+                     </Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity style={ [ gStyle.center ] }
                                     activeOpacity={ 0.5 }
                                     onPress={ () => navigation.navigate(DashboardStackEnum.EmailSetting) }>
-                     <Text style={ [ gStyle.second_font ] }> Змінити електронну пошту </Text>
+                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
+                        Змінити електронну пошту
+                     </Text>
                   </TouchableOpacity>
                </View>
             </View>
 
          </View>
       </View>
-   )
+   );
 }
+
 
 const styles = StyleSheet.create({
    header: {
@@ -63,4 +72,5 @@ const styles = StyleSheet.create({
       marginTop: 50,
       gap: 20,
    },
-})
+});
+

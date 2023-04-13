@@ -2,10 +2,14 @@ import { StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
 import { DashboardStackEnum } from "../../navigation/type";
 import { BackIcon, ChangePasswordForm } from "../../component";
+import { BG_DARK } from "../../constant";
+import { useAppSelector } from "../../hook";
 
 export function PasswordSettingScreen() {
+   const { isDark } = useAppSelector(state => state.appReducer);
+
    return (
-      <View style={ [ gStyle.screen ] }>
+      <View style={ [ gStyle.screen, isDark && { backgroundColor: BG_DARK } ] }>
          <View style={ [ gStyle.container ] }>
 
             <View style={ [ styles.header ] }>
@@ -18,9 +22,8 @@ export function PasswordSettingScreen() {
 
          </View>
       </View>
-   )
+   );
 }
-
 
 const styles = StyleSheet.create({
    header: {
@@ -37,4 +40,4 @@ const styles = StyleSheet.create({
       marginTop: 30,
       gap: 55
    },
-})
+});

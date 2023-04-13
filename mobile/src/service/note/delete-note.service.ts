@@ -8,18 +8,18 @@ import Toast from "react-native-toast-message";
 
 export function deleteNoteService() {
    const dispatch = useAppDispatch();
-   const { notesCount } = useAppSelector(state => state.userReducer)
+   const { notesCount } = useAppSelector(state => state.userReducer);
 
    const deleteNoteFn = async (noteId: INote["id"]) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          await axiosInstance.delete(notesRequests.deleteNote + noteId);
          dispatch(noteActions.deleteNote(noteId));
-         dispatch(userActions.setNotesCount(notesCount - 1))
-         Toast.hide()
+         dispatch(userActions.setNotesCount(notesCount - 1));
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

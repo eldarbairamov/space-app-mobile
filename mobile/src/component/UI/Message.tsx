@@ -27,10 +27,10 @@ export function Message({ nextFn, image, message, title, buttonTitle }: IMessage
 
          <Button title={ buttonTitle } isValid={ true } onPress={ nextFn }/>
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
    title: { textAlign: "center", fontSize: 20, fontWeight: "500" },
    message: { textAlign: "center", color: SECOND_FONT_COLOR }
-})
+});

@@ -7,20 +7,20 @@ import { useAppSelector } from "../../hook";
 import { useEffect } from "react";
 
 interface IUpdateProfileFormProps {
-   updateProfileFn: (body: IUpdateProfile) => Promise<void>
+   updateProfileFn: (body: IUpdateProfile) => Promise<void>;
 }
 
 export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) {
    const { control, handleSubmit, formState: { errors, isValid }, setValue } = useForm<IUpdateProfileForm>({ mode: "onTouched" });
-   const { username, name, surname } = useAppSelector(state => state.userReducer)
+   const { username, name, surname } = useAppSelector(state => state.userReducer);
 
-   const onSubmit = (data: any) => updateProfileFn(data)
+   const onSubmit = (data: any) => updateProfileFn(data);
 
    useEffect(() => {
-      setValue("name", name)
-      setValue("username", username)
-      setValue("surname", surname)
-   }, [])
+      setValue("name", name);
+      setValue("username", username);
+      setValue("surname", surname);
+   }, []);
 
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
@@ -47,5 +47,5 @@ export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) 
          <Button title={ "Зберегти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
-   )
+   );
 }

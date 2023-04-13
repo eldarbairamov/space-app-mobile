@@ -1,36 +1,38 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { DELETE_ICON, ITEM_BG, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
+import { DELETE_ICON, DELETE_ICON_DARK, ITEM_BG, ITEM_BG_DARK, MAIN_FONT_DARK, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
 import { INote } from "../../interface";
 import { deleteNoteService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import { NoteListScreenNavigationProp, NotesStackEnum } from "../../navigation/type";
 import dateHelper from "moment";
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { noteActions } from "../../redux/slice";
 
 export function NoteItem({ note }: { note: INote }) {
-   const { deleteNoteFn } = deleteNoteService()
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const { navigate } = useNavigation<NoteListScreenNavigationProp>()
+   const { deleteNoteFn } = deleteNoteService();
 
-   const dispatch = useAppDispatch()
+   const { navigate } = useNavigation<NoteListScreenNavigationProp>();
+
+   const dispatch = useAppDispatch();
 
    const openNote = () => {
-      dispatch(noteActions.setActiveNote(note))
-      navigate(NotesStackEnum.NoteEdit)
-   }
+      dispatch(noteActions.setActiveNote(note));
+      navigate(NotesStackEnum.NoteEdit);
+   };
 
    return (
       <>
          { note &&
-            <TouchableOpacity style={ [ styles.noteItem ] }
+            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
                               activeOpacity={ 0.7 }
                               onPress={ openNote }>
 
                <View style={ [ styles.left ] }>
 
-                  <Text style={ [ gStyle.regular_font, styles.title ] }>
+                  <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }>
                      { note.title }
                   </Text>
 
@@ -50,14 +52,14 @@ export function NoteItem({ note }: { note: INote }) {
                                  style={ [ gStyle.center, styles.right ] }
                                  onPress={ () => deleteNoteFn(note.id) }>
 
-                  <Image source={ DELETE_ICON } style={ { width: 28, height: 28 } }/>
+                  <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON } style={ { width: 28, height: 28 } }/>
 
                </TouchableOpacity>
 
             </TouchableOpacity>
          }
       </>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -91,4 +93,4 @@ const styles = StyleSheet.create({
       fontSize: 12,
       fontWeight: "bold"
    }
-})
+});

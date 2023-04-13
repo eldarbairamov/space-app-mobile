@@ -1,25 +1,34 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { SettingsIcon, LogoutIcon } from "../../component";
 import { gStyle } from "../../asset";
-import { NO_AVATAR_IMAGE } from "../../constant";
+import { BG_DARK, MAIN_FONT_DARK, NO_AVATAR_IMAGE, PLANS_COLOR, SECOND_FONT_DARK } from "../../constant";
 import { deletePhotoService, getUserService, uploadPhotoService } from "../../service";
-import { useAppSelector } from "../../hook";
+import { useAppSelector, useTheme } from "../../hook";
 import { configuration } from "../../config";
 
 export function DashboardScreen() {
-   const { username, avatar } = useAppSelector(state => state.userReducer)
+   const { username, avatar } = useAppSelector(state => state.userReducer);
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const { pickImageHandler } = uploadPhotoService()
-   const { deletePhotoFn } = deletePhotoService()
+   const { pickImageHandler } = uploadPhotoService();
+   const { deletePhotoFn } = deletePhotoService();
 
-   getUserService()
+   getUserService();
+
+   const { isEnabled, toggleSwitch } = useTheme();
 
    return (
-      <View style={ [ gStyle.screen ] }>
+      <View style={ [ gStyle.screen, isDark && { backgroundColor: BG_DARK } ] }>
          <View style={ [ gStyle.container ] }>
 
             <View style={ [ styles.header ] }>
-               <SettingsIcon/>
+               <View style={ [ { flexDirection: "row", gap: 20 }, gStyle.center ] }>
+                  <SettingsIcon/>
+                  <Switch style={ styles.switch }
+                          onValueChange={ toggleSwitch }
+                          value={ isEnabled }
+                          trackColor={ { true: PLANS_COLOR } }/>
+               </View>
                <LogoutIcon/>
             </View>
 
@@ -28,16 +37,18 @@ export function DashboardScreen() {
                       style={ avatar ? styles.photo : styles.no_photo }/>
 
                <View style={ [ styles.edit_wrapper ] }>
-                  <TouchableOpacity activeOpacity={ 0.5 } onPress={ pickImageHandler }>
-                     <Text style={ [ gStyle.second_font ] }>
+                  <TouchableOpacity activeOpacity={ 0.5 }
+                                    onPress={ pickImageHandler }>
+                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
                         Змінити фото
                      </Text>
                   </TouchableOpacity>
 
-                  <Text style={ [ gStyle.regular_font ] }> | </Text>
+                  <Text style={ [ gStyle.regular_font, isDark && { color: MAIN_FONT_DARK } ] }> | </Text>
 
-                  <TouchableOpacity activeOpacity={ 0.5 } onPress={ () => deletePhotoFn(avatar) }>
-                     <Text style={ [ gStyle.second_font ] }>
+                  <TouchableOpacity activeOpacity={ 0.5 }
+                                    onPress={ () => deletePhotoFn(avatar) }>
+                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
                         Видалити
                      </Text>
                   </TouchableOpacity>
@@ -45,13 +56,19 @@ export function DashboardScreen() {
 
             </View>
 
-            <View style={ [ styles.greetings_wrapper, gStyle.center ] }>
+            <View style={ [ gStyle.center, styles.greetings_wrapper ] }>
                <View style={ [ gStyle.center, styles.greetings, { width: "100%" } ] }>
-                  <Text style={ [ gStyle.handwrite, styles.hello ] }> Привіт, </Text>
-                  <Text
-                     style={ [ gStyle.regular_font, styles.username ] }> { username ? username : "завантажую" } </Text>
-                  <Text style={ [ gStyle.handwrite, styles.how_are_you ] }> Ну, як ти? </Text>
+                  <Text style={ [ gStyle.handwrite, styles.hello, isDark && { color: MAIN_FONT_DARK } ] }>
+                     Привіт,
+                  </Text>
+                  <Text style={ [ gStyle.regular_font, styles.username ] }>
+                     { username ? username : "завантажую" }
+                  </Text>
                </View>
+               <Text
+                  style={ [ gStyle.handwrite, styles.how_are_you, gStyle.center, isDark && { color: MAIN_FONT_DARK } ] }>
+                  Ну, як ти?
+               </Text>
             </View>
 
          </View>
@@ -75,6 +92,12 @@ const styles = StyleSheet.create({
       width: "100%",
       height: "60%",
    },
+   switch: {
+      transform: [
+         { scaleX: .8 },
+         { scaleY: .8 }
+      ],
+   },
    no_photo: {
       borderRadius: 500,
       borderColor: "#9d9d9d",
@@ -90,10 +113,11 @@ const styles = StyleSheet.create({
    greetings_wrapper: {
       width: "100%",
       marginTop: 20,
+      gap: 10
    },
    greetings: {
       flexDirection: "row",
-      gap: -7,
+      gap: 10,
    },
    hello: {
       fontWeight: "bold",
@@ -106,10 +130,9 @@ const styles = StyleSheet.create({
    },
    how_are_you: {
       fontSize: 25,
-      position: "absolute",
-      right: 80,
-      top: 60,
       fontWeight: "bold",
+      width: "100%",
+      textAlign: "center",
    },
    photo: {
       width: 260,

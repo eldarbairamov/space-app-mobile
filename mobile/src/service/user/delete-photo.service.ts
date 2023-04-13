@@ -11,14 +11,14 @@ export function deletePhotoService() {
 
    const deletePhotoFn = async (avatar: IUser["avatar"]) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
 
          await axiosInstance.patch(userRequests.deleteAvatar, { fileName: avatar });
          dispatch(userActions.unsetAvatar());
-         Toast.hide()
+         Toast.hide();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

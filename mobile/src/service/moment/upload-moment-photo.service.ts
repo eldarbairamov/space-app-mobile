@@ -17,33 +17,33 @@ export function uploadMomentPhotoService(momentId: IMoment["id"]) {
             { text: "Камера", onPress: () => pickImageFromCamera() },
             { text: "Закрити", style: "destructive" }
          ],
-         { cancelable: true })
-   }
+         { cancelable: true });
+   };
 
    const pickImageFromGallery = async () => {
-      const result: ImagePickerResponse = await launchImageLibrary({ mediaType: "photo" })
+      const result: ImagePickerResponse = await launchImageLibrary({ mediaType: "photo" });
       if (result.assets) {
-         const file = result.assets[0]
-         const formData = new FormData()
-         formData.append("photo", { uri: file.uri, type: file.type, name: file.fileName })
+         const file = result.assets[0];
+         const formData = new FormData();
+         formData.append("photo", { uri: file.uri, type: file.type, name: file.fileName });
 
          try {
-            Toast.show({ type: "info", text1: "Лоудінг.." })
+            Toast.show({ type: "info", text1: "Лоудінг.." });
             const { data } = await axiosInstance.patch<{ image: string }>(momentsRequests.uploadPhoto + momentId + "/photo_upload", formData);
             dispatch(momentActions.setPhoto({ photo: data.image }));
-            Toast.show({ type: "success", text1: "Готово!" })
+            Toast.show({ type: "success", text1: "Готово!" });
 
          } catch (e) {
-            Toast.show({ type: "error", text1: errorCatherFn(e) })
+            Toast.show({ type: "error", text1: errorCatherFn(e) });
          }
       }
-   }
+   };
 
    const pickImageFromCamera = async () => {
-      const result: ImagePickerResponse = await launchCamera({ mediaType: "photo", saveToPhotos: false })
-      if (result.errorMessage) console.log("error")
-   }
+      const result: ImagePickerResponse = await launchCamera({ mediaType: "photo", saveToPhotos: false });
+      if (result.errorMessage) console.log("error");
+   };
 
-   return { pickImageHandler }
+   return { pickImageHandler };
 
 }

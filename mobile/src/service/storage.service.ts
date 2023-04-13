@@ -3,27 +3,27 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constant";
 
 const storeData = async (key: string, value: any) => {
    try {
-      await AsyncStorage.setItem(key, value)
+      await AsyncStorage.setItem(key, value);
    } catch (e) {
-      console.log("Error saving data", e)
+      console.log("Error saving data", e);
    }
-}
+};
 
 const getData = async (key: string) => {
    try {
-      return await AsyncStorage.getItem(key)
+      return await AsyncStorage.getItem(key);
    } catch (e) {
-      console.log("Error reading data", e)
+      console.log("Error reading data", e);
    }
-}
+};
 
 const removeData = async (key: string) => {
    try {
-      await AsyncStorage.removeItem(key)
+      await AsyncStorage.removeItem(key);
    } catch (e) {
-      console.log("Error removing data", e)
+      console.log("Error removing data", e);
    }
-}
+};
 
 
 export const storageService = {
@@ -34,14 +34,14 @@ export const storageService = {
       await Promise.all([
          storeData(ACCESS_TOKEN, accessToken),
          storeData(REFRESH_TOKEN, refreshToken)
-      ])
+      ]);
    },
 
    deleteTokens: async () => {
       await Promise.all([
          removeData(ACCESS_TOKEN),
          removeData(REFRESH_TOKEN)
-      ])
+      ]);
    }
 
-}
+};

@@ -5,41 +5,44 @@ import { useAppDispatch, useAppSelector } from "../../hook";
 import { addMomentService, getMomentsService } from "../../service";
 import { Dropdown } from "react-native-element-dropdown";
 import { momentActions } from "../../redux/slice";
-import { CLEAR_ICON } from "../../constant";
+import { BG_DARK, CLEAR_ICON, ITEM_BG_DARK, MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 import { Add, MomentItem, SelectItem } from "../../component";
 import { EmptyIcon } from "../../component/UI/Empty-Icon";
 
 export function MomentsScreen() {
-   const { moments, tags, searchKey } = useAppSelector(state => state.momentReducer)
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const { addMomentFn } = addMomentService()
+   const { moments, tags, searchKey } = useAppSelector(state => state.momentReducer);
 
-   const dispatch = useAppDispatch()
+   const { addMomentFn } = addMomentService();
 
-   getMomentsService(searchKey)
+   const dispatch = useAppDispatch();
+
+   getMomentsService(searchKey);
 
    const [ value, setValue ] = useState("");
-   const [ showClearIcon, setShowClearIcon ] = useState<boolean>(false)
+   const [ showClearIcon, setShowClearIcon ] = useState<boolean>(false);
 
    const onClear = () => {
-      setShowClearIcon(false)
-      setValue("")
-      dispatch(momentActions.setSearchKey(""))
-   }
+      setShowClearIcon(false);
+      setValue("");
+      dispatch(momentActions.setSearchKey(""));
+   };
 
    return (
-      <View style={ [ gStyle.screen, gStyle.center ] }>
+      <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
          <View style={ [ styles.header ] }>
 
             <Add onPress={ addMomentFn }/>
 
             <Dropdown style={ [ styles.dropdown ] }
-                      placeholderStyle={ gStyle.second_font }
-                      selectedTextStyle={ gStyle.regular_font }
-                      activeColor={ "#e3e3e3" }
+                      placeholderStyle={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }
+                      selectedTextStyle={ [ gStyle.regular_font, isDark && { color: MAIN_FONT_DARK } ] }
+                      activeColor={ isDark ? SECOND_FONT_COLOR : SECOND_FONT_DARK }
+                      itemContainerStyle={ { borderRadius: 5 } }
                       renderItem={ (item) => <SelectItem> { item.label } </SelectItem> }
-                      containerStyle={ { borderRadius: 5 } }
+                      containerStyle={ [ { borderRadius: 5, borderWidth: 0, overflow: "hidden" }, isDark && { backgroundColor: ITEM_BG_DARK } ] }
                       iconStyle={ { tintColor: "#4e4e51" } }
                       fontFamily={ "Roboto" }
                       data={ tags.map(tag => ({ value: tag, label: tag })) }
@@ -55,9 +58,9 @@ export function MomentsScreen() {
                             </TouchableOpacity> :
                          undefined }
                       onChange={ (item: any) => {
-                         dispatch(momentActions.setSearchKey(item.value))
-                         setValue(item.value)
-                         setShowClearIcon(true)
+                         dispatch(momentActions.setSearchKey(item.value));
+                         setValue(item.value);
+                         setShowClearIcon(true);
                       } }/>
 
          </View>
@@ -104,4 +107,4 @@ const styles = StyleSheet.create({
       width: 20,
       height: 20,
    },
-})
+});

@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { IRegistration, IRegistrationForm } from "../../interface";
 
 interface IRegistrationFormProps {
-   registrationFn: (body: IRegistration) => Promise<void>
+   registrationFn: (body: IRegistration) => Promise<void>;
 }
 
 export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<IRegistrationForm>({ mode: "onTouched" });
 
-   const onSubmit = (data: any) => registrationFn(data)
+   const onSubmit = (data: any) => registrationFn(data);
 
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
@@ -40,5 +40,5 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
          <Button title={ "Зареєструватись" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
-   )
+   );
 }

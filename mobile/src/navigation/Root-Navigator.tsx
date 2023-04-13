@@ -3,8 +3,8 @@ import { BottomTab } from "./authorized";
 import { WelcomeStack } from "./unauthorized";
 
 export function RootNavigator() {
-   const { isLogin } = useAuth()
+   const { isLogin } = useAuth();
 
-   return isLogin ? <BottomTab/> : <WelcomeStack/>
+   return isLogin ? <BottomTab/> : <WelcomeStack/>;
 }
 

@@ -1,25 +1,28 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { ITEM_BG, MOMENTS_COLOR, NO_PHOTO_IMAGE, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
+import { ITEM_BG, ITEM_BG_DARK, MOMENTS_COLOR, NO_PHOTO, NO_PHOTO_DARK, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
 import { IMoment } from "../../interface";
 import { configuration } from "../../config";
 import dateHelper from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { MomentListScreenNavigationProp, MomentsStackEnum } from "../../navigation/type";
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { momentActions } from "../../redux/slice";
 
 export function MomentItem({ moment }: { moment: IMoment }) {
-   const { navigate } = useNavigation<MomentListScreenNavigationProp>()
-   const dispatch = useAppDispatch()
+   const { isDark } = useAppSelector(state => state.appReducer);
+
+   const { navigate } = useNavigation<MomentListScreenNavigationProp>();
+
+   const dispatch = useAppDispatch();
 
    return (
       <>
          { moment &&
-            <TouchableOpacity style={ [ styles.noteItem ] }
+            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
                               onPress={ () => {
-                                 dispatch(momentActions.setActiveMoment(moment))
-                                 navigate(MomentsStackEnum.MomentEdit)
+                                 dispatch(momentActions.setActiveMoment(moment));
+                                 navigate(MomentsStackEnum.MomentEdit);
                               } }
                               activeOpacity={ 0.7 }>
 
@@ -29,7 +32,7 @@ export function MomentItem({ moment }: { moment: IMoment }) {
                          source={ { uri: `${ configuration.API_URL }/${ moment.photo }` } }/>
                   :
                   <View style={ [ gStyle.absolute_center, gStyle.center ] }>
-                     <Image source={ NO_PHOTO_IMAGE }
+                     <Image source={ isDark ? NO_PHOTO_DARK : NO_PHOTO }
                             style={ [ { width: 50, height: 50 } ] }/>
                   </View>
                }
@@ -67,7 +70,7 @@ export function MomentItem({ moment }: { moment: IMoment }) {
             </TouchableOpacity>
          }
       </>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
       bottom: 20,
    },
    title: {
-      color: "whitesmoke",
+      color: "#F5F5F5FF",
    },
    noteBody: {
       color: SECOND_FONT_COLOR,
@@ -126,4 +129,4 @@ const styles = StyleSheet.create({
       color: NOTES_COLOR,
       fontSize: 12,
    }
-})
+});

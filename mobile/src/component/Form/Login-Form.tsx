@@ -11,7 +11,7 @@ interface ILoginFormProps {
 export function LoginForm({ loginFn }: ILoginFormProps) {
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<ILoginForm>({ mode: "onTouched" });
 
-   const onSubmit = async (data: ILoginForm) => await loginFn(data)
+   const onSubmit = async (data: ILoginForm) => await loginFn(data);
 
    return (
       <View style={ [ gStyle.center, gStyle.form_control_wrapper ] }>
@@ -33,5 +33,5 @@ export function LoginForm({ loginFn }: ILoginFormProps) {
          <Button title={ "Увійти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
 
       </View>
-   )
+   );
 }

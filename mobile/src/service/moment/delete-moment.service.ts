@@ -8,20 +8,20 @@ import { errorCatherFn } from "../../helper";
 
 export function deleteMomentService(next: () => void) {
    const dispatch = useAppDispatch();
-   const { momentsCount } = useAppSelector(state => state.userReducer)
+   const { momentsCount } = useAppSelector(state => state.userReducer);
 
    const deleteMomentFn = async (momentId: IMoment["id"]) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." })
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          await axiosInstance.delete(momentsRequests.deleteMoment + momentId);
          dispatch(momentActions.deleteMoment({ momentId: momentId! }));
-         dispatch(userActions.setMomentCount(momentsCount - 1))
-         Toast.hide()
+         dispatch(userActions.setMomentCount(momentsCount - 1));
+         Toast.hide();
 
-         next()
+         next();
 
       } catch (e) {
-         Toast.show({ type: "error", text1: errorCatherFn(e) })
+         Toast.show({ type: "error", text1: errorCatherFn(e) });
       }
    };
 

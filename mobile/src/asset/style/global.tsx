@@ -32,7 +32,6 @@ export const gStyle = StyleSheet.create({
    container: {
       width: "100%",
       height: "100%",
-      backgroundColor: "whitesmoke",
       shadowColor: "#000",
       shadowOpacity: 0.08,
       shadowOffset: {
@@ -91,4 +90,4 @@ export const gStyle = StyleSheet.create({
       shadowOpacity: 0.2,
       shadowRadius: 3,
    },
-})
+});

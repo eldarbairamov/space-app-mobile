@@ -4,7 +4,7 @@ import { Button } from "../UI/Button";
 import { useState } from "react";
 
 interface IActivationFormProps {
-   activationFn: (body: string) => Promise<void>
+   activationFn: (body: string) => Promise<void>;
 }
 
 export function ActivationForm({ activationFn }: IActivationFormProps) {
@@ -31,7 +31,7 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
 
          </View>
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -40,5 +40,5 @@ const styles = StyleSheet.create({
       width: 300,
       marginBottom: 40
    }
-})
+});
 

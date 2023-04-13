@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { TabStackEnum } from "../../navigation/type";
 import { DASHBOARD_COLOR, MOMENTS_COLOR, NOTES_COLOR, PLANS_COLOR } from "../../constant";
+import { useAppSelector } from "../../hook";
 
 interface ITabBarLabel {
    focused: boolean,
@@ -8,11 +9,12 @@ interface ITabBarLabel {
 }
 
 export function TabBarLabel({ focused, children }: ITabBarLabel) {
+   const { isDark } = useAppSelector(state => state.appReducer);
 
    const onFocusColorHandler = () => {
       switch (children) {
          case TabStackEnum.Dashboard:
-            return DASHBOARD_COLOR;
+            return isDark ? "#34a4ae" : DASHBOARD_COLOR;
          case TabStackEnum.Notes:
             return NOTES_COLOR;
          case TabStackEnum.Plans:

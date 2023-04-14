@@ -1,12 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
-import { BackIcon, UpdateProfileForm } from "../../component";
-import { DashboardStackEnum, SettingsProps } from "../../navigation/type";
+import { AuthSettings, BackIcon, UpdateProfileForm } from "../../component";
+import { DashboardStackEnum } from "../../navigation/type";
 import { updateProfileService } from "../../service";
-import { BG_DARK, SECOND_FONT_DARK } from "../../constant";
+import { BG_DARK } from "../../constant";
 import { useAppSelector } from "../../hook";
 
-export function SettingsScreen({ navigation }: SettingsProps) {
+export function SettingsScreen() {
    const { isDark } = useAppSelector(state => state.appReducer);
 
    const { updateProfileFn } = updateProfileService();
@@ -21,24 +21,7 @@ export function SettingsScreen({ navigation }: SettingsProps) {
 
             <View style={ [ gStyle.center, { flex: 1 } ] }>
                <UpdateProfileForm updateProfileFn={ updateProfileFn }/>
-
-               <View style={ [ styles.auth_settings, ] }>
-                  <TouchableOpacity style={ [ gStyle.center ] }
-                                    activeOpacity={ 0.5 }
-                                    onPress={ () => navigation.navigate(DashboardStackEnum.PasswordSetting) }>
-                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
-                        Змінити пароль
-                     </Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity style={ [ gStyle.center ] }
-                                    activeOpacity={ 0.5 }
-                                    onPress={ () => navigation.navigate(DashboardStackEnum.EmailSetting) }>
-                     <Text style={ [ gStyle.second_font, isDark && { color: SECOND_FONT_DARK } ] }>
-                        Змінити електронну пошту
-                     </Text>
-                  </TouchableOpacity>
-               </View>
+               <AuthSettings/>
             </View>
 
          </View>
@@ -67,10 +50,6 @@ const styles = StyleSheet.create({
       right: 20,
       top: 19,
       zIndex: 1
-   },
-   auth_settings: {
-      marginTop: 50,
-      gap: 20,
    },
 });
 

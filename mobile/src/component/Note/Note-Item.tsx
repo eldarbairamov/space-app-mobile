@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { DELETE_ICON, DELETE_ICON_DARK, ITEM_BG, ITEM_BG_DARK, MAIN_FONT_DARK, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
+import { DELETE_ICON, DELETE_ICON_DARK, ITEM_BG, ITEM_BG_DARK, MAIN_FONT_DARK, NOTES_COLOR } from "../../constant";
 import { INote } from "../../interface";
 import { deleteNoteService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
@@ -36,7 +36,7 @@ export function NoteItem({ note }: { note: INote }) {
                      { note.title }
                   </Text>
 
-                  <Text style={ [ gStyle.regular_font, styles.noteBody ] }
+                  <Text style={ [ gStyle.second_font, styles.noteBody, isDark && { color: MAIN_FONT_DARK }, ] }
                         ellipsizeMode={ "tail" }
                         numberOfLines={ 1 }>
                      { note.body }
@@ -52,7 +52,8 @@ export function NoteItem({ note }: { note: INote }) {
                                  style={ [ gStyle.center, styles.right ] }
                                  onPress={ () => deleteNoteFn(note.id) }>
 
-                  <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON } style={ { width: 28, height: 28 } }/>
+                  <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON }
+                         style={ { width: 28, height: 28 } }/>
 
                </TouchableOpacity>
 
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
       fontWeight: "500"
    },
    noteBody: {
-      color: SECOND_FONT_COLOR,
       fontSize: 14,
       width: "90%"
    },

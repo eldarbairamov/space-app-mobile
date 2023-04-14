@@ -44,7 +44,9 @@ export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) 
                       isOnlyLetters={ true }
                       errorMessage={ errors.surname?.message }/>
 
-         <Button title={ "Зберегти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Зберегти" }
+                 isValid={ isValid }
+                 onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    );

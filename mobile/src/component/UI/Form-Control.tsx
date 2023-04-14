@@ -56,7 +56,9 @@ export function FormControl({
                      rules={ rules }
                      render={ ({ field: { onChange, onBlur, value } }) => (
                         <View style={ [ styles.form_control ] }>
+
                            <View style={ [ styles.label_wrapper, { justifyContent: "space-between" } ] }>
+
                               <View style={ { flexDirection: "row" } }>
                                  { label &&
                                     <Text
@@ -66,8 +68,9 @@ export function FormControl({
                                  { (isRequired && label) && <Text style={ styles.required }>*</Text> }
                               </View>
 
-                              { !!isPassword
-                                 && <TouchableOpacity activeOpacity={ 0.5 } onPress={ showHiddenPassword }>
+                              { !!isPassword &&
+                                 <TouchableOpacity activeOpacity={ 0.5 }
+                                                   onPress={ showHiddenPassword }>
                                     <Text style={ [ gStyle.second_font, styles.label ] }>
                                        { passwordValueCondition }
                                     </Text>
@@ -75,6 +78,7 @@ export function FormControl({
                               }
 
                            </View>
+
                            <TextInput
                               secureTextEntry={ isPasswordHidden }
                               style={ [ gStyle.regular_font, styles.input, isCenter && { textAlign: "center" }, isDark && { borderBottomColor: "#373a43", color: MAIN_FONT_DARK } ] }
@@ -82,12 +86,18 @@ export function FormControl({
                               onBlur={ onBlur }
                               value={ value }
                            />
+
                         </View>
                      ) } name={ name }/>
+
          { errorMessage &&
-            <TouchableOpacity style={ styles.error } onPress={ () => showErrorMessage() } activeOpacity={ 0.5 }>
-               <Image style={ { width: 20, height: 20 } } source={ require("../../asset/image/error.png") }/>
+            <TouchableOpacity style={ styles.error }
+                              onPress={ () => showErrorMessage() }
+                              activeOpacity={ 0.5 }>
+               <Image style={ { width: 20, height: 20 } }
+                      source={ require("../../asset/image/error.png") }/>
             </TouchableOpacity> }
+
       </View>
    );
 }

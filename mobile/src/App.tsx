@@ -1,8 +1,6 @@
 import { Provider } from "react-redux";
 import { store } from "./redux";
 import { DefaultTheme, NavigationContainer, Theme } from "@react-navigation/native";
-import Toast from "react-native-toast-message";
-import { toastConfig } from "./config";
 import { RootNavigator } from "./navigation";
 
 export function App() {
@@ -10,7 +8,6 @@ export function App() {
       <Provider store={ store }>
          <NavigationContainer theme={ theme }>
             <RootNavigator/>
-            <Toast config={ toastConfig }/>
          </NavigationContainer>
       </Provider>
    );

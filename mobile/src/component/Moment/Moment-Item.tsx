@@ -1,13 +1,13 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { gStyle } from "../../asset";
-import { ITEM_BG, ITEM_BG_DARK, MOMENTS_COLOR, NO_PHOTO, NO_PHOTO_DARK, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
+import { ITEM_BG, ITEM_BG_DARK, MOMENTS_COLOR, NOTES_COLOR, SECOND_FONT_COLOR } from "../../constant";
 import { IMoment } from "../../interface";
-import { configuration } from "../../config";
 import dateHelper from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { MomentListScreenNavigationProp, MomentsStackEnum } from "../../navigation/type";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { momentActions } from "../../redux/slice";
+import { MomentItemPhoto } from "./Moment-Item-Photo";
 
 export function MomentItem({ moment }: { moment: IMoment }) {
    const { isDark } = useAppSelector(state => state.appReducer);
@@ -26,16 +26,7 @@ export function MomentItem({ moment }: { moment: IMoment }) {
                               } }
                               activeOpacity={ 0.7 }>
 
-               { moment.photo
-                  ?
-                  <Image style={ styles.photo }
-                         source={ { uri: `${ configuration.API_URL }/${ moment.photo }` } }/>
-                  :
-                  <View style={ [ gStyle.absolute_center, gStyle.center ] }>
-                     <Image source={ isDark ? NO_PHOTO_DARK : NO_PHOTO }
-                            style={ [ { width: 50, height: 50 } ] }/>
-                  </View>
-               }
+               <MomentItemPhoto moment={ moment }/>
 
                <View
                   style={ [ moment.photo ? styles.background : null, gStyle.absolute ] }>
@@ -82,13 +73,6 @@ const styles = StyleSheet.create({
       backgroundColor: ITEM_BG,
       marginVertical: 5,
       overflow: "hidden"
-   },
-   photo: {
-      position: "absolute",
-      top: -120,
-      left: -50,
-      width: 500,
-      height: 500,
    },
    background: {
       backgroundColor: "black",

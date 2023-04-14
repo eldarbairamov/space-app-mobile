@@ -12,8 +12,8 @@ export const DELETE_ICON_COLOR = require("../asset/image/delete-color.png");
 export const CLEAR_ICON = require("../asset/image/clear-dark.png");
 export const FONT_ICON = require("../asset/image/font-dark.png");
 
-export const SAVE_ICON = require("../asset/image/save-dark.png");
-export const SAVE_DISABLED_ICON = require("../asset/image/save-disabled-light.png");
+export const SAVE_ICON = require("../asset/image/save-disabled-light.png");
+export const SAVE_DISABLED_ICON = require("../asset/image/save-disabled-dark.png");
 
 export const NO_AVATAR_IMAGE = require("../asset/image/user.png");
 export const SUCCESS_IMAGE = require("../asset/image/success.png");
@@ -35,6 +35,6 @@ export const DELETE_ICON_DARK = require("../asset/image/delete-light.png");
 export const CLEAR_ICON_DARK = require("../asset/image/clear-light.png");
 export const EMPTY_DARK = require("../asset/image/empty-light.png");
 export const FONT_ICON_DARK = require("../asset/image/font-light.png");
-export const SAVE_DARK = require("../asset/image/save-dark.png");
+export const SAVE_DARK = require("../asset/image/save-light.png");
 export const SAVE_DISABLE_DARK = require("../asset/image/save-disabled-light.png");
 export const NO_PHOTO_DARK = require("../asset/image/image-light.png");

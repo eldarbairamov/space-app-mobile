@@ -42,7 +42,9 @@ export function ResetPasswordForm() {
                       errorMessage={ errors.repeatPassword?.message }
                       isRequired={ true }/>
 
-         <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Змінити" }
+                 isValid={ isValid }
+                 onPress={ handleSubmit(onSubmit) }/>
 
       </View>);
 }

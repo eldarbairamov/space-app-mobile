@@ -26,7 +26,9 @@ export function ForgotPasswordForm({ forgotPasswordFn }: IActivationFormProps) {
                       isCenter={ true }
                       errorMessage={ errors.email?.message }/>
 
-         <Button title={ "Надіслати" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Надіслати" }
+                 isValid={ isValid }
+                 onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    );

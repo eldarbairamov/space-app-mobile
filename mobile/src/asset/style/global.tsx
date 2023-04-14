@@ -32,12 +32,6 @@ export const gStyle = StyleSheet.create({
    container: {
       width: "100%",
       height: "100%",
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowOffset: {
-         width: 1,
-         height: 5
-      }
    },
    bottom_border: {
       borderBottomColor: "#e3e3e3",
@@ -81,13 +75,13 @@ export const gStyle = StyleSheet.create({
       alignItems: "center",
       gap: 40,
    },
-   shadow: {
-      shadowColor: "#171717",
-      shadowOffset: {
-         width: -2,
-         height: 4
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 3,
-   },
+   // shadow: {
+   //    shadowColor: "#171717",
+   //    shadowOffset: {
+   //       width: -2,
+   //       height: 4
+   //    },
+   //    shadowOpacity: 0.2,
+   //    shadowRadius: 3,
+   // },
 });

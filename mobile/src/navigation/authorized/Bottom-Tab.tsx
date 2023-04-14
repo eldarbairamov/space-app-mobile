@@ -26,15 +26,6 @@ export function BottomTab() {
       },
    };
 
-   const styles = StyleSheet.create({
-      image: {
-         width: 30,
-         height: 30,
-         position: "absolute",
-         top: 15
-      },
-   });
-
    const { plansCount, notesCount, momentsCount } = useAppSelector(state => state.userReducer);
 
    return (
@@ -70,4 +61,11 @@ export function BottomTab() {
    );
 }
 
-
+const styles = StyleSheet.create({
+   image: {
+      width: 30,
+      height: 30,
+      position: "absolute",
+      top: 15
+   },
+});

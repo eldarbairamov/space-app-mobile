@@ -7,8 +7,9 @@ import { noteActions, userActions } from "../../redux/slice";
 import Toast from "react-native-toast-message";
 
 export function addNoteService() {
-   const dispatch = useAppDispatch();
    const { notesCount } = useAppSelector(state => state.userReducer);
+
+   const dispatch = useAppDispatch();
 
    const addNoteFn = async () => {
       try {

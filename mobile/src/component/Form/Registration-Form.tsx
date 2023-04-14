@@ -37,7 +37,9 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
                       isRequired={ true }
                       errorMessage={ errors.password?.message }/>
 
-         <Button title={ "Зареєструватись" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Зареєструватись" }
+                 isValid={ isValid }
+                 onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    );

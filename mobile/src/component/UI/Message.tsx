@@ -25,7 +25,9 @@ export function Message({ nextFn, image, message, title, buttonTitle }: IMessage
             </Text>
          </View>
 
-         <Button title={ buttonTitle } isValid={ true } onPress={ nextFn }/>
+         <Button title={ buttonTitle }
+                 isValid={ true }
+                 onPress={ nextFn }/>
       </View>
    );
 }

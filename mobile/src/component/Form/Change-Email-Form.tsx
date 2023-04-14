@@ -38,7 +38,9 @@ export function ChangeEmailForm() {
                          name={ "email" }/>
 
             { !isEmailSent &&
-               <Button title={ "Надіслати" } isValid={ isValid } onPress={ handleSubmit(handleNewEmailRequest) }/> }
+               <Button title={ "Надіслати" }
+                       isValid={ isValid }
+                       onPress={ handleSubmit(handleNewEmailRequest) }/> }
          </View>
 
          { isEmailSent && <View style={ gStyle.form_control_wrapper }>
@@ -52,7 +54,9 @@ export function ChangeEmailForm() {
                          errorMessage={ errors.code?.message }
                          isRequired={ true }/>
 
-            <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(handleNewEmailConfirmation) }/>
+            <Button title={ "Змінити" }
+                    isValid={ isValid }
+                    onPress={ handleSubmit(handleNewEmailConfirmation) }/>
          </View> }
 
       </View>

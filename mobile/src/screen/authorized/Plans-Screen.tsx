@@ -1,10 +1,9 @@
 import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
-import { Add, PlanItem } from "../../component";
+import { Add, EmptyIcon, PlanItem } from "../../component";
 import { planAction } from "../../redux/slice";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addPlanService, getPlansService } from "../../service";
-import { EmptyIcon } from "../../component/UI/Empty-Icon";
 import { BG_DARK, MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 
 export function PlansScreen() {

@@ -2,9 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { gStyle } from "../asset";
 import { TabStackEnum } from "../navigation/type";
 import { DASHBOARD_COLOR, MOMENTS_COLOR, NOTES_COLOR, PLANS_COLOR } from "../constant";
+import { useAppSelector } from "../hook";
 
 export function Title({ children }: { children: string }) {
-   const isDark = true;
+   const { isDark } = useAppSelector(state => state.appReducer);
 
    const changeLogoBg = () => {
       switch (children) {
@@ -21,7 +22,6 @@ export function Title({ children }: { children: string }) {
       }
    };
 
-
    return (
       <View style={ [ styles.container ] }>
          <Text style={ [ gStyle.regular_font, styles.title, { color: changeLogoBg() } ] }> [ </Text>
@@ -30,7 +30,6 @@ export function Title({ children }: { children: string }) {
       </View>
    );
 }
-
 
 const styles = StyleSheet.create({
    container: {

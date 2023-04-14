@@ -27,7 +27,10 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
             <TextInput onChangeText={ handleChange }
                        value={ value }
                        style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: "center", minWidth: 300 } ] }/>
-            <Button title={ "Активувати" } isValid={ !!value } onPress={ () => activationFn(value) } btnWidth={ 300 }/>
+            <Button title={ "Активувати" }
+                    isValid={ !!value }
+                    onPress={ () => activationFn(value) }
+                    btnWidth={ 300 }/>
 
          </View>
       </View>

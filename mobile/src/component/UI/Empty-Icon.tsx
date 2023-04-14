@@ -8,7 +8,8 @@ export function EmptyIcon() {
 
    return (
       <View style={ [ gStyle.center, gStyle.screen, isDark && { backgroundColor: BG_DARK } ] }>
-         <Image source={ isDark ? EMPTY_DARK : EMPTY_IMAGE } style={ { width: 60, height: 60 } }/>
+         <Image source={ isDark ? EMPTY_DARK : EMPTY_IMAGE }
+                style={ { width: 60, height: 60 } }/>
       </View>
    );
 }

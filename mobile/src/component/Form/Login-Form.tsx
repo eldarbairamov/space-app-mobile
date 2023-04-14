@@ -30,7 +30,9 @@ export function LoginForm({ loginFn }: ILoginFormProps) {
                       isRequired={ true }
                       errorMessage={ errors.password?.message }/>
 
-         <Button title={ "Увійти" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>
+         <Button title={ "Увійти" }
+                 isValid={ isValid }
+                 onPress={ handleSubmit(onSubmit) }/>
 
       </View>
    );

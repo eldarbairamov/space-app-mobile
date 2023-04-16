@@ -1,8 +1,8 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { addMomentService, getMomentsService } from "../../service";
-import { BG_DARK, } from "../../constant";
+import { BG_DARK, MOMENTS_COLOR, } from "../../constant";
 import { Add, EmptyIcon, MomentItem, MomentsScreenDropdown } from "../../component";
 import { useState } from "react";
 import { momentActions } from "../../redux/slice";
@@ -14,7 +14,7 @@ export function MomentsScreen() {
 
    const { addMomentFn } = addMomentService();
 
-   getMomentsService(searchKey);
+   const { isLoading } = getMomentsService(searchKey);
 
    const [ value, setValue ] = useState("");
    const [ showClearIcon, setShowClearIcon ] = useState<boolean>(false);
@@ -30,28 +30,32 @@ export function MomentsScreen() {
    return (
       <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
-         <View style={ [ styles.header ] }>
-            <Add onPress={ async () => {
-               await addMomentFn();
-               onClear();
-            } }/>
-            <MomentsScreenDropdown dropdownValue={ value }
-                                   setShowClearIcon={ setShowClearIcon }
-                                   showClearIcon={ showClearIcon }
-                                   setDropdownValue={ setValue }
-                                   onClear={ onClear }/>
-         </View>
+         { isLoading ? <ActivityIndicator size={ "large" } color={ MOMENTS_COLOR }/> :
+            <>
+               <View style={ [ styles.header ] }>
+                  <Add onPress={ async () => {
+                     await addMomentFn();
+                     onClear();
+                  } }/>
+                  <MomentsScreenDropdown dropdownValue={ value }
+                                         setShowClearIcon={ setShowClearIcon }
+                                         showClearIcon={ showClearIcon }
+                                         setDropdownValue={ setValue }
+                                         onClear={ onClear }/>
+               </View>
 
-         <View style={ [ styles.body ] }>
-            { Boolean(moments.length)
-               ?
-               <FlatList style={ styles.momentListWrapper }
-                         data={ moments }
-                         renderItem={ ({ item, index }) =>
-                            <MomentItem key={ index + 1 } moment={ item }/> }/>
-               : <EmptyIcon/>
-            }
-         </View>
+               <View style={ [ styles.body ] }>
+                  { Boolean(moments.length)
+                     ?
+                     <FlatList style={ styles.momentListWrapper }
+                               data={ moments }
+                               renderItem={ ({ item, index }) =>
+                                  <MomentItem key={ index + 1 } moment={ item }/> }/>
+                     : <EmptyIcon/>
+                  }
+               </View>
+            </>
+         }
 
       </View>
    );

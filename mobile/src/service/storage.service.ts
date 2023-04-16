@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constant";
+import { ACCESS_TOKEN, IS_DARK, REFRESH_TOKEN } from "../constant";
 
 const storeData = async (key: string, value: any) => {
    try {
@@ -42,6 +42,9 @@ export const storageService = {
          removeData(ACCESS_TOKEN),
          removeData(REFRESH_TOKEN)
       ]);
-   }
+   },
+
+   getTheme: async () => await getData(IS_DARK),
+   setTheme: async (isDark: boolean) => await storeData(IS_DARK, String(isDark))
 
 };

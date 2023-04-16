@@ -1,9 +1,9 @@
 import { StyleSheet, Switch } from "react-native";
 import { PLANS_COLOR, SECOND_FONT_DARK } from "../../constant";
-import { useTheme } from "../../hook";
+import { useSwitch } from "../../hook";
 
 export function SwitchButton() {
-   const { isEnabled, toggleSwitch } = useTheme();
+   const { isEnabled, toggleSwitch } = useSwitch();
 
    return (
       <Switch style={ [ styles.switch ] }

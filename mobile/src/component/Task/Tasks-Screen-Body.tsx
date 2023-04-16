@@ -5,11 +5,10 @@ import { MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../const
 import { TaskItem } from "./Task-Item";
 import { useAppSelector } from "../../hook";
 import { useState } from "react";
-import { addTaskService, getTasksService } from "../../service";
+import { addTaskService } from "../../service";
+import { IPlan } from "../../interface";
 
-export function TasksScreenBody() {
-   const { activePlan } = useAppSelector(state => state.planReducer);
-
+export function TasksScreenBody({ activePlan }: { activePlan: IPlan }) {
    const { isDark } = useAppSelector(state => state.appReducer);
 
    const { tasks } = useAppSelector(state => state.taskReducer);
@@ -21,8 +20,6 @@ export function TasksScreenBody() {
    const iconDisableCondition = !isTyping || taskTitle === "";
 
    const { addTaskFn } = addTaskService(activePlan.id, taskTitle, () => setTaskTitle(""));
-
-   getTasksService(activePlan.id);
 
    return (
       <View style={ [ styles.body ] }>

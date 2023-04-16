@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { appActions } from "../redux/slice";
 import { useAppDispatch, useAppSelector } from "./redux.hook";
+import { useEffect } from "react";
+import { storageService } from "../service";
+import { appActions } from "../redux/slice";
 
 export function useTheme() {
-   const { isDark } = useAppSelector(state => state.appReducer);
-
    const dispatch = useAppDispatch();
 
-   const [ isEnabled, setIsEnabled ] = useState<boolean>(false);
-   const toggleSwitch = () => {
-      setIsEnabled(previousState => !previousState);
-      dispatch(appActions.switchTheme(!isDark));
-   };
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   return { isEnabled, toggleSwitch };
+   useEffect(() => {
+      storageService.getTheme().then(res => dispatch(appActions.switchTheme(Boolean(res))));
+   }, []);
+
+   return { isDark };
 }

@@ -1,6 +1,6 @@
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { gStyle } from "../../asset";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { addMomentService, getMomentsService } from "../../service";
 import { BG_DARK, MOMENTS_COLOR, } from "../../constant";
 import { Add, EmptyIcon, MomentItem, MomentsScreenDropdown } from "../../component";
@@ -27,6 +27,8 @@ export function MomentsScreen() {
       dispatch(momentActions.setSearchKey(""));
    };
 
+   const { isTablet } = useDimension();
+
    return (
       <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
@@ -49,6 +51,8 @@ export function MomentsScreen() {
                      ?
                      <FlatList style={ styles.momentListWrapper }
                                data={ moments }
+                               columnWrapperStyle={ isTablet && { justifyContent: "space-between" } }
+                               numColumns={ isTablet ? 2 : 1 }
                                renderItem={ ({ item, index }) =>
                                   <MomentItem key={ index + 1 } moment={ item }/> }/>
                      : <EmptyIcon/>
@@ -63,7 +67,7 @@ export function MomentsScreen() {
 
 const styles = StyleSheet.create({
    header: {
-      height: "5%",
+      height: 60,
       width: "100%",
       alignItems: "center",
       justifyContent: "space-between",

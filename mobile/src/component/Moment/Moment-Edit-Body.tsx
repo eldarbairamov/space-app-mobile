@@ -6,7 +6,7 @@ import dateHelper from "moment";
 import { uploadMomentPhotoService } from "../../service";
 import { IMoment, TypedSetState } from "../../interface";
 import { momentActions } from "../../redux/slice";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { MomentEditPhotoBg } from "./Moment-Edit-Photo-Bg";
 
 export function MomentEditBody({ setIsDatePickerOpen }: { setIsDatePickerOpen: TypedSetState<boolean> }) {
@@ -29,6 +29,8 @@ export function MomentEditBody({ setIsDatePickerOpen }: { setIsDatePickerOpen: T
          dispatch(momentActions.setActiveMoment(updatedMoment));
       }
    };
+
+   const { isTablet, isPhoneSmall } = useDimension();
 
    return (
       <View style={ [ styles.body, gStyle.center, isDark && { backgroundColor: ITEM_BG_DARK } ] }>
@@ -66,7 +68,7 @@ export function MomentEditBody({ setIsDatePickerOpen }: { setIsDatePickerOpen: T
          <Pressable onPress={ pickImageHandler }>
             { activeMoment.photo
                ?
-               <Image style={ [ styles.photo ] }
+               <Image style={ [ styles.photo, isTablet && { height: 600, width: 600 }, isPhoneSmall && {height: 330, width: 330} ] }
                       source={ { uri: `${ configuration.API_URL }/${ activeMoment.photo }` } }/>
                :
                <View style={ [ gStyle.absolute_center, gStyle.center ] }>
@@ -101,13 +103,15 @@ const styles = StyleSheet.create({
       width: "100%",
       top: 0,
       left: 0,
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
+      zIndex: 1
    },
    bottom_line: {
       position: "absolute",
       width: "100%",
       bottom: 0,
       left: 0,
+      zIndex: 1
    },
    wrapper: {
       backgroundColor: "#24292e",

@@ -19,7 +19,6 @@ export function getPlansService() {
    const getPlansFn = async () => {
       try {
          setIsLoading(true);
-         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<IPlan[]>(plansRequests.getAllPlans, {
             params: {
                searchKey: searchKey ? debounced : null,
@@ -27,7 +26,6 @@ export function getPlansService() {
          });
          dispatch(planAction.setPlans(data));
          await pleaseWait(delay);
-         Toast.hide();
 
       } catch (e) {
          setIsLoading(false);

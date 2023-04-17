@@ -2,7 +2,7 @@ import { ActivityIndicator, FlatList, StyleSheet, TextInput, View } from "react-
 import { gStyle } from "../../asset";
 import { Add, EmptyIcon, PlanItem } from "../../component";
 import { planAction } from "../../redux/slice";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { addPlanService, getPlansService } from "../../service";
 import { BG_DARK, MAIN_FONT_DARK, PLANS_COLOR, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 
@@ -16,7 +16,10 @@ export function PlansScreen() {
    const handleChange = (value: string) => dispatch(planAction.setSearchKey(value));
 
    const { addPlanFn } = addPlanService();
+
    const { isLoading } = getPlansService();
+
+   const { isTablet } = useDimension();
 
    return (
       <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
@@ -39,6 +42,8 @@ export function PlansScreen() {
                   { Boolean(plans.length)
                      ?
                      <FlatList style={ styles.planListWrapper }
+                               columnWrapperStyle={ isTablet && { justifyContent: "space-between" } }
+                               numColumns={ isTablet ? 2 : 1 }
                                data={ plans }
                                renderItem={ ({ item, index }) =>
                                   <PlanItem key={ index + 1 } plan={ item }/> }/>
@@ -54,7 +59,7 @@ export function PlansScreen() {
 
 const styles = StyleSheet.create({
    header: {
-      height: "5%",
+      height: 60,
       width: "100%",
       alignItems: "center",
       paddingLeft: 20,

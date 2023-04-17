@@ -20,11 +20,9 @@ export function getNotesService() {
    const getNotesFn = async () => {
       try {
          setIsLoading(true);
-         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<INote[]>(notesRequests.getNotes, { params: { searchKey: searchKey ? debounced : null, } });
          dispatch(noteActions.setNotes(data));
          await pleaseWait(delay);
-         Toast.hide();
 
       } catch (e) {
          setIsLoading(false);

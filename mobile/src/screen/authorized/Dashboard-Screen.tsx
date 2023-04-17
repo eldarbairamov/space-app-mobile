@@ -1,35 +1,40 @@
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { SettingsIcon, LogoutIcon, SwitchButton, DashboardAvatar, DashboardAvatarEdit, DashboardGreetings } from "../../component";
 import { gStyle } from "../../asset";
-import { BG_DARK } from "../../constant";
+import { BG_DARK, DASHBOARD_COLOR_DARK } from "../../constant";
 import { getUserService } from "../../service";
 import { useAppSelector } from "../../hook";
 
 export function DashboardScreen() {
    const { isDark } = useAppSelector(state => state.appReducer);
 
-   getUserService();
+   const { isLoading } = getUserService();
 
    return (
-      <View style={ [ gStyle.screen, isDark && { backgroundColor: BG_DARK } ] }>
-         <View style={ [ gStyle.container ] }>
+      <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
-            <View style={ [ styles.header ] }>
-               <SwitchButton/>
-               <View style={ [ { flexDirection: "row", gap: 20 }, gStyle.center ] }>
-                  <SettingsIcon/>
-                  <LogoutIcon/>
+         { isLoading ? <ActivityIndicator size={ "large" } color={ DASHBOARD_COLOR_DARK }/> :
+            <>
+               <View style={ [ gStyle.container ] }>
+
+                  <View style={ [ styles.header ] }>
+                     <SwitchButton/>
+                     <View style={ [ { flexDirection: "row", gap: 20 }, gStyle.center ] }>
+                        <SettingsIcon/>
+                        <LogoutIcon/>
+                     </View>
+                  </View>
+
+                  <View style={ [ gStyle.center, styles.avatar_wrapper ] }>
+                     <DashboardAvatar/>
+                     <DashboardAvatarEdit/>
+                  </View>
+
+                  <DashboardGreetings/>
+
                </View>
-            </View>
-
-            <View style={ [ gStyle.center, styles.avatar_wrapper ] }>
-               <DashboardAvatar/>
-               <DashboardAvatarEdit/>
-            </View>
-
-            <DashboardGreetings/>
-
-         </View>
+            </>
+         }
       </View>
    );
 }

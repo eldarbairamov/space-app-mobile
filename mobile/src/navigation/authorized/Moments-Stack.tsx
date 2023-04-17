@@ -2,7 +2,6 @@ import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react
 import { MomentEditScreen, MomentsScreen } from "../../screen";
 import { MomentsStackEnum } from "../type";
 
-
 const Stack = createNativeStackNavigator();
 
 export function MomentsStack() {

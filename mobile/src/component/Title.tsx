@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { gStyle } from "../asset";
 import { TabStackEnum } from "../navigation/type";
-import { DASHBOARD_COLOR, MOMENTS_COLOR, NOTES_COLOR, PLANS_COLOR } from "../constant";
+import { DASHBOARD_COLOR, DASHBOARD_COLOR_DARK, MOMENTS_COLOR, NOTES_COLOR, PLANS_COLOR } from "../constant";
 import { useAppSelector } from "../hook";
 
 export function Title({ children }: { children: string }) {
@@ -10,7 +10,7 @@ export function Title({ children }: { children: string }) {
    const changeLogoBg = () => {
       switch (children) {
          case TabStackEnum.Dashboard:
-            return isDark ? "#34a4ae" : DASHBOARD_COLOR;
+            return isDark ? DASHBOARD_COLOR_DARK : DASHBOARD_COLOR;
          case TabStackEnum.Notes:
             return NOTES_COLOR;
          case TabStackEnum.Plans:
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
    container: {
       gap: -3,
       flexDirection: "row",
-      width: "100%"
    },
    title: {
       fontWeight: "bold",

@@ -3,16 +3,18 @@ import { configuration } from "../../config";
 import { gStyle } from "../../asset";
 import { NO_PHOTO, NO_PHOTO_DARK } from "../../constant";
 import { IMoment } from "../../interface";
-import { useAppSelector } from "../../hook";
+import { useAppSelector, useDimension } from "../../hook";
 
 export function MomentItemPhoto({ moment }: { moment: IMoment }) {
    const { isDark } = useAppSelector(state => state.appReducer);
+
+   const { isTablet } = useDimension();
 
    return (
       <>
          { moment.photo
             ?
-            <Image style={ styles.photo }
+            <Image style={ [ styles.photo, isTablet && { left: 0, top: -150 } ] }
                    source={ { uri: `${ configuration.API_URL }/${ moment.photo }` } }/>
             :
             <View style={ [ gStyle.absolute_center, gStyle.center ] }>

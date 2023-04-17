@@ -1,36 +1,47 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { gStyle } from "../../asset";
 import { Button } from "../UI/Button";
-import { useState } from "react";
+import { useAppSelector } from "../../hook";
+import { MAIN_FONT_DARK } from "../../constant";
+import { useForm } from "react-hook-form";
+import { FormControl } from "../UI/Form-Control";
 
 interface IActivationFormProps {
    activationFn: (body: string) => Promise<void>;
 }
 
 export function ActivationForm({ activationFn }: IActivationFormProps) {
-   const [ value, setValue ] = useState<string>("");
+   const { isDark } = useAppSelector(state => state.appReducer);
 
-   const handleChange = (value: string) => setValue(value);
+   const { control, handleSubmit, formState: { errors, isValid } } = useForm<{ code: string }>({ mode: "onTouched" });
+
+   const onSubmit = async (data: { code: string }) => activationFn(data.code);
 
    return (
       <View>
          <View style={ styles.message }>
-            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" } ] }>
+            <Text
+               style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" }, isDark && { color: MAIN_FONT_DARK } ] }>
                Ви успішно зареєструвались.
             </Text>
-            <Text style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" } ] }>
+            <Text
+               style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500", textAlign: "center" }, isDark && { color: MAIN_FONT_DARK } ] }>
                Введіть код активації, який щойно прилетів на вашу електронну пошту:
             </Text>
          </View>
 
          <View style={ gStyle.form_control_wrapper }>
-            <TextInput onChangeText={ handleChange }
-                       value={ value }
-                       style={ [ gStyle.regular_font, gStyle.input, gStyle.bottom_border, { textAlign: "center", minWidth: 300 } ] }/>
+            <FormControl control={ control }
+                         name={ "code" }
+                         isRequired={ true }
+                         isCenter={ true }
+                         width={ 300 }
+                         errorMessage={ errors.code?.message }/>
+
             <Button title={ "Активувати" }
-                    isValid={ !!value }
-                    onPress={ () => activationFn(value) }
-                    btnWidth={ 300 }/>
+                    isValid={ isValid }
+                    btnWidth={ 300 }
+                    onPress={ handleSubmit(onSubmit) }/>
 
          </View>
       </View>
@@ -41,7 +52,7 @@ const styles = StyleSheet.create({
    message: {
       alignItems: "center",
       width: 300,
-      marginBottom: 40
+      marginBottom: 30
    }
 });
 

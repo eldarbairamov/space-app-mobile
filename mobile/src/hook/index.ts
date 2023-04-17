@@ -3,3 +3,4 @@ export * from "./use-auth.hook";
 export * from "./use-debounce.hook";
 export * from './use-switch.hook'
 export * from './use-theme.hook'
+export * from './use-dimension.hook'

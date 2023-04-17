@@ -33,6 +33,7 @@ export function toastTheme(isDark: boolean) {
                     text1Style={ [ gStyle.regular_font, isDark && { color: MAIN_FONT_DARK } ] }/>
       )
    };
+
    return toastConfig;
 }
 

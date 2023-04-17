@@ -6,7 +6,7 @@ import dateHelper from "moment";
 import { deletePlanService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import { PlanListScreenNavigationProp, PlansStackEnum } from "../../navigation/type";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { planAction } from "../../redux/slice";
 import { useEffect } from "react";
 
@@ -23,15 +23,18 @@ export function PlanItem({ plan }: { plan: IPlan }) {
 
    const { deletePlanFn } = deletePlanService();
 
+   const { isTablet } = useDimension();
+
    return (
       <>
          { plan &&
-            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
-                              activeOpacity={ 0.7 }
-                              onPress={ () => {
-                                 dispatch(planAction.setActivePlan(plan));
-                                 navigate(PlansStackEnum.TaskList);
-                              } }>
+            <TouchableOpacity
+               style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && { width: "49.5%", height: 160 } ] }
+               activeOpacity={ 0.7 }
+               onPress={ () => {
+                  dispatch(planAction.setActivePlan(plan));
+                  navigate(PlansStackEnum.TaskList);
+               } }>
                <View style={ [ styles.left ] }>
                   <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }>
                      { plan.title }
@@ -44,7 +47,7 @@ export function PlanItem({ plan }: { plan: IPlan }) {
 
                <View style={ [ styles.mid ] }>
                   <Image source={ BRAIN_IMAGE }
-                         style={ [ { width: 60, height: 60 } ] }/>
+                         style={ [ { width: 60, height: 60 }, isTablet && { width: 80, height: 80 } ] }/>
                </View>
 
                <TouchableOpacity activeOpacity={ 0.5 }

@@ -9,6 +9,7 @@ export function DashboardAvatarEdit() {
    const { avatar } = useAppSelector(state => state.userReducer);
 
    const { pickImageHandler } = uploadPhotoService();
+
    const { deletePhotoFn } = deletePhotoService();
 
    return (

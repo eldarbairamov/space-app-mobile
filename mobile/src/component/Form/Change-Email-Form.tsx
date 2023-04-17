@@ -7,9 +7,10 @@ import { emailConfirmationService } from "../../service/user/email-confirmation.
 import { useNavigation } from "@react-navigation/native";
 import { DashboardStackEnum, EmailSettingScreenNavigationProp } from "../../navigation/type";
 import { SECOND_FONT_DARK } from "../../constant";
+import { useAppSelector } from "../../hook";
 
 export function ChangeEmailForm() {
-   const isDark = true;
+   const { isDark } = useAppSelector(state => state.appReducer);
 
    const { control, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string, code: string }>({ mode: "onTouched" });
 

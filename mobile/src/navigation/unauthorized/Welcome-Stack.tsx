@@ -1,29 +1,37 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
-import { ActivationScreen, ForgotPasswordSreen, LoginScreen, RegistrationSreen, ResetPasswordScreen } from "../../screen";
+import { ActivationScreen, ForgotPasswordScreen, LoginScreen, RegistrationScreen, ResetPasswordScreen } from "../../screen";
 import { UnauthorizedStackEnum } from "../type";
-import { Title } from "../../component";
+import { SwitchButton, Title } from "../../component";
+import { BG_DARK, MAIN_FONT_COLOR, MAIN_FONT_DARK } from "../../constant";
+import { useAppSelector } from "../../hook";
 
 const Stack = createNativeStackNavigator();
 
 export function WelcomeStack() {
+   const { isDark } = useAppSelector(state => state.appReducer);
+
+   const screenOptions: NativeStackNavigationOptions = {
+      headerTitle: ({ children }) => <Title children={ children }/>,
+      headerRight: () => <SwitchButton/>,
+      headerBackTitleVisible: false,
+      headerTintColor: isDark ? MAIN_FONT_DARK : MAIN_FONT_COLOR,
+      headerShadowVisible: false,
+      headerStyle: {
+         backgroundColor: isDark ? BG_DARK : "whitesmoke",
+      },
+      animation: "fade",
+      animationDuration: 100,
+   };
+
    return (
       <Stack.Navigator screenOptions={ screenOptions } initialRouteName={ UnauthorizedStackEnum.Login }>
          <Stack.Screen name={ UnauthorizedStackEnum.Login } component={ LoginScreen }/>
-         <Stack.Screen name={ UnauthorizedStackEnum.Registration } component={ RegistrationSreen }/>
-         <Stack.Screen name={ UnauthorizedStackEnum.ForgotPassword } component={ ForgotPasswordSreen }/>
+         <Stack.Screen name={ UnauthorizedStackEnum.Registration } component={ RegistrationScreen }/>
+         <Stack.Screen name={ UnauthorizedStackEnum.ForgotPassword } component={ ForgotPasswordScreen }/>
          <Stack.Screen name={ UnauthorizedStackEnum.Activation } component={ ActivationScreen }/>
          <Stack.Screen name={ UnauthorizedStackEnum.ResetPassword } component={ ResetPasswordScreen }/>
       </Stack.Navigator>
    );
 }
 
-const screenOptions: NativeStackNavigationOptions = {
-   headerTitle: ({ children }) => <Title children={ children }/>,
-   headerBackTitleVisible: false,
-   headerShadowVisible: false,
-   headerStyle: {
-      backgroundColor: "whitesmoke",
-   },
-   animation: "fade",
-   animationDuration: 100
-};
+

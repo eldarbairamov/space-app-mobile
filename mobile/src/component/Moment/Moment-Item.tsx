@@ -5,7 +5,7 @@ import { IMoment } from "../../interface";
 import dateHelper from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { MomentListScreenNavigationProp, MomentsStackEnum } from "../../navigation/type";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { momentActions } from "../../redux/slice";
 import { MomentItemPhoto } from "./Moment-Item-Photo";
 
@@ -16,15 +16,18 @@ export function MomentItem({ moment }: { moment: IMoment }) {
 
    const dispatch = useAppDispatch();
 
+   const { isTablet } = useDimension();
+
    return (
       <>
          { moment &&
-            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
-                              onPress={ () => {
-                                 dispatch(momentActions.setActiveMoment(moment));
-                                 navigate(MomentsStackEnum.MomentEdit);
-                              } }
-                              activeOpacity={ 0.7 }>
+            <TouchableOpacity
+               style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && { width: "49.5%", height: 300 } ] }
+               onPress={ () => {
+                  dispatch(momentActions.setActiveMoment(moment));
+                  navigate(MomentsStackEnum.MomentEdit);
+               } }
+               activeOpacity={ 0.7 }>
 
                <MomentItemPhoto moment={ moment }/>
 

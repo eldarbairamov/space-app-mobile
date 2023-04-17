@@ -8,8 +8,8 @@ export * from "./authorized/Settings-Screen";
 export * from "./authorized/Email-Setting-Screen";
 export * from "./authorized/Moment-Edit-Screen";
 
-export * from "./unauthorized/Registration-Sreen";
+export * from "./unauthorized/Registration-Screen";
 export * from "./unauthorized/Login-Screen";
-export * from "./unauthorized/Forgot-Password-Sreen";
+export * from "./unauthorized/Forgot-Password-Screen";
 export * from "./unauthorized/Activation-Screen";
 export * from "./unauthorized/Reset-Password-Screen";

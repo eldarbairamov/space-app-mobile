@@ -20,7 +20,7 @@ export * from "./Moment/Moment-Item";
 export * from "./Moment/Moment-Edit-Header";
 export * from "./Moment/Moment-Edit-Body";
 export * from "./Moment/Moment-Edit-Photo-Bg";
-export * from './Moment/Moment-Item-Photo'
+export * from "./Moment/Moment-Item-Photo";
 
 export * from "./Plan/Plan-Item";
 
@@ -38,6 +38,7 @@ export * from "./Form/Activation-Form";
 export * from "./Form/Reset-Password-Form";
 
 export * from "./Message/Change-Password-Message";
+export * from "./Message/Change-Email-Message";
 
 export * from "./Title";
 

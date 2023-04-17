@@ -21,7 +21,9 @@ export function Button({ title, onPress, isValid, btnWidth = 250 }: IButtonProps
                         disabled={ !isValid }
                         style={ [ gStyle.border, gStyle.center, styles.container, { width: btnWidth }, { backgroundColor: isDark ? darkModeDisable : lightModeDisable } ] }
                         activeOpacity={ 0.5 }>
-         <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }> { title } </Text>
+         <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }>
+            { title }
+         </Text>
       </TouchableOpacity>
    );
 }
@@ -35,5 +37,6 @@ const styles = StyleSheet.create({
    },
    title: {
       fontWeight: "bold",
+      color: "whitesmoke"
    }
 });

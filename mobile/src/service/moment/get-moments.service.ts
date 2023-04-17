@@ -16,7 +16,6 @@ export function getMomentsService(searchKey: string) {
    const getMomentsFn = async () => {
       try {
          setIsLoading(true);
-         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<IMoments>(momentsRequests.getAllMoments, {
             params: {
                searchKey: searchKey ? searchKey : null,
@@ -24,7 +23,6 @@ export function getMomentsService(searchKey: string) {
          });
          dispatch(momentActions.setMoments(data));
          await pleaseWait(delay);
-         Toast.hide();
 
       } catch (e) {
          setIsLoading(false);

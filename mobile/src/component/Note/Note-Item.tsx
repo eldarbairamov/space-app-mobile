@@ -6,7 +6,7 @@ import { deleteNoteService } from "../../service";
 import { useNavigation } from "@react-navigation/native";
 import { NoteListScreenNavigationProp, NotesStackEnum } from "../../navigation/type";
 import dateHelper from "moment";
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { noteActions } from "../../redux/slice";
 
 export function NoteItem({ note }: { note: INote }) {
@@ -23,10 +23,12 @@ export function NoteItem({ note }: { note: INote }) {
       navigate(NotesStackEnum.NoteEdit);
    };
 
+   const { isTablet } = useDimension();
+
    return (
       <>
          { note &&
-            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK } ] }
+            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && {width: "49.5%"} ] }
                               activeOpacity={ 0.7 }
                               onPress={ openNote }>
 

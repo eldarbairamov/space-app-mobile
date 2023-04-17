@@ -3,12 +3,12 @@ import { PLANS_COLOR, SECOND_FONT_DARK } from "../../constant";
 import { useSwitch } from "../../hook";
 
 export function SwitchButton() {
-   const { isEnabled, toggleSwitch } = useSwitch();
+   const { isDark, toggleSwitch } = useSwitch();
 
    return (
       <Switch style={ [ styles.switch ] }
               onValueChange={ toggleSwitch }
-              value={ isEnabled }
+              value={ isDark }
               ios_backgroundColor={ SECOND_FONT_DARK }
               trackColor={ { true: PLANS_COLOR } }/>
    );

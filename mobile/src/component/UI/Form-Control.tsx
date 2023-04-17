@@ -18,10 +18,11 @@ interface IFormControlProps {
    isOnlyLetters?: boolean,
    isCenter?: boolean,
    isChangeValueOff?: boolean
+   width?: number
 }
 
 export function FormControl({
-                               label, name, control, errorMessage, isRequired, isEmail,
+                               label, name, control, errorMessage, isRequired, width = 250, isEmail,
                                isPassword, isTextLimit, isOnlyLetters, isCenter, isChangeValueOff
                             }: IFormControlProps) {
 
@@ -81,7 +82,7 @@ export function FormControl({
 
                            <TextInput
                               secureTextEntry={ isPasswordHidden }
-                              style={ [ gStyle.regular_font, styles.input, isCenter && { textAlign: "center" }, isDark && { borderBottomColor: "#373a43", color: MAIN_FONT_DARK } ] }
+                              style={ [ gStyle.regular_font, styles.input, { width: width }, isCenter && { textAlign: "center" }, isDark && { borderBottomColor: "#373a43", color: MAIN_FONT_DARK } ] }
                               onChangeText={ !isChangeValueOff ? onChange : undefined }
                               onBlur={ onBlur }
                               value={ value }

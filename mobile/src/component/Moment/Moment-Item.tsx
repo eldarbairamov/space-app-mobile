@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       backgroundColor: ITEM_BG,
       marginVertical: 5,
-      overflow: "hidden"
+      overflow: "hidden",
    },
    background: {
       backgroundColor: "black",

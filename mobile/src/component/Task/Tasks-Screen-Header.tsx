@@ -54,7 +54,7 @@ export function TasksScreenHeader() {
 
 const styles = StyleSheet.create({
    header: {
-      height: "5%",
+      height: 50,
       width: "100%",
       flexDirection: "row",
       alignItems: "center",

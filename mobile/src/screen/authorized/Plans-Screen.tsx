@@ -59,7 +59,7 @@ export function PlansScreen() {
 
 const styles = StyleSheet.create({
    header: {
-      height: 60,
+      height: 50,
       width: "100%",
       alignItems: "center",
       paddingLeft: 20,

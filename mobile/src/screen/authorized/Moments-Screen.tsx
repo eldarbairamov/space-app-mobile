@@ -67,7 +67,7 @@ export function MomentsScreen() {
 
 const styles = StyleSheet.create({
    header: {
-      height: 60,
+      height: 50,
       width: "100%",
       alignItems: "center",
       justifyContent: "space-between",

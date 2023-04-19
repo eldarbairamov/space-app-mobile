@@ -1,4 +1,4 @@
-import { INote } from "../../interface";
+import { INote, INotes } from "../../interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface INoteInitialState {
@@ -6,6 +6,9 @@ interface INoteInitialState {
    activeNote: INote;
    lastNote: INote;
    searchKey: string;
+   limit: number;
+   total: number;
+   count: number;
 }
 
 const initialState: INoteInitialState = {
@@ -13,6 +16,9 @@ const initialState: INoteInitialState = {
    activeNote: {} as INote,
    lastNote: {} as INote,
    searchKey: "",
+   limit: 30,
+   total: 30,
+   count: 0,
 };
 
 const noteSlice = createSlice({
@@ -37,8 +43,9 @@ const noteSlice = createSlice({
          state.searchKey = payload;
       },
 
-      setNotes: (state, { payload }: PayloadAction<INote[]>) => {
-         state.notes = payload;
+      setNotes: (state, { payload }: PayloadAction<INotes>) => {
+         state.notes = payload.data;
+         state.count = payload.count;
       },
 
       addNote: (state, { payload }: PayloadAction<INote>) => {
@@ -49,6 +56,12 @@ const noteSlice = createSlice({
       deleteNote: (state, { payload }: PayloadAction<string>) => {
          const targetId = payload;
          state.notes = state.notes.filter(item => item.id !== targetId);
+      },
+
+      next: (state) => {
+         if (state.total <= state.count) {
+            state.total = state.total + state.limit;
+         }
       },
 
    },

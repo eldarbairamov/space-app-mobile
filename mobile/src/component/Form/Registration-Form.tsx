@@ -21,6 +21,7 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
                       name={ "username" }
                       isTextLimit={ true }
                       isRequired={ true }
+                      isRequiredLabel={ true }
                       errorMessage={ errors.username?.message }/>
 
          <FormControl label={ "Електронна пошта" }
@@ -28,6 +29,7 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
                       name={ "email" }
                       isEmail={ true }
                       isRequired={ true }
+                      isRequiredLabel={ true }
                       errorMessage={ errors.email?.message }/>
 
          <FormControl label={ "Пароль" }
@@ -35,6 +37,7 @@ export function RegistrationForm({ registrationFn }: IRegistrationFormProps) {
                       name={ "password" }
                       isPassword={ true }
                       isRequired={ true }
+                      isRequiredLabel={ true }
                       errorMessage={ errors.password?.message }/>
 
          <Button title={ "Зареєструватись" }

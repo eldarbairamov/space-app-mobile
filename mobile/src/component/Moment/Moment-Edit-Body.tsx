@@ -68,8 +68,9 @@ export function MomentEditBody({ setIsDatePickerOpen }: { setIsDatePickerOpen: T
          <Pressable onPress={ pickImageHandler }>
             { activeMoment.photo
                ?
-               <Image style={ [ styles.photo, isTablet && { height: 600, width: 600 }, isPhoneSmall && {height: 330, width: 330} ] }
-                      source={ { uri: `${ configuration.API_URL }/${ activeMoment.photo }` } }/>
+               <Image
+                  style={ [ styles.photo, isTablet && { height: 600, width: 600 }, isPhoneSmall && { height: 330, width: 330 } ] }
+                  source={ { uri: `${ configuration.API_URL }/${ activeMoment.photo }` } }/>
                :
                <View style={ [ gStyle.absolute_center, gStyle.center ] }>
                   <Image source={ isDark ? NO_PHOTO_DARK : NO_PHOTO }
@@ -87,9 +88,8 @@ const styles = StyleSheet.create({
    input: {
       backgroundColor: "#24292e",
       color: "whitesmoke",
-      padding: 5,
+      paddingVertical: 5,
       paddingHorizontal: 10,
-      minWidth: 100,
       borderRadius: 4,
       textAlign: "center"
    },
@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
    },
    photo: {
       zIndex: 20,
-      width: 400,
-      height: 400,
+      width: 360,
+      height: 360,
       borderRadius: 15,
    },
 });

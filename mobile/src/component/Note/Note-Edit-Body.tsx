@@ -30,33 +30,34 @@ export function NoteEditBody({ fontStyle }: INoteEditBodyProps) {
 
    return (
       <View style={ [ styles.body ] }>
-         <TextInput style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }
-                    maxLength={ 30 }
-                    autoFocus={ false }
-                    value={ activeNote.title }
-                    placeholder={ "Заголовок" }
-                    onChangeText={ value => handleInputs("title", value) }/>
 
+         <View style={ [ { height: "10%" }, gStyle.center ] }>
+            <TextInput style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }
+                       maxLength={ 30 }
+                       autoFocus={ false }
+                       value={ activeNote.title }
+                       placeholder={ "Заголовок" }
+                       onChangeText={ value => handleInputs("title", value) }/>
+         </View>
 
-         <TextInput placeholder={ "Розкажи мені щось цікаве..." }
-                    placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
-                    style={ [
-                       fontStyle === "Handwrite" ? gStyle.handwriteForNote : gStyle.regular_font,
-                       { width: "90%", minHeight: "100%", marginTop: 10 },
-                       isDark && { color: MAIN_FONT_DARK }
-                    ] }
-                    autoFocus={ true }
-                    value={ activeNote.body }
-                    onChangeText={ (value) => handleInputs("body", value) }
-                    multiline={ true }/>
+         <View style={ { height: "90%", width: "90%" } }>
+            <TextInput placeholder={ "Розкажи мені щось цікаве..." }
+                       placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
+                       style={ [
+                          fontStyle === "Handwrite" ? gStyle.handwriteForNote : gStyle.regular_font,
+                          isDark && { color: MAIN_FONT_DARK },
+                       ] }
+                       autoFocus={ true }
+                       value={ activeNote.body }
+                       onChangeText={ (value) => handleInputs("body", value) }
+                       multiline={ true }/>
+         </View>
       </View>
    );
 }
 
 const styles = StyleSheet.create({
    body: {
-      paddingTop: 20,
-      gap: 15,
       height: "95%",
       width: "100%",
       alignItems: "center",

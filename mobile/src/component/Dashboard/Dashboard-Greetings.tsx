@@ -13,7 +13,7 @@ export function DashboardGreetings() {
       <View style={ [ gStyle.center, styles.greetings_wrapper ] }>
          <View style={ [ gStyle.center, styles.greetings, { width: "100%" } ] }>
             <Text
-               style={ [ gStyle.handwrite, styles.hello, isDark && { color: MAIN_FONT_DARK }, isTablet && { fontSize: 60 } ] }>
+               style={ [ gStyle.handwrite_bold, styles.hello, isDark && { color: MAIN_FONT_DARK }, isTablet && { fontSize: 60 } ] }>
                Привіт,
             </Text>
             <Text style={ [ gStyle.regular_font, styles.username, isTablet && { fontSize: 40 } ] }>
@@ -21,7 +21,7 @@ export function DashboardGreetings() {
             </Text>
          </View>
          <Text
-            style={ [ gStyle.handwrite, styles.how_are_you, gStyle.center, isDark && { color: MAIN_FONT_DARK }, isTablet && { fontSize: 30 } ] }>
+            style={ [ gStyle.handwrite_bold, styles.how_are_you, gStyle.center, isDark && { color: MAIN_FONT_DARK }, isTablet && { fontSize: 30 } ] }>
             Ну, як ти?
          </Text>
       </View>
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
       gap: 10,
    },
    hello: {
-      fontWeight: "bold",
       fontSize: 43,
    },
    username: {
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
    },
    how_are_you: {
       fontSize: 25,
-      fontWeight: "bold",
       width: "100%",
       textAlign: "center",
    },

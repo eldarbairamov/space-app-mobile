@@ -4,15 +4,11 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { ChangePasswordDto, ProfileUpdateDto } from "./dto";
 import { IUserInfoResponse } from "./interface/user-info-response.interface";
 import { IUpdateProfileResponse } from "./interface/update-profile-response.interface";
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiDefaultResponse, ApiOkResponse, ApiOperation, ApiPayloadTooLargeResponse, ApiTags, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
-import { ChangeEmailAcceptBody, ChangeEmailRequest, ChangePasswordBody, DefaultError, DeleteAvatarBody, FileSizeError, FileTypeError, GetUserResponse, SuccessResponse, UnauthorizedError, UploadImageResponse } from "@src/common/swagger";
 import { SharpPipe } from "@src/common/pipe/sharp.pipe";
 import { FileValidatorFilter } from "@src/common/exception/file-validator.filter";
-import { ApiFile, User } from "@src/common/decorator";
+import { User } from "@src/common/decorator";
 import { AccessGuard } from "@src/auth/guard";
 
-@ApiBearerAuth()
-@ApiTags("User")
 @Controller("user")
 export class UserController {
 
@@ -20,10 +16,6 @@ export class UserController {
    }
 
    // Get user info
-   @ApiOperation({ summary: "get user info" })
-   @ApiOkResponse({ description: "Success", type: GetUserResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Get("get_user")
    async getUserInfo(
@@ -33,11 +25,6 @@ export class UserController {
    }
 
    // Change email: request
-   @ApiOperation({ summary: "change email request" })
-   @ApiBody({ type: ChangeEmailRequest, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Post("email_change")
    async changeEmailRequest(
@@ -49,10 +36,6 @@ export class UserController {
    }
 
    // Update user profile
-   @ApiOperation({ summary: "update user" })
-   @ApiOkResponse({ description: "Success", type: ProfileUpdateDto })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Patch("profile_update")
    async profileUpdate(
@@ -63,11 +46,6 @@ export class UserController {
    }
 
    // Accept new email
-   @ApiOperation({ summary: "change email accept" })
-   @ApiBody({ type: ChangeEmailAcceptBody, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @Patch("email_new")
    async changeEmail(
       @Body("code") code: string): Promise<{ message: string }> {
@@ -77,11 +55,6 @@ export class UserController {
    }
 
    // Accept new password
-   @ApiOperation({ summary: "change password" })
-   @ApiBody({ type: ChangePasswordBody, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Patch("password_new")
    async changePassword(
@@ -93,14 +66,6 @@ export class UserController {
    }
 
    // Upload avatar
-   @ApiOperation({ summary: "upload avatar" })
-   @ApiConsumes("multipart/form-data")
-   @ApiFile("avatar")
-   @ApiOkResponse({ description: "Success", type: UploadImageResponse })
-   @ApiPayloadTooLargeResponse({ description: "File size error", type: FileSizeError })
-   @ApiUnprocessableEntityResponse({ description: "Invalid file type", type: FileTypeError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Patch("avatar_upload")
    @UseFilters(FileValidatorFilter)
@@ -114,11 +79,6 @@ export class UserController {
    }
 
    // Send image name and delete it
-   @ApiOperation({ summary: "send file name and delete avatar" })
-   @ApiBody({ type: DeleteAvatarBody, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Patch("avatar_delete")
    async deleteAvatar(

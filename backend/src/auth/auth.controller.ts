@@ -4,11 +4,8 @@ import { AccessGuard, LoginGuard, RefreshGuard, RegistrationGuard } from "./guar
 import { RegistrationDto, ResetPasswordDto } from "./dto";
 import { User } from "@src/common/decorator";
 import { IAccessTokenPair, ILoginResponse } from "./interface";
-import { ApiBearerAuth, ApiBody, ApiConflictResponse, ApiCreatedResponse, ApiDefaultResponse, ApiForbiddenResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { RequestWithUser } from "@src/common/interface/express.interface";
-import { ActivationBody, CodeIsNotValid, DefaultError, EmailInUse, ForgotPassBody, LoginBody, LoginResponse, RefreshBody, RefreshResponse, SuccessResponse, UnactivatedAccount, UnauthorizedError, UserIsNotFound, WrongEmailOrPass } from "@src/common/swagger";
 
-@ApiTags("Auth")
 @Controller("auth")
 export class AuthController {
 
@@ -16,10 +13,6 @@ export class AuthController {
    }
 
    // Registration
-   @ApiOperation({ summary: "registration" })
-   @ApiCreatedResponse({ description: "User account was created", type: SuccessResponse })
-   @ApiConflictResponse({ description: "Conflict", type: EmailInUse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(RegistrationGuard)
    @Post("registration")
    async registration(
@@ -30,12 +23,6 @@ export class AuthController {
    }
 
    // Login
-   @ApiOperation({ summary: "login" })
-   @ApiBody({ type: LoginBody, required: true })
-   @ApiCreatedResponse({ description: "Access tokens was created", type: LoginResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: WrongEmailOrPass })
-   @ApiForbiddenResponse({ description: "Forbidden", type: UnactivatedAccount })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(LoginGuard)
    @Post("login")
    async login(
@@ -45,11 +32,6 @@ export class AuthController {
    }
 
    // Forgot password
-   @ApiOperation({ summary: "forgot password" })
-   @ApiBody({ type: ForgotPassBody, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UserIsNotFound })
    @HttpCode(200)
    @Post("password_forgot")
    async forgotPassword(
@@ -60,11 +42,6 @@ export class AuthController {
    }
 
    // Account activation
-   @ApiOperation({ summary: "activation" })
-   @ApiBody({ type: ActivationBody, required: true })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: CodeIsNotValid })
    @HttpCode(200)
    @Post("activation")
    async activation(
@@ -75,11 +52,6 @@ export class AuthController {
    }
 
    // Refresh
-   @ApiOperation({ summary: "Refresh tokens" })
-   @ApiBody({ type: RefreshBody, required: true })
-   @ApiCreatedResponse({ description: "Access tokens was refreshed", type: RefreshResponse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
    @UseGuards(RefreshGuard)
    @Post("refresh")
    async refresh(
@@ -89,10 +61,6 @@ export class AuthController {
    }
 
    // Reset password
-   @ApiOperation({ summary: "reset password" })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
    @Patch("password_reset")
    async resetPassword(
       @Body() dto: ResetPasswordDto): Promise<{ message: string }> {
@@ -102,11 +70,6 @@ export class AuthController {
    }
 
    // Logout
-   @ApiOperation({ summary: "logout" })
-   @ApiBearerAuth()
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
    @UseGuards(AccessGuard)
    @Get("logout")
    async logout(

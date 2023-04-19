@@ -1,14 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Put, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { PlanService } from "./plan.service";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { CreatePlanDto } from "./dto";
-import { IPlanResponse } from "./interface/plan-response.interface";
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
-import { DefaultError, ObjectIdError, ObjNotExistError, PlanResponse, SuccessResponse, UnauthorizedError } from "@src/common/swagger";
+import { IPlanResponse, IPlansResponse } from "./interface/plan-response.interface";
 import { AccessGuard } from "@src/auth/guard";
 import { User } from "@src/common/decorator";
+import { DeleteItemDto, QueryDto } from "@src/common/dto";
 
-@ApiTags("Plans")
 @Controller("plans")
 export class PlanController {
 
@@ -16,24 +14,16 @@ export class PlanController {
    }
 
    // Get all plans
-   @ApiOperation({ summary: "get all plans" })
-   @ApiOkResponse({ description: "Success", type: [ PlanResponse ] })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Get()
    async getPlans(
-      @Query("searchKey") searchKey: string,
-      @User("userId") userId: string): Promise<IPlanResponse[]> {
+      @Query() queryDto: QueryDto,
+      @User("userId") userId: string): Promise<IPlansResponse> {
 
-      return this.planService.getPlans(userId, searchKey);
+      return this.planService.getPlans(userId, queryDto);
    }
 
    // Add plan
-   @ApiOperation({ summary: "add plan" })
-   @ApiCreatedResponse({ description: "New plan was created", type: PlanResponse })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @Get("add")
    async addPlan(
@@ -43,13 +33,6 @@ export class PlanController {
    }
 
    // Get one plan
-   @ApiOperation({ summary: "get plan by id" })
-   @ApiParam({ name: "planId", description: "plan id", example: "63dfe16eda233c96fc6e2604" })
-   @ApiOkResponse({ description: "Success", type: PlanResponse })
-   @ApiBadRequestResponse({ description: "Invalid ObjectID", type: ObjectIdError })
-   @ApiNotFoundResponse({ description: "Not found", type: ObjNotExistError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
    @Get(":planId")
@@ -60,13 +43,6 @@ export class PlanController {
    }
 
    // Update plan
-   @ApiOperation({ summary: "update plan by id" })
-   @ApiParam({ name: "planId", description: "plan id", example: "63dfe16eda233c96fc6e2604" })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiBadRequestResponse({ description: "Invalid ObjectID", type: ObjectIdError })
-   @ApiNotFoundResponse({ description: "Not found", type: ObjNotExistError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
    @Put(":planId")
@@ -77,23 +53,16 @@ export class PlanController {
       return this.planService.updatePlan(noteId, dto);
    }
 
-   // Delete plan
-   @ApiOperation({ summary: "delete plan by id" })
-   @ApiParam({ name: "planId", description: "plan id", example: "63dfe16eda233c96fc6e2604" })
-   @ApiOkResponse({ description: "Success", type: SuccessResponse })
-   @ApiBadRequestResponse({ description: "Invalid ObjectID", type: ObjectIdError })
-   @ApiUnauthorizedResponse({ description: "Unauthorized", type: UnauthorizedError })
-   @ApiNotFoundResponse({ description: "Not found", type: ObjNotExistError })
-   @ApiDefaultResponse({ description: "Unexpected errors", type: DefaultError })
+   // Send prev request params and delete plan
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
-   @Delete(":planId")
+   @Post(":planId")
    async deletePlan(
       @User("userId") userId: string,
-      @Param("planId") noteId: string): Promise<{ message: string }> {
+      @Body() dto: DeleteItemDto,
+      @Param("planId") noteId: string): Promise<IPlansResponse> {
 
-      await this.planService.deletePlan(noteId, userId)
-      return { message: "Success" }
+      return this.planService.deletePlan(noteId, userId, dto.limit, dto.searchKey);
    }
 
 }

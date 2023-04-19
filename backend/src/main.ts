@@ -4,7 +4,6 @@ import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { STATIC_PATH } from "./common/constants";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import configuration from "./config/configuration";
 
 const start = async () => {
@@ -13,17 +12,6 @@ const start = async () => {
    app.useGlobalPipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }));
    app.useStaticAssets(STATIC_PATH);
    app.enableCors();
-
-   const config = new DocumentBuilder()
-      .addBearerAuth()
-      .setTitle("Space App")
-      .setDescription("Final fullstack project for Okten School")
-      .setVersion("1.0.0")
-      .build();
-
-   const document = SwaggerModule.createDocument(app, config);
-
-   SwaggerModule.setup("/docs", app, document);
 
    await app.listen(configuration().PORT);
 };

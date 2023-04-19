@@ -1,5 +1,5 @@
 import { BottomTabNavigationOptions, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Platform } from "react-native";
 import { TabBarLabel, Title } from "../../component";
 import { TabStackEnum } from "../type";
 import { BG_DARK, HOME_ICON, HOME_ICON_DARK, MOMENT_ICON, MOMENT_ICON_DARK, MOMENTS_COLOR, NOTE_ICON, NOTE_ICON_DARK, NOTES_COLOR, PLAN_ICON, PLAN_ICON_DARK, PLANS_COLOR } from "../../constant";
@@ -21,11 +21,14 @@ export function BottomTab() {
       headerStyle: {
          backgroundColor: isDark ? BG_DARK : "whitesmoke",
          shadowOpacity: 0,
+         elevation: 0,
       },
+      headerTitleAlign: "center",
       tabBarStyle: {
          backgroundColor: isDark ? BG_DARK : "whitesmoke",
          borderTopWidth: 0,
-         paddingBottom: isTablet ? 100 : isPhoneSmall ? 70 : undefined
+         paddingBottom: isTablet ? 100 : isPhoneSmall ? 70 : Platform.OS === "android" ? 70 : undefined,
+         elevation: 0,
       },
    };
 

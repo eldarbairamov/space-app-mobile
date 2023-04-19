@@ -19,7 +19,6 @@ const theme: Theme = {
       ...DefaultTheme.colors,
       primary: "#4e4e51",
       background: "whitesmoke",
-
    }
 };
 

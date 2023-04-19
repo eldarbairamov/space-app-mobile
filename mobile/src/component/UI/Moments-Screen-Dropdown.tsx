@@ -35,7 +35,7 @@ export function MomentsScreenDropdown({ dropdownValue, onClear, showClearIcon, s
                 data={ tags.map(tag => ({ value: tag, label: tag })) }
                 labelField={ "label" }
                 valueField={ "value" }
-                placeholder={ "Фільтр" }
+                placeholder={ "фільтр" }
                 value={ dropdownValue }
                 renderRightIcon={ showClearIcon ? () =>
                       <TouchableOpacity activeOpacity={ 0.5 } onPress={ onClear }>

@@ -1,5 +1,6 @@
+import { useEffect } from "react";
+
 import { useAppDispatch } from "../../hook";
-import { useEffect, useState } from "react";
 import { axiosInstance } from "../axios.service";
 import { errorCatherFn, pleaseWait } from "../../helper";
 import Toast from "react-native-toast-message";
@@ -11,28 +12,22 @@ import { delay } from "../../constant";
 export function getUserService() {
    const dispatch = useAppDispatch();
 
-   const [ isLoading, setIsLoading ] = useState(false);
-
    const getUserFn = async () => {
       try {
-         setIsLoading(true);
+         Toast.show({ type: "info", text1: "Лоудінг.." });
          const { data } = await axiosInstance.get<IUser>(userRequests.getUser);
-         dispatch(userActions.setInfo(data));
          await pleaseWait(delay);
+         dispatch(userActions.setInfo(data));
+         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.hide();
 
       } catch (e) {
-         setIsLoading(false);
          Toast.show({ type: "error", text1: errorCatherFn(e) });
-
-      } finally {
-         setIsLoading(false);
       }
-
    };
 
    useEffect(() => {
       getUserFn();
    }, []);
 
-   return { getUserFn, isLoading };
 }

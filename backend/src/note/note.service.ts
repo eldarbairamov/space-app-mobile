@@ -2,10 +2,11 @@ import { Injectable } from "@nestjs/common";
 import { NotePresenter } from "./presenter/note.presenter";
 import { NoteRepository } from "./repository/note.repository";
 import { UpdateNoteDto } from "./dto";
-import { INoteResponse } from "./interface/note-response.interface";
+import { INoteResponse, INotesResponse } from "./interface/note-response.interface";
 import { NoteDocument } from "./model/note.model";
 import { UserRepository } from "@src/user/repository/user.repository";
 import { UserDocument } from "@src/user/model/user.model";
+import { QueryDto } from "@src/common/dto";
 
 @Injectable()
 export class NoteService {
@@ -35,21 +36,35 @@ export class NoteService {
       return this.notePresenter.single(note);
    }
 
-   async getNotes(userId: UserDocument["id"], searchKey: string): Promise<INoteResponse[]> {
-      // Find notes
-      const notes = await this.noteRepository.find({ ownerId: userId }, searchKey)
+   async getNotes(userId: UserDocument["id"], queryDto: QueryDto): Promise<INotesResponse> {
+      // Find and count notes
+      const [ notes, count ] = await Promise.all([
+         this.noteRepository.find({ ownerId: userId }, queryDto),
+         this.noteRepository.count({ ownerId: userId }, queryDto.searchKey),
+      ]);
 
       // Return presented data to client
-      return this.notePresenter.array(notes)
+      return {
+         data: this.notePresenter.array(notes),
+         count,
+      };
    }
 
-   async deleteNote(noteId: NoteDocument["id"], userId: UserDocument["id"]): Promise<void> {
+   async deleteNote(noteId: NoteDocument["id"], userId: UserDocument["id"], limit: number, searchKey: string): Promise<INotesResponse> {
       // Delete note
       await this.noteRepository.findByIdAndDelete(noteId);
 
-      // Update user
-      await this.userRepository.findByIdAndUpdate(userId, { $pull: { notesIds: noteId } })
+      // Update user and return updated note list
+      const [ notes, count ] = await Promise.all([
+         this.noteRepository.find({ ownerId: userId }, { limit, searchKey }),
+         this.noteRepository.count({ ownerId: userId }, searchKey),
+         this.userRepository.findByIdAndUpdate(userId, { $pull: { notesIds: noteId } }),
+      ]);
 
+      return {
+         data: this.notePresenter.array(notes),
+         count,
+      };
    }
 
 }

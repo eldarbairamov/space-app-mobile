@@ -12,6 +12,7 @@ interface IFormControlProps {
    control: any;
    errorMessage: string | undefined;
    isRequired?: boolean;
+   isRequiredLabel?: boolean,
    isEmail?: boolean;
    isPassword?: boolean;
    isTextLimit?: boolean;
@@ -22,7 +23,7 @@ interface IFormControlProps {
 }
 
 export function FormControl({
-                               label, name, control, errorMessage, isRequired, width = 250, isEmail,
+                               label, name, control, errorMessage, isRequired, isRequiredLabel, width = 250, isEmail,
                                isPassword, isTextLimit, isOnlyLetters, isCenter, isChangeValueOff
                             }: IFormControlProps) {
 
@@ -66,7 +67,7 @@ export function FormControl({
                                        style={ [ gStyle.second_font, styles.label, isDark && { color: SECOND_FONT_DARK } ] }>
                                        { label }
                                     </Text> }
-                                 { (isRequired && label) && <Text style={ styles.required }>*</Text> }
+                                 { (isRequiredLabel && label) && <Text style={ styles.required }>*</Text> }
                               </View>
 
                               { !!isPassword &&

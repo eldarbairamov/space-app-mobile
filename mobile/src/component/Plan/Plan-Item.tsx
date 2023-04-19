@@ -13,6 +13,8 @@ import { useEffect } from "react";
 export function PlanItem({ plan }: { plan: IPlan }) {
    const { isDark } = useAppSelector(state => state.appReducer);
 
+   const { total, searchKey } = useAppSelector(state => state.planReducer);
+
    const dispatch = useAppDispatch();
 
    useEffect(() => {
@@ -50,13 +52,13 @@ export function PlanItem({ plan }: { plan: IPlan }) {
                          style={ [ { width: 60, height: 60 }, isTablet && { width: 80, height: 80 } ] }/>
                </View>
 
-               <TouchableOpacity activeOpacity={ 0.5 }
-                                 style={ [ styles.right, gStyle.center ] }
-                                 onPress={ () => deletePlanFn(plan.id) }>
-                  <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON }
-                         style={ { width: 28, height: 28, alignSelf: "flex-end" } }/>
-
-               </TouchableOpacity>
+               <View style={ [ styles.right, gStyle.center, { alignItems: "flex-end" } ] }>
+                  <TouchableOpacity activeOpacity={ 0.5 }
+                                    onPress={ () => deletePlanFn(plan.id, total, searchKey) }>
+                     <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON }
+                            style={ { width: 28, height: 28, alignSelf: "flex-end" } }/>
+                  </TouchableOpacity>
+               </View>
 
             </TouchableOpacity>
          }
@@ -74,11 +76,11 @@ const styles = StyleSheet.create({
       marginVertical: 5,
    },
    left: {
-      width: "33,3%",
+      width: "33%",
       justifyContent: "space-between",
    },
    mid: {
-      width: "33,3%",
+      width: "34%",
       justifyContent: "center",
       alignItems: "center"
    },
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
       width: "34%",
    },
    title: {
-      fontWeight: "500"
+      fontWeight: "700"
    },
    date: {
       color: PLANS_COLOR,

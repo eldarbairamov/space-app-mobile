@@ -30,6 +30,7 @@ export function ChangePasswordForm() {
                       name={ "currentPassword" }
                       isPassword={ true }
                       errorMessage={ errors.currentPassword?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <FormControl label={ "Новий пароль" }
@@ -37,6 +38,7 @@ export function ChangePasswordForm() {
                       name={ "newPassword" }
                       isPassword={ true }
                       errorMessage={ errors.newPassword?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <FormControl label={ "Повторіть пароль" }
@@ -44,6 +46,7 @@ export function ChangePasswordForm() {
                       name={ "repeatPassword" }
                       isPassword={ true }
                       errorMessage={ errors.repeatPassword?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <Button title={ "Змінити" } isValid={ isValid } onPress={ handleSubmit(onSubmit) }/>

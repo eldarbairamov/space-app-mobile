@@ -1,6 +1,7 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { NoteEditScreen, NotesScreen } from "../../screen";
 import { NotesStackEnum } from "../type";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,6 @@ export function NotesStack() {
 
 const screenOptions: NativeStackNavigationOptions = {
    headerShown: false,
-   animation: "fade",
+   animation: Platform.OS === "android" ? "none" : "fade",
    animationDuration: 100,
 };

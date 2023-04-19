@@ -35,8 +35,8 @@ export function TasksScreenBody({ activePlan }: { activePlan: IPlan }) {
                        placeholder={ "Що плануєш зробити?" }/>
          </View>
 
-
          <FlatList style={ [ styles.taskListWrapper ] }
+                   contentContainerStyle={ { alignItems: "center" } }
                    data={ tasks }
                    renderItem={ ({ item, index }) =>
                       <TaskItem key={ index + 1 } task={ item }/> }/>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
    taskListWrapper: {
       marginTop: 10,
       width: "93%",
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
    },
 });
 

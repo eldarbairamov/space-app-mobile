@@ -2,6 +2,7 @@ import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react
 import { PasswordSettingScreen, DashboardScreen, SettingsScreen, EmailSettingScreen } from "../../screen";
 import { DashboardStackEnum } from "../type";
 import { ChangeEmailMessage, ChangePasswordMessage } from "../../component";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,6 @@ export function DashboardStack() {
 
 const screenOptions: NativeStackNavigationOptions = {
    headerShown: false,
-   animation: "fade",
+   animation: Platform.OS === "android" ? "none" : "fade",
    animationDuration: 100,
 };

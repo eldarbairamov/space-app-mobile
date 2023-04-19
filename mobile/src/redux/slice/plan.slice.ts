@@ -1,17 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPlan } from "../../interface";
+import { IPlan, IPlans } from "../../interface";
 
 interface IPlanInitialState {
    searchKey: string;
    plans: IPlan[];
    limit: number;
+   total: number;
+   count: number;
    activePlan: IPlan;
+
 }
 
 const initialState: IPlanInitialState = {
    plans: [],
    searchKey: "",
    limit: 30,
+   total: 30,
+   count: 0,
    activePlan: {} as IPlan
 };
 
@@ -29,8 +34,9 @@ const planSlice = createSlice({
          state.plans = state.plans.sort((a, b) => b.lastModified - a.lastModified);
       },
 
-      setPlans: (state, { payload }: PayloadAction<IPlan[]>) => {
-         state.plans = payload;
+      setPlans: (state, { payload }: PayloadAction<IPlans>) => {
+         state.plans = payload.data;
+         state.count = payload.count;
       },
 
       setSearchKey: (state, { payload }: PayloadAction<string>) => {
@@ -49,7 +55,13 @@ const planSlice = createSlice({
 
       setActivePlan: (state, { payload }: PayloadAction<IPlan>) => {
          state.activePlan = payload;
-      }
+      },
+
+      next: (state) => {
+         if (state.total <= state.count) {
+            state.total = state.total + state.limit;
+         }
+      },
 
    },
 

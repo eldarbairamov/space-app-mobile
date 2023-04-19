@@ -1,20 +1,18 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SettingsIcon, LogoutIcon, SwitchButton, DashboardAvatar, DashboardAvatarEdit, DashboardGreetings } from "../../component";
 import { gStyle } from "../../asset";
-import { BG_DARK, DASHBOARD_COLOR_DARK } from "../../constant";
+import { BG_DARK } from "../../constant";
 import { getUserService } from "../../service";
 import { useAppSelector } from "../../hook";
 
 export function DashboardScreen() {
    const { isDark } = useAppSelector(state => state.appReducer);
 
-   const { isLoading } = getUserService();
+   getUserService();
 
    return (
       <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
 
-         { isLoading ? <ActivityIndicator size={ "large" } color={ DASHBOARD_COLOR_DARK }/> :
-            <>
                <View style={ [ gStyle.container ] }>
 
                   <View style={ [ styles.header ] }>
@@ -33,8 +31,7 @@ export function DashboardScreen() {
                   <DashboardGreetings/>
 
                </View>
-            </>
-         }
+
       </View>
    );
 }

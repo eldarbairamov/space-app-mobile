@@ -3,3 +3,8 @@ export interface IPlan {
    readonly title: string;
    readonly lastModified: number;
 }
+
+export interface IPlans {
+   readonly data: IPlan[];
+   readonly count: number;
+}

@@ -11,4 +11,5 @@ export interface IMoment {
 export interface IMoments {
    readonly data: IMoment[];
    readonly tagsForFilter: string[];
+   readonly count: number;
 }

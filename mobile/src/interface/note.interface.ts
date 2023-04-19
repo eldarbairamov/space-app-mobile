@@ -4,3 +4,8 @@ export interface INote {
    readonly body: string;
    readonly lastModified: number;
 }
+
+export interface INotes {
+   readonly data: INote[];
+   readonly count: number;
+}

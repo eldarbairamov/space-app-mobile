@@ -19,6 +19,11 @@ export const gStyle = StyleSheet.create({
       letterSpacing: -0.5,
       color: MAIN_FONT_COLOR,
    },
+   handwrite_bold: {
+      fontFamily: "Caveat-Bold",
+      letterSpacing: -0.5,
+      color: MAIN_FONT_COLOR,
+   },
    handwriteForNote: {
       fontFamily: "Caveat",
       fontSize: 25,

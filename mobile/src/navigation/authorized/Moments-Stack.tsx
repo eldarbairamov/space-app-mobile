@@ -1,6 +1,7 @@
 import { createNativeStackNavigator, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { MomentEditScreen, MomentsScreen } from "../../screen";
 import { MomentsStackEnum } from "../type";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ export function MomentsStack() {
 
 const screenOptions: NativeStackNavigationOptions = {
    headerShown: false,
-   animation: "fade",
+   animation: Platform.OS === "android" ? "none" : "fade",
    animationDuration: 100,
 };
 

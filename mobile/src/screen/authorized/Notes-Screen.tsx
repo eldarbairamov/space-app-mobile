@@ -1,10 +1,10 @@
-import { ActivityIndicator, FlatList, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import { gStyle } from "../../asset";
 import { Add, EmptyIcon, NoteItem } from "../../component";
 import { useAppDispatch, useAppSelector, useDimension } from "../../hook";
 import { addNoteService, getNotesService } from "../../service";
 import { noteActions } from "../../redux/slice";
-import { BG_DARK, MAIN_FONT_DARK, NOTES_COLOR, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
+import { BG_DARK, MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 
 export function NotesScreen() {
    const { isDark } = useAppSelector(state => state.appReducer);
@@ -17,42 +17,37 @@ export function NotesScreen() {
 
    const { addNoteFn } = addNoteService();
 
-   const { isLoading } = getNotesService();
+   getNotesService();
 
    const { isTablet } = useDimension();
 
    return (
       <View style={ [ gStyle.screen, gStyle.center, isDark && { backgroundColor: BG_DARK } ] }>
+         <View style={ [ styles.header ] }>
 
-         { isLoading ? <ActivityIndicator size={ "large" } color={ NOTES_COLOR }/> :
-            <>
-               <View style={ [ styles.header ] }>
+            <Add onPress={ addNoteFn }/>
 
-                  <Add onPress={ addNoteFn }/>
+            <TextInput onChangeText={ handleChange }
+                       value={ searchKey }
+                       placeholder={ "пошук" }
+                       placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
+                       style={ [ gStyle.regular_font, gStyle.input, isDark && { color: MAIN_FONT_DARK } ] }/>
+         </View>
 
-                  <TextInput onChangeText={ handleChange }
-                             value={ searchKey }
-                             placeholder={ "Пошук" }
-                             placeholderTextColor={ isDark ? SECOND_FONT_DARK : SECOND_FONT_COLOR }
-                             style={ [ gStyle.regular_font, gStyle.input, isDark && { color: MAIN_FONT_DARK } ] }/>
-               </View>
-
-               <View style={ [ styles.body ] }>
-                  { Boolean(notes.length)
-                     ?
-                     <FlatList style={ [ styles.noteListWrapper ] }
-                               columnWrapperStyle={ isTablet && { justifyContent: "space-between" } }
-                               numColumns={ isTablet ? 2 : 1 }
-                               data={ notes }
-                               renderItem={ ({ item, index }) =>
-                                  <NoteItem key={ index + 1 } note={ item }/> }/>
-                     :
-                     <EmptyIcon/>
-                  }
-               </View>
-            </>
-         }
-
+         <View style={ [ styles.body ] }>
+            { Boolean(notes.length)
+               ?
+               <FlatList style={ [ styles.noteListWrapper ] }
+                         columnWrapperStyle={ isTablet && { justifyContent: "space-between" } }
+                         numColumns={ isTablet ? 2 : 1 }
+                         onEndReached={ () => dispatch(noteActions.next()) }
+                         data={ notes }
+                         renderItem={ ({ item, index }) =>
+                            <NoteItem key={ index + 1 } note={ item }/> }/>
+               :
+               <EmptyIcon/>
+            }
+         </View>
       </View>
    );
 }

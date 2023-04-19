@@ -22,7 +22,7 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
          <View style={ styles.message }>
             <Text
                style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" }, isDark && { color: MAIN_FONT_DARK } ] }>
-               Ви успішно зареєструвались.
+               Ви успішно зареєструвались!
             </Text>
             <Text
                style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500", textAlign: "center" }, isDark && { color: MAIN_FONT_DARK } ] }>

@@ -6,6 +6,9 @@ interface IMomentInitialState {
    activeMoment: IMoment;
    searchKey: string;
    tags: (string | undefined)[];
+   count: number;
+   limit: number;
+   total: number;
 }
 
 const initialState: IMomentInitialState = {
@@ -13,6 +16,9 @@ const initialState: IMomentInitialState = {
    activeMoment: {} as IMoment,
    searchKey: "",
    tags: [],
+   count: 0,
+   limit: 10,
+   total: 10,
 };
 
 const momentSlice = createSlice({
@@ -24,6 +30,7 @@ const momentSlice = createSlice({
          state.activeMoment = {} as IMoment;
          state.moments = payload.data;
          state.tags = payload.tagsForFilter;
+         state.count = payload.count;
       },
 
       addMoment: (state, { payload }: PayloadAction<IMoment>) => {
@@ -75,7 +82,13 @@ const momentSlice = createSlice({
          });
 
          state.tags = state.moments.map(moment => moment.tag);
-      }
+      },
+
+      next: (state) => {
+         if (state.total <= state.count) {
+            state.total = state.total + state.limit;
+         }
+      },
 
    },
 });

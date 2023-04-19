@@ -26,6 +26,7 @@ export function ResetPasswordForm() {
                       control={ control }
                       name={ "code" }
                       errorMessage={ errors.code?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <FormControl label={ "Новий пароль" }
@@ -33,6 +34,7 @@ export function ResetPasswordForm() {
                       name={ "newPassword" }
                       isPassword={ true }
                       errorMessage={ errors.newPassword?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <FormControl label={ "Повторіть пароль" }
@@ -40,6 +42,7 @@ export function ResetPasswordForm() {
                       name={ "repeatPassword" }
                       isPassword={ true }
                       errorMessage={ errors.repeatPassword?.message }
+                      isRequiredLabel={ true }
                       isRequired={ true }/>
 
          <Button title={ "Змінити" }

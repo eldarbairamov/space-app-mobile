@@ -4,6 +4,7 @@ import { UnauthorizedStackEnum } from "../type";
 import { SwitchButton, Title } from "../../component";
 import { BG_DARK, MAIN_FONT_COLOR, MAIN_FONT_DARK } from "../../constant";
 import { useAppSelector } from "../../hook";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,10 +17,11 @@ export function WelcomeStack() {
       headerBackTitleVisible: false,
       headerTintColor: isDark ? MAIN_FONT_DARK : MAIN_FONT_COLOR,
       headerShadowVisible: false,
+      headerTitleAlign: 'center',
       headerStyle: {
          backgroundColor: isDark ? BG_DARK : "whitesmoke",
       },
-      animation: "fade",
+      animation: Platform.OS === "android" ? "none" : "fade",
       animationDuration: 100,
    };
 

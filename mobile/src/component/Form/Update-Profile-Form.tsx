@@ -28,6 +28,7 @@ export function UpdateProfileForm({ updateProfileFn }: IUpdateProfileFormProps) 
          <FormControl label={ "Імʼя користувача" }
                       control={ control }
                       name={ "username" }
+                      isRequiredLabel={ true }
                       isRequired={ true }
                       isTextLimit={ true }
                       errorMessage={ errors.username?.message }/>

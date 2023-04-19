@@ -3,7 +3,7 @@ import { COMPLETE_TASK_IMAGE, DELETE_ICON, DELETE_ICON_DARK, INCOMPLETE_TASK_IMA
 import { gStyle } from "../../asset";
 import { ITask } from "../../interface";
 import { deleteTaskService, updateTaskService } from "../../service";
-import { useAppSelector } from "../../hook";
+import { useAppSelector, useDimension } from "../../hook";
 
 export function TaskItem({ task }: { task: ITask }) {
    const { isDark } = useAppSelector(state => state.appReducer);
@@ -11,8 +11,10 @@ export function TaskItem({ task }: { task: ITask }) {
    const { deleteTaskFn } = deleteTaskService();
    const { updateTaskFn } = updateTaskService();
 
+   const { isTablet } = useDimension();
+
    return (
-      <View style={ [ styles.task_item, isDark && { backgroundColor: ITEM_BG_DARK } ] }>
+      <View style={ [ styles.task_item, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && {width: 500} ] }>
 
          <TouchableOpacity style={ [ styles.left ] }
                            onPress={ () => updateTaskFn(task.id, !task.isCompleted) }
@@ -20,7 +22,7 @@ export function TaskItem({ task }: { task: ITask }) {
             { task.isCompleted
                ?
                <Image source={ COMPLETE_TASK_IMAGE }
-                      style={ { width: 28, height: 28 } }/>
+                      style={ { width: 34, height: 34 } }/>
                :
                <Image source={ INCOMPLETE_TASK_IMAGE }
                       style={ { width: 28, height: 28 } }/>
@@ -46,10 +48,11 @@ export function TaskItem({ task }: { task: ITask }) {
 
 const styles = StyleSheet.create({
    task_item: {
-      padding: 20,
+      paddingHorizontal: 20,
       backgroundColor: ITEM_BG,
       marginVertical: 5,
       borderRadius: 10,
+      minHeight: 80,
       gap: 15,
       flexDirection: "row",
       alignItems: "center",

@@ -12,6 +12,8 @@ import { noteActions } from "../../redux/slice";
 export function NoteItem({ note }: { note: INote }) {
    const { isDark } = useAppSelector(state => state.appReducer);
 
+   const { total, searchKey } = useAppSelector(state => state.noteReducer);
+
    const { deleteNoteFn } = deleteNoteService();
 
    const { navigate } = useNavigation<NoteListScreenNavigationProp>();
@@ -28,9 +30,10 @@ export function NoteItem({ note }: { note: INote }) {
    return (
       <>
          { note &&
-            <TouchableOpacity style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && {width: "49.5%"} ] }
-                              activeOpacity={ 0.7 }
-                              onPress={ openNote }>
+            <TouchableOpacity
+               style={ [ styles.noteItem, isDark && { backgroundColor: ITEM_BG_DARK }, isTablet && { width: "49.5%" } ] }
+               activeOpacity={ 0.7 }
+               onPress={ openNote }>
 
                <View style={ [ styles.left ] }>
 
@@ -52,7 +55,7 @@ export function NoteItem({ note }: { note: INote }) {
 
                <TouchableOpacity activeOpacity={ 0.5 }
                                  style={ [ gStyle.center, styles.right ] }
-                                 onPress={ () => deleteNoteFn(note.id) }>
+                                 onPress={ () => deleteNoteFn(note.id, total, searchKey) }>
 
                   <Image source={ isDark ? DELETE_ICON_DARK : DELETE_ICON }
                          style={ { width: 28, height: 28 } }/>
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
       alignItems: "flex-end"
    },
    title: {
-      fontWeight: "500"
+      fontWeight: "bold"
    },
    noteBody: {
       fontSize: 14,

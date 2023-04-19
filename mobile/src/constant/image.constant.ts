@@ -16,7 +16,7 @@ export const SAVE_ICON = require("../asset/image/save-disabled-light.png");
 export const SAVE_DISABLED_ICON = require("../asset/image/save-disabled-dark.png");
 
 export const NO_AVATAR_IMAGE = require("../asset/image/user.png");
-export const SUCCESS_IMAGE = require("../asset/image/success.png");
+export const SUCCESS_IMAGE = require("../asset/image/thumbs-up-dark.png");
 export const BRAIN_IMAGE = require("../asset/image/brain.png");
 export const NO_PHOTO = require("../asset/image/image-dark.png");
 export const COMPLETE_TASK_IMAGE = require("../asset/image/complete.png");
@@ -38,3 +38,4 @@ export const FONT_ICON_DARK = require("../asset/image/font-light.png");
 export const SAVE_DARK = require("../asset/image/save-light.png");
 export const SAVE_DISABLE_DARK = require("../asset/image/save-disabled-light.png");
 export const NO_PHOTO_DARK = require("../asset/image/image-light.png");
+export const SUCCESS_IMAGE_DARK = require("../asset/image/thumbs-up-light..png");

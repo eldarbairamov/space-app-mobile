@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { useAppSelector } from "../../hook";
 
 interface IMessageProps {
-   nextFn: () => void,
+   nextFn?: () => void,
    image: ImageSourcePropType,
    title: string,
    message: string,

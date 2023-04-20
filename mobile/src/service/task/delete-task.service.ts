@@ -11,7 +11,7 @@ export function deleteTaskService() {
 
    const deleteTaskFn = async (taskId: ITask["id"]) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          await axiosInstance.delete(tasksRequests.deleteTask + taskId);
          dispatch(taskAction.deleteTask(taskId));
          Toast.hide();

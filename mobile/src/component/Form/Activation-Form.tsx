@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { gStyle } from "../../asset";
 import { Button } from "../UI/Button";
 import { useAppSelector } from "../../hook";
-import { MAIN_FONT_DARK } from "../../constant";
+import { MAIN_FONT_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
 import { useForm } from "react-hook-form";
 import { FormControl } from "../UI/Form-Control";
 
@@ -19,13 +19,11 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
 
    return (
       <View>
-         <View style={ styles.message }>
-            <Text
-               style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500" }, isDark && { color: MAIN_FONT_DARK } ] }>
-               Ви успішно зареєструвались!
+         <View style={ styles.messageWrapper }>
+            <Text style={ [ gStyle.regular_font, styles.title, isDark && { color: MAIN_FONT_DARK } ] }>
+               Ви успішно зареєструвались
             </Text>
-            <Text
-               style={ [ gStyle.regular_font, { fontSize: 16, fontWeight: "500", textAlign: "center" }, isDark && { color: MAIN_FONT_DARK } ] }>
+            <Text style={ [ gStyle.regular_font, styles.message, isDark && { color: SECOND_FONT_DARK } ] }>
                Введіть код активації, який щойно прилетів на вашу електронну пошту:
             </Text>
          </View>
@@ -49,10 +47,13 @@ export function ActivationForm({ activationFn }: IActivationFormProps) {
 }
 
 const styles = StyleSheet.create({
-   message: {
+   messageWrapper: {
       alignItems: "center",
       width: 300,
-      marginBottom: 30
-   }
+      marginBottom: 30,
+      gap: 5,
+   },
+   title: { textAlign: "center", fontSize: 20, fontWeight: "500" },
+   message: { textAlign: "center", color: SECOND_FONT_COLOR }
 });
 

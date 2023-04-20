@@ -17,7 +17,7 @@ export function getMomentsService() {
 
    const getMomentsFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<IMoments>(momentsRequests.getAllMoments, {
             params: {
                searchKey: searchKey ? searchKey : null,

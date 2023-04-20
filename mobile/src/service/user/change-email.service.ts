@@ -9,7 +9,7 @@ export function changeEmailService() {
 
    const changeEmailFn = async (email: string) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          await axiosInstance.post(userRequests.changeEmail, { email });
          setIsEmailSent(true);
          Toast.hide();

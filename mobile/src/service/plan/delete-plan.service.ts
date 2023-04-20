@@ -13,7 +13,7 @@ export function deletePlanService() {
 
    const deletePlanFn = async (targetId: IPlan["id"], total = 30, searchKey = "") => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.post<IPlans>(plansRequests.deletePlan + targetId, {
             params: {
                searchKey,

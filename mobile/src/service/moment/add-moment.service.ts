@@ -12,7 +12,7 @@ export function addMomentService() {
 
    const addMomentFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<IMoment>(momentsRequests.addMoment);
          dispatch(momentActions.addMoment(data));
          dispatch(userActions.setMomentCount(momentsCount + 1));

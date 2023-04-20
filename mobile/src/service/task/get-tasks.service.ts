@@ -14,7 +14,7 @@ export function getTasksService(planId: IPlan["id"]) {
 
    const getTasksFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.post<ITask[]>(tasksRequests.getAllTasks, { planId });
          await pleaseWait(delay);
          dispatch(taskAction.setTasks(data));

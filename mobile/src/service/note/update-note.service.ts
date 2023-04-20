@@ -8,7 +8,7 @@ export function updateNoteService(setPrevState: TypedSetState<INote>) {
 
    const updateNoteFn = async (activeNote: INote) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const noteToSave = {
             title: activeNote.title,
             body: activeNote.body,

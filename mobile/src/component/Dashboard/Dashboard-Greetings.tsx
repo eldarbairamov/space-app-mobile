@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
       color: "#9d9d9d",
    },
    how_are_you: {
-      fontSize: 25,
+      fontSize: 28,
       width: "100%",
       textAlign: "center",
    },

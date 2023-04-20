@@ -28,7 +28,7 @@ export function uploadMomentPhotoService(momentId: IMoment["id"]) {
          formData.append("photo", { uri: file.uri, type: file.type, name: file.fileName });
 
          try {
-            Toast.show({ type: "info", text1: "Лоудінг.." });
+            Toast.show({ type: "info", text1: "Лоудінг..." });
             const { data } = await axiosInstance.patch<{ image: string }>(momentsRequests.uploadPhoto + momentId + "/photo_upload", formData);
             dispatch(momentActions.setPhoto({ photo: data.image }));
             Toast.show({ type: "success", text1: "Готово!" });

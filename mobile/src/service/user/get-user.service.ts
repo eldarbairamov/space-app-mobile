@@ -14,7 +14,7 @@ export function getUserService() {
 
    const getUserFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<IUser>(userRequests.getUser);
          await pleaseWait(delay);
          dispatch(userActions.setInfo(data));

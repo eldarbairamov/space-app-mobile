@@ -12,7 +12,7 @@ export function addPlanService() {
 
    const addPlanFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<IPlan>(plansRequests.addPlan);
          dispatch(planAction.addPlan(data));
          dispatch(userActions.setPlansCount(plansCount + 1));

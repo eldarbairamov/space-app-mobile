@@ -18,7 +18,7 @@ export function getPlansService() {
 
    const getPlansFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<IPlans>(plansRequests.getAllPlans, {
             params: {
                searchKey: searchKey ? debounced : null,

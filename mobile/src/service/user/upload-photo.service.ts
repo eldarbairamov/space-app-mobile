@@ -27,7 +27,7 @@ export function uploadPhotoService() {
          formData.append("avatar", { uri: file.uri, type: file.type, name: file.fileName });
 
          try {
-            Toast.show({ type: "info", text1: "Лоудінг.." });
+            Toast.show({ type: "info", text1: "Лоудінг..." });
             const { data } = await axiosInstance.patch<{ image: string }>(userRequests.uploadAvatar, formData);
             dispatch(userActions.setAvatar(data.image));
             Toast.show({ type: "success", text1: "Готово!" });

@@ -8,7 +8,7 @@ export function registrationService(next: () => any) {
 
    const registrationFn = async (body: IRegistration) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          await axiosInstance.post(authRequests.registration, body);
          Toast.hide();
 

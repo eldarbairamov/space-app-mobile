@@ -11,7 +11,7 @@ export function updateProfileService() {
 
    const updateProfileFn = async (body: IUpdateProfile) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.patch<IUser>(userRequests.profileUpdate, body);
          dispatch(userActions.updateProfile(data));
          Toast.show({ type: "success", text1: "Ви успішно оновили профіль" });

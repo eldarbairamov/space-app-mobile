@@ -45,7 +45,7 @@ export function ChangeEmailForm() {
          </View>
 
          { isEmailSent && <View style={ gStyle.form_control_wrapper }>
-            <Text style={ [ gStyle.regular_font, styles.description ] }>
+            <Text style={ [ gStyle.regular_font, styles.description, isDark && { color: SECOND_FONT_DARK } ] }>
                Введіть код:
             </Text>
 

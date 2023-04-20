@@ -11,7 +11,7 @@ export function logoutService() {
 
    const logoutFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          await axiosInstance.get(authRequests.logout);
          await storageService.deleteTokens();
          Toast.hide();

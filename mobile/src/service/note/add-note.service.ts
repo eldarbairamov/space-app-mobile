@@ -13,7 +13,7 @@ export function addNoteService() {
 
    const addNoteFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<INote>(notesRequests.addNote);
          dispatch(noteActions.addNote(data));
          dispatch(userActions.setNotesCount(notesCount + 1));

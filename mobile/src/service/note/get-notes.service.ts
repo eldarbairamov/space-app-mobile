@@ -18,7 +18,7 @@ export function getNotesService() {
 
    const getNotesFn = async () => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.get<INotes>(notesRequests.getNotes, {
             params: {
                searchKey: searchKey ? debounced : null,

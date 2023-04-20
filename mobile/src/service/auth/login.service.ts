@@ -15,7 +15,7 @@ export function loginService() {
 
    const loginFn = async (body: ILoginForm) => {
       try {
-         Toast.show({ type: "info", text1: "Лоудінг.." });
+         Toast.show({ type: "info", text1: "Лоудінг..." });
          const { data } = await axiosInstance.post<IOAuth>(authRequests.login, body);
          await storageService.setTokens(data.accessToken, data.refreshToken);
          Toast.show({ type: "success", text1: `Привіт, ${ data.username }` });

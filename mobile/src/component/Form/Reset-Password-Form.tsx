@@ -45,7 +45,7 @@ export function ResetPasswordForm() {
                       isRequiredLabel={ true }
                       isRequired={ true }/>
 
-         <Button title={ "Змінити" }
+         <Button title={ "Зберегти" }
                  isValid={ isValid }
                  onPress={ handleSubmit(onSubmit) }/>
 

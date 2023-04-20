@@ -9,7 +9,7 @@ export function resetPasswordService(next: () => any) {
       try {
          Toast.show({ type: "info", text1: "Лоудінг..." });
          await axiosInstance.patch(authRequests.resetPassword, { code, password });
-         Toast.show({ type: "success", text1: "Вітаємо! У вас новий пароль." });
+         Toast.show({ type: "success", text1: "Вітаємо! У вас новий пароль" });
          await pleaseWait(2000);
          Toast.hide();
 

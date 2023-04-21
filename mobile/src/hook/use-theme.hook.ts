@@ -8,8 +8,13 @@ export function useTheme() {
 
    const { isDark } = useAppSelector(state => state.appReducer);
 
+   const setTheme = async () => {
+      const theme = await storageService.getTheme();
+      dispatch(appActions.switchTheme(theme === "true"));
+   };
+
    useEffect(() => {
-      storageService.getTheme().then(res => dispatch(appActions.switchTheme(Boolean(res))));
+      setTheme();
    }, []);
 
    return { isDark };

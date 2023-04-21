@@ -5,6 +5,7 @@ import { authActions } from "../redux/slice";
 
 export function useAuth() {
    const dispatch = useAppDispatch();
+
    const { isLogin } = useAppSelector(state => state.authReducer);
 
    useEffect(() => {

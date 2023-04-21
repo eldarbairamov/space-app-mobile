@@ -25,8 +25,6 @@ export class MomentService {
          this.momentRepository.findAllByUserId(userId),
       ]);
 
-      console.log(count);
-
       // Defined unique tags
       const tags = allMoments.map(moment => moment.tag);
       const uniqueTags = Array.from(new Set(tags.flat()));

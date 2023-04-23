@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
    container: {
       height: 30,
       justifyContent: "center",
-      paddingHorizontal: 5
+      paddingHorizontal: 5,
    }
 });

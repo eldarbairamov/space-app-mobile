@@ -36,6 +36,7 @@ axiosInstance.interceptors.response.use((config: any) => {
 
          } catch (e) {
             await storageService.deleteTokens();
+            console.log('asd');
          }
 
          return axiosInstance(originalRequest);

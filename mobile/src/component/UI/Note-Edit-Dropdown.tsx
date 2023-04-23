@@ -1,5 +1,5 @@
 import { Dropdown } from "react-native-element-dropdown";
-import { FONT_ICON, FONT_ICON_DARK, ITEM_BG_DARK, SECOND_FONT_COLOR, SECOND_FONT_DARK } from "../../constant";
+import { DROPDOWN_ACTIVE, DROPDOWN_ACTIVE_DARK, FONT_ICON, FONT_ICON_DARK, ITEM_BG_DARK } from "../../constant";
 import { SelectItem } from "./Select-Item";
 import { Image, StyleSheet } from "react-native";
 import { TypedSetState } from "../../interface";
@@ -18,10 +18,10 @@ export function NoteEditDropdown({ setFontStyle, fontStyle }: INoteEditDropdownP
    return (
       <Dropdown style={ [ styles.dropdown ] }
                 selectedTextStyle={ { display: "none" } }
-                activeColor={ isDark ? SECOND_FONT_COLOR : SECOND_FONT_DARK }
+                activeColor={ isDark ? DROPDOWN_ACTIVE_DARK : DROPDOWN_ACTIVE }
                 renderItem={ (item) => <SelectItem> { item.label } </SelectItem> }
                 itemContainerStyle={ { borderRadius: 5 } }
-                containerStyle={ [ { borderRadius: 5, borderWidth: 0, overflow: "hidden" }, isDark && { backgroundColor: ITEM_BG_DARK } ] }
+                containerStyle={ [ { borderRadius: 5, borderWidth: 0, overflow: "hidden", }, isDark && { backgroundColor: ITEM_BG_DARK } ] }
                 iconStyle={ { display: "none" } }
                 fontFamily={ "Roboto" }
                 data={ fontStyles.map(font => ({ value: font, label: font })) }

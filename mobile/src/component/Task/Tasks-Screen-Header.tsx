@@ -17,8 +17,8 @@ export function TasksScreenHeader() {
 
    const [ isPrevPlanTitleSame, setIsPrevPlanTitleSame ] = useState<boolean>(true);
 
-   const lightModeSaveDisable = isPrevPlanTitleSame ? SAVE_ICON : SAVE_DISABLED_ICON;
-   const darkModeSaveDisable = isPrevPlanTitleSame ? SAVE_DARK : SAVE_DISABLE_DARK;
+   const lightModeSaveDisable = isPrevPlanTitleSame ? SAVE_DISABLED_ICON : SAVE_ICON;
+   const darkModeSaveDisable = isPrevPlanTitleSame ? SAVE_DISABLE_DARK : SAVE_DARK;
 
    const { updatePlanFn } = updatePlanService(() => setIsPrevPlanTitleSame(true));
 
@@ -30,6 +30,7 @@ export function TasksScreenHeader() {
 
             <TouchableOpacity style={ [ { flexDirection: "row", gap: 10 } ] }
                               activeOpacity={ 0.5 }
+                              disabled={ isPrevPlanTitleSame }
                               onPress={ () => updatePlanFn(activePlan.id, activePlan.title) }>
 
                <Image source={ isDark ? darkModeSaveDisable : lightModeSaveDisable }

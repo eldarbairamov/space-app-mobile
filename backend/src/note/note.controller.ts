@@ -1,11 +1,11 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { NoteService } from "./note.service";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { UpdateNoteDto } from "./dto";
 import { INoteResponse, INotesResponse } from "./interface/note-response.interface";
 import { AccessGuard } from "@src/auth/guard";
 import { User } from "@src/common/decorator";
-import { DeleteItemDto, QueryDto } from "@src/common/dto";
+import {  QueryDto } from "@src/common/dto";
 
 @Controller("notes")
 export class NoteController {
@@ -25,7 +25,7 @@ export class NoteController {
 
    // Add note
    @UseGuards(AccessGuard)
-   @Get("add")
+   @Post("add")
    async addNote(
       @User("userId") userId: string): Promise<INoteResponse> {
 
@@ -43,17 +43,17 @@ export class NoteController {
       return this.noteService.updateNote(noteId, dto);
    }
 
-   // Send prev request params and delete note
+   // Delete note
    @HttpCode(200)
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
-   @Post(":noteId")
+   @Delete(":noteId")
    async deleteNote(
       @User("userId") userId: string,
-      @Body() dto: DeleteItemDto,
+      @Query() queryDto: QueryDto,
       @Param("noteId") noteId: string): Promise<INotesResponse> {
 
-      return this.noteService.deleteNote(noteId, userId, dto.limit, dto.searchKey);
+      return this.noteService.deleteNote(noteId, userId, queryDto);
    }
 
 }

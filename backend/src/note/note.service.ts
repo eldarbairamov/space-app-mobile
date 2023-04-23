@@ -50,14 +50,14 @@ export class NoteService {
       };
    }
 
-   async deleteNote(noteId: NoteDocument["id"], userId: UserDocument["id"], limit: number, searchKey: string): Promise<INotesResponse> {
+   async deleteNote(noteId: NoteDocument["id"], userId: UserDocument["id"], queryDto: QueryDto): Promise<INotesResponse> {
       // Delete note
       await this.noteRepository.findByIdAndDelete(noteId);
 
       // Update user and return updated note list
       const [ notes, count ] = await Promise.all([
-         this.noteRepository.find({ ownerId: userId }, { limit, searchKey }),
-         this.noteRepository.count({ ownerId: userId }, searchKey),
+         this.noteRepository.find({ ownerId: userId }, queryDto),
+         this.noteRepository.count({ ownerId: userId }, queryDto.searchKey),
          this.userRepository.findByIdAndUpdate(userId, { $pull: { notesIds: noteId } }),
       ]);
 

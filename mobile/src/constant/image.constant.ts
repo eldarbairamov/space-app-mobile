@@ -31,6 +31,7 @@ export const SETTINGS_ICON_DARK = require("../asset/image/settings-light.png");
 export const BACK_ICON_DARK = require("../asset/image/back-light.png");
 export const LOGOUT_ICON_DARK = require("../asset/image/logout-light.png");
 export const ADD_ICON_DARK = require("../asset/image/add-light.png");
+export const ADD_DISABLE_ICON_DARK = require("../asset/image/add-dark.png");
 export const DELETE_ICON_DARK = require("../asset/image/delete-light.png");
 export const CLEAR_ICON_DARK = require("../asset/image/clear-light.png");
 export const EMPTY_DARK = require("../asset/image/empty-light.png");

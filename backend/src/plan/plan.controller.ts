@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { PlanService } from "./plan.service";
 import { ObjectCheckingGuard } from "./guard/object-checking.guard";
 import { CreatePlanDto } from "./dto";
 import { IPlanResponse, IPlansResponse } from "./interface/plan-response.interface";
 import { AccessGuard } from "@src/auth/guard";
 import { User } from "@src/common/decorator";
-import { DeleteItemDto, QueryDto } from "@src/common/dto";
+import {  QueryDto } from "@src/common/dto";
 
 @Controller("plans")
 export class PlanController {
@@ -25,7 +25,7 @@ export class PlanController {
 
    // Add plan
    @UseGuards(AccessGuard)
-   @Get("add")
+   @Post("add")
    async addPlan(
       @User("userId") userId: string): Promise<IPlanResponse> {
 
@@ -53,16 +53,16 @@ export class PlanController {
       return this.planService.updatePlan(noteId, dto);
    }
 
-   // Send prev request params and delete plan
+   // Delete plan
    @UseGuards(AccessGuard)
    @UseGuards(ObjectCheckingGuard)
-   @Post(":planId")
+   @Delete(":planId")
    async deletePlan(
       @User("userId") userId: string,
-      @Body() dto: DeleteItemDto,
+      @Query() queryDto: QueryDto,
       @Param("planId") noteId: string): Promise<IPlansResponse> {
 
-      return this.planService.deletePlan(noteId, userId, dto.limit, dto.searchKey);
+      return this.planService.deletePlan(noteId, userId, queryDto);
    }
 
 }

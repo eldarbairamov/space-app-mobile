@@ -14,3 +14,5 @@ export const ITEM_BG_DARK = "#41434a";
 export const MAIN_FONT_DARK = "#F5F5F5FF";
 export const SECOND_FONT_DARK = "#acacac";
 
+export const DROPDOWN_ACTIVE = "#e1e1e1";
+export const DROPDOWN_ACTIVE_DARK = "#5f5f5f";

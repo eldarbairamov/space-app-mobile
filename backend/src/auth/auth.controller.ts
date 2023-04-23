@@ -27,7 +27,6 @@ export class AuthController {
    @Post("login")
    async login(
       @Req() req: RequestWithUser): Promise<ILoginResponse> {
-
       return this.authService.login(req.user);
    }
 

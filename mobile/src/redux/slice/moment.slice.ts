@@ -42,8 +42,8 @@ const momentSlice = createSlice({
 
       deleteMoment: (state, { payload }: PayloadAction<{ momentId: string }>) => {
          state.moments = state.moments.filter(moment => moment.id !== payload.momentId);
-
          state.tags = state.moments.map(moment => moment.tag);
+         state.tags = Array.from(new Set(state.tags));
       },
 
       setActiveMoment: (state, { payload }: PayloadAction<IMoment>) => {
@@ -82,6 +82,7 @@ const momentSlice = createSlice({
          });
 
          state.tags = state.moments.map(moment => moment.tag);
+         state.tags = Array.from(new Set(state.tags));
       },
 
       next: (state) => {

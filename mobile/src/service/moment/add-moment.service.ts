@@ -13,7 +13,7 @@ export function addMomentService() {
    const addMomentFn = async () => {
       try {
          Toast.show({ type: "info", text1: "Лоудінг..." });
-         const { data } = await axiosInstance.get<IMoment>(momentsRequests.addMoment);
+         const { data } = await axiosInstance.post<IMoment>(momentsRequests.addMoment);
          dispatch(momentActions.addMoment(data));
          dispatch(userActions.setMomentCount(momentsCount + 1));
          Toast.hide();

@@ -64,7 +64,15 @@ export const errorCatherFn = (e: unknown) => {
          break;
    }
 
-   console.log(response ? response : axiosError.message);
+   if (Array.isArray(response)) {
+      response.forEach(item => {
+         if (item.includes("not be empty")) {
+            message = "Поля неповинні залишитись пустими";
+         }
+      });
+   }
+
+   // console.log(response ? response : axiosError.message);
 
    return message;
 };

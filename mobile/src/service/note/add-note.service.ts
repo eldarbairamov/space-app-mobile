@@ -14,7 +14,7 @@ export function addNoteService() {
    const addNoteFn = async () => {
       try {
          Toast.show({ type: "info", text1: "Лоудінг..." });
-         const { data } = await axiosInstance.get<INote>(notesRequests.addNote);
+         const { data } = await axiosInstance.post<INote>(notesRequests.addNote);
          dispatch(noteActions.addNote(data));
          dispatch(userActions.setNotesCount(notesCount + 1));
          Toast.hide();

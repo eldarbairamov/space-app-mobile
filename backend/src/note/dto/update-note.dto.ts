@@ -1,13 +1,14 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsString, NotEquals, ValidateIf } from "class-validator";
 
 export class UpdateNoteDto {
-
    @IsString()
-   @IsOptional()
+   @NotEquals(null)
+   @ValidateIf((object, value) => value === null)
    readonly title: string;
 
    @IsString()
-   @IsOptional()
+   @NotEquals(null)
+   @ValidateIf((object, value) => value === null)
    readonly body: string;
 
 }

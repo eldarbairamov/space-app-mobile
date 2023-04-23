@@ -3,7 +3,7 @@ import { BackIcon } from "../UI/Back-Icon";
 import { NotesStackEnum } from "../../navigation/type";
 import { NoteEditDropdown } from "../UI/Note-Edit-Dropdown";
 import { gStyle } from "../../asset";
-import { SAVE_DARK, SAVE_DISABLE_DARK, SAVE_DISABLED_ICON, SAVE_ICON, SECOND_FONT_DARK } from "../../constant";
+import { SAVE_DARK, SAVE_DISABLED_DARK, SAVE_DISABLED_ICON, SAVE_ICON, SECOND_FONT_DARK } from "../../constant";
 import dateHelper from "moment/moment";
 import { useAppSelector } from "../../hook";
 import { notePrevStateService, updateNoteService } from "../../service";
@@ -24,7 +24,7 @@ export function NoteEditHeader({ setFontStyle, fontStyle }: INoteEditHeaderProps
    const { updateNoteFn } = updateNoteService(setPrevState);
 
    const lightModeSaveDisable = prevState === activeNote ? SAVE_DISABLED_ICON : SAVE_ICON;
-   const darkModeSaveDisable = prevState === activeNote ? SAVE_DISABLE_DARK : SAVE_DARK;
+   const darkModeSaveDisable = prevState === activeNote ? SAVE_DISABLED_DARK : SAVE_DARK;
 
    return (
       <View style={ [ styles.header ] }>

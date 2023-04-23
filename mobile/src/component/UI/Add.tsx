@@ -1,6 +1,6 @@
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { gStyle } from "../../asset";
-import { ADD_DISABLE_ICON, ADD_DISABLE_ICON_DARK, ADD_ICON, ADD_ICON_DARK } from "../../constant";
+import { ADD_DISABLE_ICON, ADD_DISABLED_ICON_DARK, ADD_ICON, ADD_ICON_DARK } from "../../constant";
 import { useAppSelector } from "../../hook";
 
 interface IAddProps {
@@ -12,7 +12,7 @@ export function Add({ onPress, condition }: IAddProps) {
    const { isDark } = useAppSelector(state => state.appReducer);
 
    const lightCondition = condition ? ADD_DISABLE_ICON : ADD_ICON;
-   const darkCondition = condition ? ADD_DISABLE_ICON_DARK : ADD_ICON_DARK;
+   const darkCondition = condition ? ADD_DISABLED_ICON_DARK : ADD_ICON_DARK;
 
    return (
       <TouchableOpacity activeOpacity={ 0.5 }

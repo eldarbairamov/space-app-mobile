@@ -2,7 +2,7 @@ import { Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-nati
 import { BackIcon } from "../UI/Back-Icon";
 import { PlansStackEnum } from "../../navigation/type";
 import { gStyle } from "../../asset";
-import { MAIN_FONT_DARK, SAVE_DARK, SAVE_DISABLE_DARK, SAVE_DISABLED_ICON, SAVE_ICON } from "../../constant";
+import { MAIN_FONT_DARK, SAVE_DARK, SAVE_DISABLED_DARK, SAVE_DISABLED_ICON, SAVE_ICON } from "../../constant";
 import { planAction } from "../../redux/slice";
 import { useState } from "react";
 import { updatePlanService } from "../../service";
@@ -18,7 +18,7 @@ export function TasksScreenHeader() {
    const [ isPrevPlanTitleSame, setIsPrevPlanTitleSame ] = useState<boolean>(true);
 
    const lightModeSaveDisable = isPrevPlanTitleSame ? SAVE_DISABLED_ICON : SAVE_ICON;
-   const darkModeSaveDisable = isPrevPlanTitleSame ? SAVE_DISABLE_DARK : SAVE_DARK;
+   const darkModeSaveDisable = isPrevPlanTitleSame ? SAVE_DISABLED_DARK : SAVE_DARK;
 
    const { updatePlanFn } = updatePlanService(() => setIsPrevPlanTitleSame(true));
 

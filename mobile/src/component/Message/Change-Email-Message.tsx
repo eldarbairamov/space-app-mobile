@@ -13,6 +13,6 @@ export function ChangeEmailMessage() {
                image={ isDark ? SUCCESS_IMAGE_DARK : SUCCESS_IMAGE }
                buttonTitle={ "Увійти" }
                title={ "Ви успішно оновили адресу електронної пошти" }
-               message={ "Будь ласка, виконайте вхід до аккаунту використовуючи оновленні дані" }/>
+               message={ "Будь ласка, виконайте вхід до аккаунту використовуючи оновлені дані" }/>
    );
 }

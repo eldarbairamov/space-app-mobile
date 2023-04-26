@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { TaskPresenter } from "./presenter/task.presenter";
 import { TaskRepository } from "./repository/task.repository";
 import { CreateTaskDto } from "./dto";
@@ -35,6 +35,10 @@ export class TaskService {
    }
 
    async getTasks(planId: string): Promise<ITaskResponse[]> {
+      // Check is plan exists
+      const isPlanExists = await this.planRepository.findById(planId);
+      if (!isPlanExists) throw new HttpException("Object does not exist", HttpStatus.NOT_FOUND);
+
       // Find tasks
       const tasks = await this.taskRepository.find({ planId });
 

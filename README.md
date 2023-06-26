@@ -32,7 +32,7 @@
 
 ###
 
-<p align="center">Back-end part of the application is built on Node.js platform using Nest.js framework and Mongo database via Mongoose ODM. Also we have Nest.js task scheduling tool - @nestjs/schedule, that cleans out-of-date login records from the database once a week.<br><br>Front-end part is built with React Native using TypeScript and Redux Toolkit state manager.<br><br></p>
+<p align="center">Back-end part of the application is built on Node.js platform using Nest.js framework and Mongo database via Mongoose ODM. Also we have Nest.js task scheduling tool - @nestjs/schedule, that cleans out-of-date login records from the database once a week.<br><br>Front-end part is built with React Native using TypeScript and Redux Toolkit state manager.</p>
 
 ###
 

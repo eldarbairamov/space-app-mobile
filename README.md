@@ -42,7 +42,7 @@
 
 ###
 
-<p align="center">- Authentication and authorization through JWT<br>- Routing for authorized and unauthorized users<br>- Saving pre-compressed images to the server and deleting them<br>- "Forgot Password" - reset password<br>- Edit user profile<br>- Ability to change fonts in Notes section<br>- Theme switcher<br>- Search and filter by content in each section<br>- Adaptive interface for IOS and Android</p>
+<p align="center">- Authentication and authorization through JWT<br>- E-Mail sevice<br>- Routing for authorized and unauthorized users<br>- Saving pre-compressed images to the server and deleting them<br>- "Forgot Password" - reset password<br>- Edit user profile<br>- Ability to change fonts in Notes section<br>- Theme switcher<br>- Search and filter by content in each section<br>- Adaptive interface for IOS and Android</p>
 
 ###
 

@@ -45,3 +45,18 @@
 <p align="center">- Authentication and authorization through JWT<br>- Routing for authorized and unauthorized users<br>- Saving pre-compressed images to the server and deleting them<br>- "Forgot Password" - reset password<br>- Edit user profile<br>- Ability to change fonts in Notes section<br>- Theme switcher<br>- Search and filter by content in each section<br>- Adaptive interface for IOS and Android</p>
 
 ###
+
+<h1 align="center"></h1>
+<h3 align="center">Video previews :</h3>
+
+<h4 align="center"> IOS </h4>
+
+[<img src="https://i.ytimg.com/vi/odm1KheIJVc/maxresdefault.jpg" width="100%">](https://youtu.be/odm1KheIJVc "Space - IOS")
+
+<h4 align="center"> Android </h4>
+
+[<img src="https://i.ytimg.com/vi/JZ-P2BTuG60/maxresdefault.jpg" width="100%">](https://youtu.be/JZ-P2BTuG60 "Space - Android")
+
+<h4 align="center"> IPad </h4>
+
+[<img src="https://i.ytimg.com/vi/Odo1L66YlQ4/maxresdefault.jpg" width="100%">](https://youtu.be/Odo1L66YlQ4 "Space - IPad")
